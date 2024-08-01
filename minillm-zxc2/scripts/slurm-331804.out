@@ -1,0 +1,15 @@
+torchrun --nproc_per_node 4 --nnodes 1 --node_rank 0 --master_addr localhost --master_port 2012 --gpus=4/train_minillm.py --base-path --gpus=4 --model-path --gpus=4/results/gpt2/train/minillm_init/gpt2-base --teacher-model-path --gpus=4/results/gpt2/train/sft/gpt2-xlarge/ --ckpt-name base-init --teacher-ckpt-name xlarge-sft --n-gpu 4 --n-nodes 1 --teacher-model-fp16 --prompt-data-dir --gpus=4/processed_data/dolly/prompt/gpt2/ --lm-data-dir --gpus=4/processed_data/openwebtext/gpt2/512/10M/ --dev-num 1000 --num-workers 0 --epochs 10 --total-iters 5000 --kd-ratio 0.5 --batch-size 16 --lr 5e-6 --lr-min 5e-6 --gradient-accumulation-steps 1 --max-length 512 --max-prompt-length 256 --warmup-iters 100 --save --gpus=4/results/gpt2/train/minillm-zxc/ --seed 10 --seed-ppo 42 --seed-lm 7 --save-interval 500 --eval-interval 100 --log-interval 16 --mid-log-num 1 --type minillm --ppo-epochs 4 --num-rollouts 64 --chunk-size 32 --length-norm --single-step-reg --teacher-mixed-alpha 0.2 --reward-scaling 0.5 --cliprange-reward 100 --do-sample --top-k 0 --top-p 1.0 --temperature 1.0 --deepspeed --deepspeed_config --gpus=4/configs/deepspeed/ds_config.json --gpus=4 > --gpus=4/results/gpt2/train/minillm-zxc//gpt2-xl-base-minillm-20240519-train.log 2>&1
+PYTHONPATH=--gpus=4
+mkdir: unrecognized option '--gpus=4/results/gpt2/train/minillm-zxc/'
+Try 'mkdir --help' for more information.
+usage: torchrun [-h] [--nnodes NNODES] [--nproc_per_node NPROC_PER_NODE]
+                [--rdzv_backend RDZV_BACKEND] [--rdzv_endpoint RDZV_ENDPOINT]
+                [--rdzv_id RDZV_ID] [--rdzv_conf RDZV_CONF] [--standalone]
+                [--max_restarts MAX_RESTARTS]
+                [--monitor_interval MONITOR_INTERVAL]
+                [--start_method {spawn,fork,forkserver}] [--role ROLE] [-m]
+                [--no_python] [--run_path] [--log_dir LOG_DIR] [-r REDIRECTS]
+                [-t TEE] [--node_rank NODE_RANK] [--master_addr MASTER_ADDR]
+                [--master_port MASTER_PORT]
+                training_script ...
+torchrun: error: unrecognized arguments: --gpus=4/train_minillm.py --base-path --gpus=4 --model-path --gpus=4/results/gpt2/train/minillm_init/gpt2-base --teacher-model-path --gpus=4/results/gpt2/train/sft/gpt2-xlarge/ --ckpt-name

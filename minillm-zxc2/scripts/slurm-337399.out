@@ -1,0 +1,364 @@
+torchrun --nproc_per_node 4 --nnodes 1 --node_rank 0 --master_addr localhost --master_port 2012 /home/bingxing2/home/scx7atk/work/minillm-zxc2/train_minillm.py --base-path /home/bingxing2/home/scx7atk/work/minillm-zxc2 --model-path /home/bingxing2/home/scx7atk/pt_models/llama2/Llama-2-7b-chat-hf --teacher-model-path /home/bingxing2/home/scx7atk/pt_models/llama2/Llama-2-13b-chat-hf/ --ckpt-name llama2-7b --teacher-ckpt-name llama2-13b --n-gpu 4 --n-nodes 1 --model-type llama --teacher-model-fp16 --model-parallel --model-parallel-size 4 --prompt-data-dir /home/bingxing2/home/scx7atk/work/minillm-zxc2/processed_data/dolly/prompt/llama/ --lm-data-dir /home/bingxing2/home/scx7atk/work/minillm-zxc2/processed_data/roberta/llama/512/20M/ --dev-num 1000 --num-workers 0 --epochs 10 --total-iters 5000 --kd-ratio 0.5 --batch-size 8 --lr 5e-6 --lr-min 5e-6 --gradient-accumulation-steps 2 --max-length 512 --max-prompt-length 256 --warmup-iters 100 --scheduler-name cosine_trm --save /home/bingxing2/home/scx7atk/work/minillm-zxc2/results/llama2/train/minillm-zxc2/ --seed 10 --seed-ppo 42 --seed-lm 7 --save-interval 500 --eval-interval 100 --log-interval 16 --mid-log-num 1 --type minillm --ppo-epochs 4 --chunk-size 8 --length-norm --single-step-reg --teacher-mixed-alpha 0.2 --reward-scaling 0.5 --cliprange-reward 100 --do-sample --top-k 0 --top-p 1.0 --temperature 1.0 --deepspeed --deepspeed_config /home/bingxing2/home/scx7atk/work/minillm-zxc2/configs/deepspeed/ds_config.json > /home/bingxing2/home/scx7atk/work/minillm-zxc2/results/llama2/train/minillm-zxc2//llama2-xl-base-minillm-20240521-train.log 2>&1
+PYTHONPATH=/home/bingxing2/home/scx7atk/work/minillm-zxc2
+WARNING:torch.distributed.run:
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+[2024-05-21 23:32:53,008] [INFO] [real_accelerator.py:133:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2024-05-21 23:32:53,009] [INFO] [real_accelerator.py:133:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2024-05-21 23:32:53,009] [INFO] [real_accelerator.py:133:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2024-05-21 23:32:53,009] [INFO] [real_accelerator.py:133:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2024-05-21 23:33:01,470] [WARNING] [comm.py:152:init_deepspeed_backend] NCCL backend in DeepSpeed not yet implemented
+[2024-05-21 23:33:01,470] [INFO] [comm.py:616:init_distributed] cdb=None
+[2024-05-21 23:33:01,476] [WARNING] [comm.py:152:init_deepspeed_backend] NCCL backend in DeepSpeed not yet implemented
+[2024-05-21 23:33:01,476] [INFO] [comm.py:616:init_distributed] cdb=None
+[2024-05-21 23:33:01,481] [WARNING] [comm.py:152:init_deepspeed_backend] NCCL backend in DeepSpeed not yet implemented
+[2024-05-21 23:33:01,481] [INFO] [comm.py:616:init_distributed] cdb=None
+using world size: 4
+[2024-05-21 23:33:01,488] [WARNING] [comm.py:152:init_deepspeed_backend] NCCL backend in DeepSpeed not yet implemented
+[2024-05-21 23:33:01,488] [INFO] [comm.py:616:init_distributed] cdb=None
+[2024-05-21 23:33:01,489] [INFO] [comm.py:643:init_distributed] Initializing TorchBackend in DeepSpeed with backend nccl
+> initializing model parallel with size 4
+> initializing model parallel cuda seeds on global rank 0, model parallel rank 0, and data parallel rank 0 with model parallel seed: 2728 and data parallel seed: 10
+arguments:
+  model_path ................... /home/bingxing2/home/scx7atk/pt_models/llama2/Llama-2-7b-chat-hf
+  ckpt_name .................... llama2-7b
+  n_gpu ........................ 4
+  n_nodes ...................... 1
+  model_type ................... llama
+  teacher_model_type ........... None
+  teacher_model_path ........... ['/home/bingxing2/home/scx7atk/pt_models/llama2/Llama-2-13b-chat-hf/']
+  teacher_ckpt_name ............ llama2-13b
+  teacher_model_fp16 ........... True
+  model_parallel ............... True
+  model_parallel_size .......... 4
+  no_value ..................... False
+  dropout_path_rate ............ None
+  fp32 ......................... False
+  type ......................... minillm
+  do_train ..................... False
+  do_valid ..................... False
+  do_eval ...................... False
+  base_path .................... /home/bingxing2/home/scx7atk/work/minillm-zxc2
+  load ......................... None
+  save ......................... /home/bingxing2/home/scx7atk/work/minillm-zxc2/results/llama2/train/minillm-zxc2/bs8-lr5e-06-G2-N4-NN1-lm1-len512-mp4/pe4_rs0.5_nr256_ln_sr_tm0.2
+  log_interval ................. 16
+  mid_log_num .................. 1
+  save_interval ................ 500
+  eval_interval ................ 100
+  local_rank ................... 0
+  save_additional_suffix ....... 
+  save_rollout ................. False
+  eb_sample_times .............. 3
+  data_dir ..................... None
+  processed_data_dir ........... None
+  force_process ................ False
+  force_process_demo ........... False
+  data_process_workers ......... -1
+  train_num .................... -1
+  train_ratio .................. 1
+  dev_num ...................... 1000
+  dev_ratio .................... 1
+  gen_num ...................... -1
+  data_names ................... None
+  prompt_type .................. None
+  num_workers .................. 0
+  max_prompt_length ............ 256
+  min_prompt_length ............ 128
+  json_data .................... False
+  bin_data ..................... False
+  txt_data ..................... False
+  prompt_data_dir .............. /home/bingxing2/home/scx7atk/work/minillm-zxc2/processed_data/dolly/prompt/llama/
+  lm_data_dir .................. /home/bingxing2/home/scx7atk/work/minillm-zxc2/processed_data/roberta/llama/512/20M/
+  eval_ppl ..................... False
+  eval_rw ...................... False
+  eval_gen ..................... False
+  only_prompt .................. False
+  batch_size ................... 8
+  eval_batch_size .............. 32
+  clip_grad .................... 1.0
+  total_iters .................. 5000
+  train_iters_per_epoch ........ -1
+  max_length ................... 512
+  seed ......................... 10
+  seed_order ................... 42
+  seed_data .................... 42
+  seed_ppo ..................... 42
+  seed_lm ...................... 7
+  epochs ....................... 10
+  training_epochs .............. 10000
+  gradient_accumulation_steps .. 2
+  gradient_checkpointing ....... False
+  attn_dtype ................... None
+  lr ........................... 5e-06
+  lr_min ....................... 5e-06
+  weight_decay ................. 0.01
+  loss_scale ................... 65536
+  kd_ratio ..................... 0.5
+  warmup_iters ................. 100
+  lr_decay_iters ............... None
+  lr_decay_style ............... noam
+  scheduler_name ............... cosine_trm
+  reward_scaling ............... 0.5
+  cliprange_reward ............. 100.0
+  ppo_epochs ................... 4
+  num_rollouts ................. 256
+  num_rollouts_per_device ...... 64
+  cliprange .................... 0.2
+  chunk_size ................... 8
+  gamma ........................ 0.95
+  length_norm .................. True
+  single_step_reg .............. True
+  teacher_mixed_alpha .......... 0.2
+  lm_coef ...................... 1
+  top_k ........................ 0
+  top_p ........................ 1.0
+  do_sample .................... True
+  no_repeat_ngram_size ......... 6
+  repetition_penalty ........... None
+  num_beams .................... 1
+  temperature .................. 1.0
+  peft ......................... None
+  peft_lora_r .................. 8
+  peft_lora_alpha .............. 32
+  peft_lora_dropout ............ 0.1
+  peft_name .................... None
+  peft_path .................... None
+  teacher_peft_name ............ None
+  teacher_peft_path ............ None
+  deepspeed .................... True
+  deepspeed_config ............. /home/bingxing2/home/scx7atk/work/minillm-zxc2/configs/deepspeed/ds_config.json
+  deepscale .................... False
+  deepscale_config ............. None
+  deepspeed_mpi ................ False
+  rank ......................... 0
+  world_size ................... 4
+Rank 1: /home/bingxing2/home/scx7atk/pt_models/llama2/Llama-2-13b-chat-hf/mp4/pytorch_model_1.bin loaded.
+Rank 0: /home/bingxing2/home/scx7atk/pt_models/llama2/Llama-2-13b-chat-hf/mp4/pytorch_model_0.bin loaded.
+Rank 2: /home/bingxing2/home/scx7atk/pt_models/llama2/Llama-2-13b-chat-hf/mp4/pytorch_model_2.bin loaded.
+Rank 3: /home/bingxing2/home/scx7atk/pt_models/llama2/Llama-2-13b-chat-hf/mp4/pytorch_model_3.bin loaded.
+Rank 2: /home/bingxing2/home/scx7atk/pt_models/llama2/Llama-2-7b-chat-hf/mp4/pytorch_model_2.bin loaded.Rank 3: /home/bingxing2/home/scx7atk/pt_models/llama2/Llama-2-7b-chat-hf/mp4/pytorch_model_3.bin loaded.Rank 0: /home/bingxing2/home/scx7atk/pt_models/llama2/Llama-2-7b-chat-hf/mp4/pytorch_model_0.bin loaded.
+Rank 1: /home/bingxing2/home/scx7atk/pt_models/llama2/Llama-2-7b-chat-hf/mp4/pytorch_model_1.bin loaded.
+
+
+ > number of parameters on model parallel rank 2: 1684803584
+ > number of parameters on model parallel rank 3: 1684803584 > number of parameters on model parallel rank 0: 1684803584
+ > number of parameters on model parallel rank 1: 1684803584
+
+Model load time: 3.9351494312286377s
+ > number of parameters on model parallel rank 2: 1684M
+ > number of parameters on model parallel rank 3: 1684M > number of parameters on model parallel rank 1: 1684M
+ > number of parameters on model parallel rank 0: 1684M
+
+[2024-05-21 23:33:13,791] [INFO] [logging.py:96:log_dist] [Rank 0] DeepSpeed info: version=0.10.0, git-hash=unknown, git-branch=unknown
+[2024-05-21 23:33:13,921] [INFO] [logging.py:96:log_dist] [Rank 0] DeepSpeed Flops Profiler Enabled: False
+[2024-05-21 23:33:13,924] [INFO] [logging.py:96:log_dist] [Rank 0] Removing param_group that has no 'params' in the client Optimizer
+[2024-05-21 23:33:13,924] [INFO] [logging.py:96:log_dist] [Rank 0] Using client Optimizer as basic optimizer
+[2024-05-21 23:33:13,947] [INFO] [logging.py:96:log_dist] [Rank 0] DeepSpeed Basic Optimizer = AdamW
+[2024-05-21 23:33:13,947] [INFO] [utils.py:54:is_zero_supported_optimizer] Checking ZeRO support for optimizer=AdamW type=<class 'torch.optim.adamw.AdamW'>
+[2024-05-21 23:33:13,948] [INFO] [logging.py:96:log_dist] [Rank 0] Creating torch.float16 ZeRO stage 1 optimizer
+[2024-05-21 23:33:13,948] [INFO] [stage_1_and_2.py:133:__init__] Reduce bucket size 500,000,000
+[2024-05-21 23:33:13,948] [INFO] [stage_1_and_2.py:134:__init__] Allgather bucket size 500,000,000
+[2024-05-21 23:33:13,948] [INFO] [stage_1_and_2.py:135:__init__] CPU Offload: False
+[2024-05-21 23:33:13,948] [INFO] [stage_1_and_2.py:136:__init__] Round robin gradient partitioning: False
+Rank: 3 partition count [1] and sizes[(1684803584, False)] 
+Rank: 0 partition count [1] and sizes[(1684803584, False)] 
+Rank: 2 partition count [1] and sizes[(1684803584, False)] 
+Rank: 1 partition count [1] and sizes[(1684803584, False)] 
+[2024-05-21 23:33:16,434] [INFO] [utils.py:785:see_memory_usage] Before initializing optimizer states
+[2024-05-21 23:33:16,435] [INFO] [utils.py:786:see_memory_usage] MA 15.58 GB         Max_MA 18.72 GB         CA 18.96 GB         Max_CA 19 GB 
+[2024-05-21 23:33:16,435] [INFO] [utils.py:793:see_memory_usage] CPU Virtual Memory:  used = 83.73 GB, percent = 33.0%
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc2/train_minillm.py", line 131, in <module>
+Traceback (most recent call last):
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc2/train_minillm.py", line 131, in <module>
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc2/train_minillm.py", line 131, in <module>
+    main()
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc2/train_minillm.py", line 116, in main
+    main()
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc2/train_minillm.py", line 116, in main
+    main()
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc2/train_minillm.py", line 116, in main
+    train(
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc2/minillm/__init__.py", line 22, in train
+    trainer = PPOTrainer(
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc2/minillm/trainer.py", line 87, in __init__
+    self.model, self.opt, self.scheduler = self.setup_ds(self.model, self.opt, self.scheduler)
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc2/minillm/trainer.py", line 145, in setup_ds
+    model, optimizer, _, scheduler = deepspeed.initialize(
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/deepspeed/__init__.py", line 171, in initialize
+    engine = DeepSpeedEngine(args=args,
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/deepspeed/runtime/engine.py", line 310, in __init__
+    self._configure_optimizer(optimizer, model_parameters)
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/deepspeed/runtime/engine.py", line 1209, in _configure_optimizer
+    self.optimizer = self._configure_zero_optimizer(basic_optimizer)
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/deepspeed/runtime/engine.py", line 1444, in _configure_zero_optimizer
+    optimizer = DeepSpeedZeroOptimizer(
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/deepspeed/runtime/zero/stage_1_and_2.py", line 489, in __init__
+    train(
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc2/minillm/__init__.py", line 22, in train
+    self.initialize_optimizer_states()
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/deepspeed/runtime/zero/stage_1_and_2.py", line 624, in initialize_optimizer_states
+    self.optimizer.step()
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/optim/lr_scheduler.py", line 68, in wrapper
+    train(
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc2/minillm/__init__.py", line 22, in train
+    trainer = PPOTrainer(
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc2/minillm/trainer.py", line 87, in __init__
+    self.model, self.opt, self.scheduler = self.setup_ds(self.model, self.opt, self.scheduler)
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc2/minillm/trainer.py", line 145, in setup_ds
+    model, optimizer, _, scheduler = deepspeed.initialize(
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/deepspeed/__init__.py", line 171, in initialize
+    engine = DeepSpeedEngine(args=args,
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/deepspeed/runtime/engine.py", line 310, in __init__
+    self._configure_optimizer(optimizer, model_parameters)
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/deepspeed/runtime/engine.py", line 1209, in _configure_optimizer
+    trainer = PPOTrainer(
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc2/minillm/trainer.py", line 87, in __init__
+    self.model, self.opt, self.scheduler = self.setup_ds(self.model, self.opt, self.scheduler)
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc2/minillm/trainer.py", line 145, in setup_ds
+    model, optimizer, _, scheduler = deepspeed.initialize(
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/deepspeed/__init__.py", line 171, in initialize
+    engine = DeepSpeedEngine(args=args,
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/deepspeed/runtime/engine.py", line 310, in __init__
+    self._configure_optimizer(optimizer, model_parameters)
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/deepspeed/runtime/engine.py", line 1209, in _configure_optimizer
+    self.optimizer = self._configure_zero_optimizer(basic_optimizer)
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/deepspeed/runtime/engine.py", line 1444, in _configure_zero_optimizer
+        optimizer = DeepSpeedZeroOptimizer(return wrapped(*args, **kwargs)
+
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/deepspeed/runtime/zero/stage_1_and_2.py", line 489, in __init__
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/optim/optimizer.py", line 140, in wrapper
+    self.initialize_optimizer_states()
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/deepspeed/runtime/zero/stage_1_and_2.py", line 624, in initialize_optimizer_states
+    self.optimizer.step()
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/optim/lr_scheduler.py", line 68, in wrapper
+    return wrapped(*args, **kwargs)
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/optim/optimizer.py", line 140, in wrapper
+        out = func(*args, **kwargs)out = func(*args, **kwargs)
+
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/autograd/grad_mode.py", line 27, in decorate_context
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/autograd/grad_mode.py", line 27, in decorate_context
+        return func(*args, **kwargs)return func(*args, **kwargs)
+
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/optim/adamw.py", line 162, in step
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/optim/adamw.py", line 162, in step
+    adamw(params_with_grad,    
+adamw(params_with_grad,  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/optim/adamw.py", line 219, in adamw
+
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/optim/adamw.py", line 219, in adamw
+    func(params,
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/optim/adamw.py", line 316, in _single_tensor_adamw
+    func(params,
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/optim/adamw.py", line 316, in _single_tensor_adamw
+    denom = (exp_avg_sq.sqrt() / bias_correction2_sqrt).add_(eps)
+torch.cuda.OutOfMemoryError    : denom = (exp_avg_sq.sqrt() / bias_correction2_sqrt).add_(eps)CUDA out of memory. Tried to allocate 6.28 GiB (GPU 2; 39.39 GiB total capacity; 34.41 GiB already allocated; 4.12 GiB free; 34.65 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 6.28 GiB (GPU 3; 39.39 GiB total capacity; 34.41 GiB already allocated; 4.12 GiB free; 34.65 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+    self.optimizer = self._configure_zero_optimizer(basic_optimizer)
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/deepspeed/runtime/engine.py", line 1444, in _configure_zero_optimizer
+    optimizer = DeepSpeedZeroOptimizer(
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/deepspeed/runtime/zero/stage_1_and_2.py", line 489, in __init__
+    self.initialize_optimizer_states()
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/deepspeed/runtime/zero/stage_1_and_2.py", line 624, in initialize_optimizer_states
+    self.optimizer.step()
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/optim/lr_scheduler.py", line 68, in wrapper
+    return wrapped(*args, **kwargs)
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/optim/optimizer.py", line 140, in wrapper
+    out = func(*args, **kwargs)
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/autograd/grad_mode.py", line 27, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/optim/adamw.py", line 162, in step
+    adamw(params_with_grad,
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/optim/adamw.py", line 219, in adamw
+    func(params,
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/optim/adamw.py", line 316, in _single_tensor_adamw
+    denom = (exp_avg_sq.sqrt() / bias_correction2_sqrt).add_(eps)
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 6.28 GiB (GPU 1; 39.39 GiB total capacity; 34.41 GiB already allocated; 4.12 GiB free; 34.65 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+Traceback (most recent call last):
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc2/train_minillm.py", line 131, in <module>
+    main()
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc2/train_minillm.py", line 116, in main
+    train(
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc2/minillm/__init__.py", line 22, in train
+    trainer = PPOTrainer(
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc2/minillm/trainer.py", line 87, in __init__
+    self.model, self.opt, self.scheduler = self.setup_ds(self.model, self.opt, self.scheduler)
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc2/minillm/trainer.py", line 145, in setup_ds
+    model, optimizer, _, scheduler = deepspeed.initialize(
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/deepspeed/__init__.py", line 171, in initialize
+    engine = DeepSpeedEngine(args=args,
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/deepspeed/runtime/engine.py", line 310, in __init__
+    self._configure_optimizer(optimizer, model_parameters)
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/deepspeed/runtime/engine.py", line 1209, in _configure_optimizer
+    self.optimizer = self._configure_zero_optimizer(basic_optimizer)
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/deepspeed/runtime/engine.py", line 1444, in _configure_zero_optimizer
+    optimizer = DeepSpeedZeroOptimizer(
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/deepspeed/runtime/zero/stage_1_and_2.py", line 489, in __init__
+    self.initialize_optimizer_states()
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/deepspeed/runtime/zero/stage_1_and_2.py", line 624, in initialize_optimizer_states
+    self.optimizer.step()
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/optim/lr_scheduler.py", line 68, in wrapper
+    return wrapped(*args, **kwargs)
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/optim/optimizer.py", line 140, in wrapper
+    out = func(*args, **kwargs)
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/autograd/grad_mode.py", line 27, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/optim/adamw.py", line 162, in step
+    adamw(params_with_grad,
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/optim/adamw.py", line 219, in adamw
+    func(params,
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/optim/adamw.py", line 316, in _single_tensor_adamw
+    denom = (exp_avg_sq.sqrt() / bias_correction2_sqrt).add_(eps)
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 6.28 GiB (GPU 0; 39.39 GiB total capacity; 34.41 GiB already allocated; 4.12 GiB free; 34.65 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+ERROR:torch.distributed.elastic.multiprocessing.api:failed (exitcode: 1) local_rank: 0 (pid: 3333805) of binary: /home/bingxing2/home/scx7atk/.conda/envs/minillm/bin/python
+Traceback (most recent call last):
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/bin/torchrun", line 8, in <module>
+    sys.exit(main())
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 346, in wrapper
+    return f(*args, **kwargs)
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/distributed/run.py", line 762, in main
+    run(args)
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/distributed/run.py", line 753, in run
+    elastic_launch(
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 132, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 246, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+/home/bingxing2/home/scx7atk/work/minillm-zxc2/train_minillm.py FAILED
+------------------------------------------------------------
+Failures:
+[1]:
+  time      : 2024-05-21_23:33:18
+  host      : paraai-n32-h-01-agent-78.paraai-n32-h-01.com
+  rank      : 1 (local_rank: 1)
+  exitcode  : 1 (pid: 3333806)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+[2]:
+  time      : 2024-05-21_23:33:18
+  host      : paraai-n32-h-01-agent-78.paraai-n32-h-01.com
+  rank      : 2 (local_rank: 2)
+  exitcode  : 1 (pid: 3333810)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+[3]:
+  time      : 2024-05-21_23:33:18
+  host      : paraai-n32-h-01-agent-78.paraai-n32-h-01.com
+  rank      : 3 (local_rank: 3)
+  exitcode  : 1 (pid: 3333811)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2024-05-21_23:33:18
+  host      : paraai-n32-h-01-agent-78.paraai-n32-h-01.com
+  rank      : 0 (local_rank: 0)
+  exitcode  : 1 (pid: 3333805)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================

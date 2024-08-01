@@ -1,0 +1,624 @@
+torchrun --nproc_per_node 4 --nnodes 1 --node_rank 0 --master_addr localhost --master_port 2012 /home/bingxing2/home/scx7atk/work/minillm-zxc/train_minillm.py --base-path /home/bingxing2/home/scx7atk/work/minillm-zxc --model-path /home/bingxing2/home/scx7atk/pt_models/llama2/Llama-2-7b-hf/ --teacher-model-path /home/bingxing2/home/scx7atk/pt_models/llama2/Llama-2-13b-hf/ --ckpt-name llama2-7b --teacher-ckpt-name llama2-13b --n-gpu 4 --n-nodes 1 --model-type llama --teacher-model-fp16 --model-parallel --model-parallel-size 4 --prompt-data-dir /home/bingxing2/home/scx7atk/work/minillm-zxc/processed_data/dolly/prompt/llama/ --lm-data-dir /home/bingxing2/home/scx7atk/work/minillm-zxc/processed_data/roberta/llama/512/20M/ --dev-num 1000 --num-workers 0 --epochs 10 --total-iters 5000 --kd-ratio 0.5 --batch-size 8 --lr 5e-6 --lr-min 5e-6 --gradient-accumulation-steps 2 --max-length 512 --max-prompt-length 256 --warmup-iters 100 --save /home/bingxing2/home/scx7atk/work/minillm-zxc/results/llama2/train/minillm-zxc/ --seed 10 --seed-ppo 42 --seed-lm 7 --save-interval 500 --eval-interval 100 --log-interval 16 --mid-log-num 1 --type minillm --ppo-epochs 4 --num-rollouts 64 --chunk-size 8 --length-norm --single-step-reg --teacher-mixed-alpha 0.2 --reward-scaling 0.5 --cliprange-reward 100 --do-sample --top-k 0 --top-p 1.0 --temperature 1.0 --deepspeed --deepspeed_config /home/bingxing2/home/scx7atk/work/minillm-zxc/configs/deepspeed/ds_config_zero2_offload.json > /home/bingxing2/home/scx7atk/work/minillm-zxc/results/llama2/train/minillm-zxc//gpt2-xl-base-minillm-20240521-train.log 2>&1
+PYTHONPATH=/home/bingxing2/home/scx7atk/work/minillm-zxc
+WARNING:torch.distributed.run:
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+[2024-05-21 18:46:52,839] [INFO] [real_accelerator.py:133:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2024-05-21 18:46:52,839] [INFO] [real_accelerator.py:133:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2024-05-21 18:46:52,839] [INFO] [real_accelerator.py:133:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2024-05-21 18:46:52,839] [INFO] [real_accelerator.py:133:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2024-05-21 18:46:59,027] [WARNING] [comm.py:152:init_deepspeed_backend] NCCL backend in DeepSpeed not yet implemented
+[2024-05-21 18:46:59,027] [INFO] [comm.py:616:init_distributed] cdb=None
+using world size: 4[2024-05-21 18:46:59,027] [WARNING] [comm.py:152:init_deepspeed_backend] NCCL backend in DeepSpeed not yet implemented
+
+[2024-05-21 18:46:59,027] [WARNING] [comm.py:152:init_deepspeed_backend] NCCL backend in DeepSpeed not yet implemented
+[2024-05-21 18:46:59,027] [INFO] [comm.py:616:init_distributed] cdb=None
+[2024-05-21 18:46:59,027] [INFO] [comm.py:616:init_distributed] cdb=None
+[2024-05-21 18:46:59,027] [WARNING] [comm.py:152:init_deepspeed_backend] NCCL backend in DeepSpeed not yet implemented
+[2024-05-21 18:46:59,028] [INFO] [comm.py:616:init_distributed] cdb=None
+[2024-05-21 18:46:59,028] [INFO] [comm.py:643:init_distributed] Initializing TorchBackend in DeepSpeed with backend nccl
+> initializing model parallel with size 4
+> initializing model parallel cuda seeds on global rank 0, model parallel rank 0, and data parallel rank 0 with model parallel seed: 2728 and data parallel seed: 10
+arguments:
+  model_path ................... /home/bingxing2/home/scx7atk/pt_models/llama2/Llama-2-7b-hf/
+  ckpt_name .................... llama2-7b
+  n_gpu ........................ 4
+  n_nodes ...................... 1
+  model_type ................... llama
+  teacher_model_type ........... None
+  teacher_model_path ........... ['/home/bingxing2/home/scx7atk/pt_models/llama2/Llama-2-13b-hf/']
+  teacher_ckpt_name ............ llama2-13b
+  teacher_model_fp16 ........... True
+  model_parallel ............... True
+  model_parallel_size .......... 4
+  no_value ..................... False
+  dropout_path_rate ............ None
+  fp32 ......................... False
+  type ......................... minillm
+  do_train ..................... False
+  do_valid ..................... False
+  do_eval ...................... False
+  base_path .................... /home/bingxing2/home/scx7atk/work/minillm-zxc
+  load ......................... None
+  save ......................... /home/bingxing2/home/scx7atk/work/minillm-zxc/results/llama2/train/minillm-zxc/bs8-lr5e-06-G2-N4-NN1-lm1-len512-mp4/pe4_rs0.5_nr64_ln_sr_tm0.2
+  log_interval ................. 16
+  mid_log_num .................. 1
+  save_interval ................ 500
+  eval_interval ................ 100
+  local_rank ................... 0
+  save_additional_suffix ....... 
+  save_rollout ................. False
+  eb_sample_times .............. 3
+  data_dir ..................... None
+  processed_data_dir ........... None
+  force_process ................ False
+  force_process_demo ........... False
+  data_process_workers ......... -1
+  train_num .................... -1
+  train_ratio .................. 1
+  dev_num ...................... 1000
+  dev_ratio .................... 1
+  gen_num ...................... -1
+  data_names ................... None
+  prompt_type .................. None
+  num_workers .................. 0
+  max_prompt_length ............ 256
+  min_prompt_length ............ 128
+  json_data .................... False
+  bin_data ..................... False
+  txt_data ..................... False
+  prompt_data_dir .............. /home/bingxing2/home/scx7atk/work/minillm-zxc/processed_data/dolly/prompt/llama/
+  lm_data_dir .................. /home/bingxing2/home/scx7atk/work/minillm-zxc/processed_data/roberta/llama/512/20M/
+  eval_ppl ..................... False
+  eval_rw ...................... False
+  eval_gen ..................... False
+  only_prompt .................. False
+  batch_size ................... 8
+  eval_batch_size .............. 32
+  clip_grad .................... 1.0
+  total_iters .................. 5000
+  train_iters_per_epoch ........ -1
+  max_length ................... 512
+  seed ......................... 10
+  seed_order ................... 42
+  seed_data .................... 42
+  seed_ppo ..................... 42
+  seed_lm ...................... 7
+  epochs ....................... 10
+  training_epochs .............. 10000
+  gradient_accumulation_steps .. 2
+  gradient_checkpointing ....... False
+  attn_dtype ................... None
+  lr ........................... 5e-06
+  lr_min ....................... 5e-06
+  weight_decay ................. 0.01
+  loss_scale ................... 65536
+  kd_ratio ..................... 0.5
+  warmup_iters ................. 100
+  lr_decay_iters ............... None
+  lr_decay_style ............... noam
+  scheduler_name ............... constant_trm
+  reward_scaling ............... 0.5
+  cliprange_reward ............. 100.0
+  ppo_epochs ................... 4
+  num_rollouts ................. 64
+  num_rollouts_per_device ...... 16
+  cliprange .................... 0.2
+  chunk_size ................... 8
+  gamma ........................ 0.95
+  length_norm .................. True
+  single_step_reg .............. True
+  teacher_mixed_alpha .......... 0.2
+  lm_coef ...................... 1
+  top_k ........................ 0
+  top_p ........................ 1.0
+  do_sample .................... True
+  no_repeat_ngram_size ......... 6
+  repetition_penalty ........... None
+  num_beams .................... 1
+  temperature .................. 1.0
+  peft ......................... None
+  peft_lora_r .................. 8
+  peft_lora_alpha .............. 32
+  peft_lora_dropout ............ 0.1
+  peft_name .................... None
+  peft_path .................... None
+  teacher_peft_name ............ None
+  teacher_peft_path ............ None
+  deepspeed .................... True
+  deepspeed_config ............. /home/bingxing2/home/scx7atk/work/minillm-zxc/configs/deepspeed/ds_config_zero2_offload.json
+  deepscale .................... False
+  deepscale_config ............. None
+  deepspeed_mpi ................ False
+  rank ......................... 0
+  world_size ................... 4
+Rank 1: /home/bingxing2/home/scx7atk/pt_models/llama2/Llama-2-13b-hf/mp4/pytorch_model_1.bin loaded.Rank 0: /home/bingxing2/home/scx7atk/pt_models/llama2/Llama-2-13b-hf/mp4/pytorch_model_0.bin loaded.Rank 2: /home/bingxing2/home/scx7atk/pt_models/llama2/Llama-2-13b-hf/mp4/pytorch_model_2.bin loaded.
+
+Rank 3: /home/bingxing2/home/scx7atk/pt_models/llama2/Llama-2-13b-hf/mp4/pytorch_model_3.bin loaded.
+
+Rank 1: /home/bingxing2/home/scx7atk/pt_models/llama2/Llama-2-7b-hf/mp4/pytorch_model_1.bin loaded.Rank 0: /home/bingxing2/home/scx7atk/pt_models/llama2/Llama-2-7b-hf/mp4/pytorch_model_0.bin loaded.Rank 3: /home/bingxing2/home/scx7atk/pt_models/llama2/Llama-2-7b-hf/mp4/pytorch_model_3.bin loaded.
+Rank 2: /home/bingxing2/home/scx7atk/pt_models/llama2/Llama-2-7b-hf/mp4/pytorch_model_2.bin loaded.
+
+
+ > number of parameters on model parallel rank 1: 1684803584
+ > number of parameters on model parallel rank 0: 1684803584
+ > number of parameters on model parallel rank 3: 1684803584Model load time: 3.2782063484191895s
+
+ > number of parameters on model parallel rank 2: 1684803584
+ > number of parameters on model parallel rank 1: 1684M
+ > number of parameters on model parallel rank 0: 1684M > number of parameters on model parallel rank 3: 1684M
+
+ > number of parameters on model parallel rank 2: 1684M
+[2024-05-21 18:47:11,026] [INFO] [logging.py:96:log_dist] [Rank 0] DeepSpeed info: version=0.10.0, git-hash=unknown, git-branch=unknown
+[2024-05-21 18:47:11,203] [INFO] [logging.py:96:log_dist] [Rank 0] DeepSpeed Flops Profiler Enabled: False
+[2024-05-21 18:47:11,205] [INFO] [logging.py:96:log_dist] [Rank 0] Removing param_group that has no 'params' in the client Optimizer
+[2024-05-21 18:47:11,205] [INFO] [logging.py:96:log_dist] [Rank 0] Using client Optimizer as basic optimizer
+[2024-05-21 18:47:11,229] [INFO] [logging.py:96:log_dist] [Rank 0] DeepSpeed Basic Optimizer = AdamW
+[2024-05-21 18:47:11,229] [INFO] [utils.py:54:is_zero_supported_optimizer] Checking ZeRO support for optimizer=AdamW type=<class 'torch.optim.adamw.AdamW'>
+[2024-05-21 18:47:11,229] [INFO] [logging.py:96:log_dist] [Rank 0] Creating torch.float16 ZeRO stage 2 optimizer
+[2024-05-21 18:47:11,229] [INFO] [stage_1_and_2.py:133:__init__] Reduce bucket size 200000000
+[2024-05-21 18:47:11,229] [INFO] [stage_1_and_2.py:134:__init__] Allgather bucket size 200000000
+[2024-05-21 18:47:11,229] [INFO] [stage_1_and_2.py:135:__init__] CPU Offload: True
+[2024-05-21 18:47:11,229] [INFO] [stage_1_and_2.py:136:__init__] Round robin gradient partitioning: False
+Rank: 1 partition count [1] and sizes[(1684803584, False)] 
+Rank: 0 partition count [1] and sizes[(1684803584, False)] 
+Rank: 3 partition count [1] and sizes[(1684803584, False)] 
+Rank: 2 partition count [1] and sizes[(1684803584, False)] 
+[2024-05-21 18:47:17,563] [INFO] [utils.py:785:see_memory_usage] Before initializing optimizer states
+[2024-05-21 18:47:17,564] [INFO] [utils.py:786:see_memory_usage] MA 9.36 GB         Max_MA 9.36 GB         CA 9.6 GB         Max_CA 10 GB 
+[2024-05-21 18:47:17,564] [INFO] [utils.py:793:see_memory_usage] CPU Virtual Memory:  used = 125.85 GB, percent = 49.5%
+[2024-05-21 18:47:39,549] [INFO] [utils.py:785:see_memory_usage] After initializing optimizer states
+[2024-05-21 18:47:39,550] [INFO] [utils.py:786:see_memory_usage] MA 9.36 GB         Max_MA 9.36 GB         CA 9.6 GB         Max_CA 10 GB 
+[2024-05-21 18:47:39,550] [INFO] [utils.py:793:see_memory_usage] CPU Virtual Memory:  used = 201.4 GB, percent = 79.3%
+[2024-05-21 18:47:39,550] [INFO] [stage_1_and_2.py:493:__init__] optimizer state initialized
+[2024-05-21 18:47:39,621] [INFO] [utils.py:785:see_memory_usage] After initializing ZeRO optimizer
+[2024-05-21 18:47:39,622] [INFO] [utils.py:786:see_memory_usage] MA 9.36 GB         Max_MA 9.36 GB         CA 9.6 GB         Max_CA 10 GB 
+[2024-05-21 18:47:39,622] [INFO] [utils.py:793:see_memory_usage] CPU Virtual Memory:  used = 201.4 GB, percent = 79.3%
+[2024-05-21 18:47:39,634] [INFO] [logging.py:96:log_dist] [Rank 0] DeepSpeed Final Optimizer = AdamW
+[2024-05-21 18:47:39,635] [INFO] [logging.py:96:log_dist] [Rank 0] DeepSpeed using client LR scheduler
+[2024-05-21 18:47:39,635] [INFO] [logging.py:96:log_dist] [Rank 0] DeepSpeed LR Scheduler = <torch.optim.lr_scheduler.LambdaLR object at 0x40016c0668c0>
+[2024-05-21 18:47:39,635] [INFO] [logging.py:96:log_dist] [Rank 0] step=0, skipped=0, lr=[0.0], mom=[[0.9, 0.95]]
+[2024-05-21 18:47:39,636] [INFO] [config.py:960:print] DeepSpeedEngine configuration:
+[2024-05-21 18:47:39,636] [INFO] [config.py:964:print]   activation_checkpointing_config  {
+    "partition_activations": false, 
+    "contiguous_memory_optimization": false, 
+    "cpu_checkpointing": false, 
+    "number_checkpoints": null, 
+    "synchronize_checkpoint_boundary": false, 
+    "profile": false
+}
+[2024-05-21 18:47:39,636] [INFO] [config.py:964:print]   aio_config ................... {'block_size': 1048576, 'queue_depth': 8, 'thread_count': 1, 'single_submit': False, 'overlap_events': True}
+[2024-05-21 18:47:39,636] [INFO] [config.py:964:print]   amp_enabled .................. False
+[2024-05-21 18:47:39,637] [INFO] [config.py:964:print]   amp_params ................... False
+[2024-05-21 18:47:39,637] [INFO] [config.py:964:print]   autotuning_config ............ {
+    "enabled": false, 
+    "start_step": null, 
+    "end_step": null, 
+    "metric_path": null, 
+    "arg_mappings": null, 
+    "metric": "throughput", 
+    "model_info": null, 
+    "results_dir": "autotuning_results", 
+    "exps_dir": "autotuning_exps", 
+    "overwrite": true, 
+    "fast": true, 
+    "start_profile_step": 3, 
+    "end_profile_step": 5, 
+    "tuner_type": "gridsearch", 
+    "tuner_early_stopping": 5, 
+    "tuner_num_trials": 50, 
+    "model_info_path": null, 
+    "mp_size": 1, 
+    "max_train_batch_size": null, 
+    "min_train_batch_size": 1, 
+    "max_train_micro_batch_size_per_gpu": 1.024000e+03, 
+    "min_train_micro_batch_size_per_gpu": 1, 
+    "num_tuning_micro_batch_sizes": 3
+}
+[2024-05-21 18:47:39,637] [INFO] [config.py:964:print]   bfloat16_enabled ............. False
+[2024-05-21 18:47:39,637] [INFO] [config.py:964:print]   checkpoint_parallel_write_pipeline  False
+[2024-05-21 18:47:39,637] [INFO] [config.py:964:print]   checkpoint_tag_validation_enabled  True
+[2024-05-21 18:47:39,637] [INFO] [config.py:964:print]   checkpoint_tag_validation_fail  False
+[2024-05-21 18:47:39,637] [INFO] [config.py:964:print]   comms_config ................. <deepspeed.comm.config.DeepSpeedCommsConfig object at 0x40016d053460>
+[2024-05-21 18:47:39,637] [INFO] [config.py:964:print]   communication_data_type ...... None
+[2024-05-21 18:47:39,637] [INFO] [config.py:964:print]   compression_config ........... {'weight_quantization': {'shared_parameters': {'enabled': False, 'quantizer_kernel': False, 'schedule_offset': 0, 'quantize_groups': 1, 'quantize_verbose': False, 'quantization_type': 'symmetric', 'quantize_weight_in_forward': False, 'rounding': 'nearest', 'fp16_mixed_quantize': False, 'quantize_change_ratio': 0.001}, 'different_groups': {}}, 'activation_quantization': {'shared_parameters': {'enabled': False, 'quantization_type': 'symmetric', 'range_calibration': 'dynamic', 'schedule_offset': 1000}, 'different_groups': {}}, 'sparse_pruning': {'shared_parameters': {'enabled': False, 'method': 'l1', 'schedule_offset': 1000}, 'different_groups': {}}, 'row_pruning': {'shared_parameters': {'enabled': False, 'method': 'l1', 'schedule_offset': 1000}, 'different_groups': {}}, 'head_pruning': {'shared_parameters': {'enabled': False, 'method': 'topk', 'schedule_offset': 1000}, 'different_groups': {}}, 'channel_pruning': {'shared_parameters': {'enabled': False, 'method': 'l1', 'schedule_offset': 1000}, 'different_groups': {}}, 'layer_reduction': {'enabled': False}}
+[2024-05-21 18:47:39,637] [INFO] [config.py:964:print]   curriculum_enabled_legacy .... False
+[2024-05-21 18:47:39,637] [INFO] [config.py:964:print]   curriculum_params_legacy ..... False
+[2024-05-21 18:47:39,637] [INFO] [config.py:964:print]   data_efficiency_config ....... {'enabled': False, 'seed': 1234, 'data_sampling': {'enabled': False, 'num_epochs': 1000, 'num_workers': 0, 'curriculum_learning': {'enabled': False}}, 'data_routing': {'enabled': False, 'random_ltd': {'enabled': False, 'layer_token_lr_schedule': {'enabled': False}}}}
+[2024-05-21 18:47:39,638] [INFO] [config.py:964:print]   data_efficiency_enabled ...... False
+[2024-05-21 18:47:39,638] [INFO] [config.py:964:print]   dataloader_drop_last ......... False
+[2024-05-21 18:47:39,638] [INFO] [config.py:964:print]   disable_allgather ............ False
+[2024-05-21 18:47:39,638] [INFO] [config.py:964:print]   dump_state ................... False
+[2024-05-21 18:47:39,638] [INFO] [config.py:964:print]   dynamic_loss_scale_args ...... {'init_scale': 2048, 'scale_window': 5000, 'delayed_shift': 4, 'consecutive_hysteresis': False, 'min_scale': 1}
+[2024-05-21 18:47:39,638] [INFO] [config.py:964:print]   eigenvalue_enabled ........... False
+[2024-05-21 18:47:39,638] [INFO] [config.py:964:print]   eigenvalue_gas_boundary_resolution  1
+[2024-05-21 18:47:39,638] [INFO] [config.py:964:print]   eigenvalue_layer_name ........ bert.encoder.layer
+[2024-05-21 18:47:39,638] [INFO] [config.py:964:print]   eigenvalue_layer_num ......... 0
+[2024-05-21 18:47:39,638] [INFO] [config.py:964:print]   eigenvalue_max_iter .......... 100
+[2024-05-21 18:47:39,638] [INFO] [config.py:964:print]   eigenvalue_stability ......... 1e-06
+[2024-05-21 18:47:39,638] [INFO] [config.py:964:print]   eigenvalue_tol ............... 0.01
+[2024-05-21 18:47:39,638] [INFO] [config.py:964:print]   eigenvalue_verbose ........... False
+[2024-05-21 18:47:39,638] [INFO] [config.py:964:print]   elasticity_enabled ........... False
+[2024-05-21 18:47:39,638] [INFO] [config.py:964:print]   flops_profiler_config ........ {
+    "enabled": false, 
+    "recompute_fwd_factor": 0.0, 
+    "profile_step": 1, 
+    "module_depth": -1, 
+    "top_modules": 1, 
+    "detailed": true, 
+    "output_file": null
+}
+[2024-05-21 18:47:39,638] [INFO] [config.py:964:print]   fp16_auto_cast ............... False
+[2024-05-21 18:47:39,638] [INFO] [config.py:964:print]   fp16_enabled ................. True
+[2024-05-21 18:47:39,638] [INFO] [config.py:964:print]   fp16_master_weights_and_gradients  False
+[2024-05-21 18:47:39,638] [INFO] [config.py:964:print]   global_rank .................. 0
+[2024-05-21 18:47:39,639] [INFO] [config.py:964:print]   grad_accum_dtype ............. None
+[2024-05-21 18:47:39,639] [INFO] [config.py:964:print]   gradient_accumulation_steps .. 2
+[2024-05-21 18:47:39,639] [INFO] [config.py:964:print]   gradient_clipping ............ 1.0
+[2024-05-21 18:47:39,639] [INFO] [config.py:964:print]   gradient_predivide_factor .... 1.0
+[2024-05-21 18:47:39,639] [INFO] [config.py:964:print]   hybrid_engine ................ enabled=False max_out_tokens=512 inference_tp_size=1 release_inference_cache=False pin_parameters=True tp_gather_partition_size=8
+[2024-05-21 18:47:39,639] [INFO] [config.py:964:print]   initial_dynamic_scale ........ 2048
+[2024-05-21 18:47:39,639] [INFO] [config.py:964:print]   load_universal_checkpoint .... False
+[2024-05-21 18:47:39,639] [INFO] [config.py:964:print]   loss_scale ................... 0
+[2024-05-21 18:47:39,639] [INFO] [config.py:964:print]   memory_breakdown ............. False
+[2024-05-21 18:47:39,639] [INFO] [config.py:964:print]   mics_hierarchial_params_gather  False
+[2024-05-21 18:47:39,639] [INFO] [config.py:964:print]   mics_shard_size .............. -1
+[2024-05-21 18:47:39,639] [INFO] [config.py:964:print]   monitor_config ............... tensorboard=TensorBoardConfig(enabled=False, output_path='', job_name='DeepSpeedJobName') wandb=WandbConfig(enabled=False, group=None, team=None, project='deepspeed') csv_monitor=CSVConfig(enabled=False, output_path='', job_name='DeepSpeedJobName') enabled=False
+[2024-05-21 18:47:39,639] [INFO] [config.py:964:print]   nebula_config ................ {
+    "enabled": false, 
+    "persistent_storage_path": null, 
+    "persistent_time_interval": 100, 
+    "num_of_version_in_retention": 2, 
+    "enable_nebula_load": true, 
+    "load_path": null
+}
+[2024-05-21 18:47:39,639] [INFO] [config.py:964:print]   optimizer_legacy_fusion ...... False
+[2024-05-21 18:47:39,639] [INFO] [config.py:964:print]   optimizer_name ............... None
+[2024-05-21 18:47:39,639] [INFO] [config.py:964:print]   optimizer_params ............. None
+[2024-05-21 18:47:39,639] [INFO] [config.py:964:print]   pipeline ..................... {'stages': 'auto', 'partition': 'best', 'seed_layers': False, 'activation_checkpoint_interval': 0}
+[2024-05-21 18:47:39,640] [INFO] [config.py:964:print]   pld_enabled .................. False
+[2024-05-21 18:47:39,640] [INFO] [config.py:964:print]   pld_params ................... False
+[2024-05-21 18:47:39,640] [INFO] [config.py:964:print]   prescale_gradients ........... False
+[2024-05-21 18:47:39,640] [INFO] [config.py:964:print]   scheduler_name ............... None
+[2024-05-21 18:47:39,640] [INFO] [config.py:964:print]   scheduler_params ............. None
+[2024-05-21 18:47:39,640] [INFO] [config.py:964:print]   sparse_attention ............. None
+[2024-05-21 18:47:39,640] [INFO] [config.py:964:print]   sparse_gradients_enabled ..... False
+[2024-05-21 18:47:39,640] [INFO] [config.py:964:print]   steps_per_print .............. 10000000
+[2024-05-21 18:47:39,640] [INFO] [config.py:964:print]   train_batch_size ............. 16
+[2024-05-21 18:47:39,640] [INFO] [config.py:964:print]   train_micro_batch_size_per_gpu  8
+[2024-05-21 18:47:39,640] [INFO] [config.py:964:print]   use_node_local_storage ....... False
+[2024-05-21 18:47:39,640] [INFO] [config.py:964:print]   wall_clock_breakdown ......... False
+[2024-05-21 18:47:39,640] [INFO] [config.py:964:print]   world_size ................... 1
+[2024-05-21 18:47:39,640] [INFO] [config.py:964:print]   zero_allow_untested_optimizer  True
+[2024-05-21 18:47:39,640] [INFO] [config.py:964:print]   zero_config .................. stage=2 contiguous_gradients=True reduce_scatter=True reduce_bucket_size=200000000 allgather_partitions=True allgather_bucket_size=200000000 overlap_comm=True load_from_fp32_weights=True elastic_checkpoint=False offload_param=None offload_optimizer=DeepSpeedZeroOffloadOptimizerConfig(device='cpu', nvme_path=None, buffer_count=4, pin_memory=False, pipeline=False, pipeline_read=False, pipeline_write=False, fast_init=False) sub_group_size=1,000,000,000 cpu_offload_param=None cpu_offload_use_pin_memory=None cpu_offload=None prefetch_bucket_size=50,000,000 param_persistence_threshold=100,000 model_persistence_threshold=sys.maxsize max_live_parameters=1,000,000,000 max_reuse_distance=1,000,000,000 gather_16bit_weights_on_model_save=False stage3_gather_fp16_weights_on_model_save=False ignore_unused_parameters=True legacy_stage1=False round_robin_gradients=False zero_hpz_partition_size=1 zero_quantized_weights=False zero_quantized_gradients=False mics_shard_size=-1 mics_hierarchical_params_gather=False memory_efficient_linear=True
+[2024-05-21 18:47:39,640] [INFO] [config.py:964:print]   zero_enabled ................. True
+[2024-05-21 18:47:39,640] [INFO] [config.py:964:print]   zero_force_ds_cpu_optimizer .. False
+[2024-05-21 18:47:39,640] [INFO] [config.py:964:print]   zero_optimization_stage ...... 2
+[2024-05-21 18:47:39,641] [INFO] [config.py:950:print_user_config]   json = {
+    "train_micro_batch_size_per_gpu": 8, 
+    "gradient_accumulation_steps": 2, 
+    "zero_optimization": {
+        "stage": 2, 
+        "offload_optimizer": {
+            "device": "cpu"
+        }, 
+        "allgather_partitions": true, 
+        "allgather_bucket_size": 2.000000e+08, 
+        "overlap_comm": true, 
+        "reduce_scatter": true, 
+        "reduce_bucket_size": 2.000000e+08, 
+        "contiguous_gradients": true
+    }, 
+    "zero_force_ds_cpu_optimizer": false, 
+    "zero_allow_untested_optimizer": true, 
+    "fp16": {
+        "enabled": true, 
+        "loss_scale": 0, 
+        "initial_scale_power": 11, 
+        "loss_scale_window": 5.000000e+03, 
+        "hysteresis": 4
+    }, 
+    "wall_clock_breakdown": false, 
+    "gradient_clipping": 1.0, 
+    "steps_per_print": 1.000000e+07
+}
+Probing Dataset
+Probing end. Max data state 1, total length 10902
+Num PPO instances: 10902
+Rank 0: Number Sampling Elements 0 / 16
+Rank 0: Number Sampling Elements 8 / 16
+Probing Dataset
+Probing end. Max data state 1, total length 1000
+Num PPO instances: 1000
+Probing Dataset
+Probing end. Max data state 1, total length 20000004
+Num LM instances: 20000004
+Probing Dataset
+Probing end. Max data state 1, total length 10000
+Num LM instances: 10000
+Generation Evaluation:   0%|          | 0/125 [00:00<?, ?it/s]Generation Evaluation:   1%|          | 1/125 [00:17<36:14, 17.54s/it]Generation Evaluation:   2%|▏         | 2/125 [00:35<35:55, 17.52s/it]Generation Evaluation:   2%|▏         | 3/125 [00:52<35:30, 17.46s/it]Generation Evaluation:   3%|▎         | 4/125 [01:09<35:16, 17.50s/it]Generation Evaluation:   4%|▍         | 5/125 [01:27<34:56, 17.47s/it]Generation Evaluation:   5%|▍         | 6/125 [01:44<34:43, 17.51s/it]Generation Evaluation:   6%|▌         | 7/125 [02:02<34:21, 17.47s/it]Generation Evaluation:   6%|▋         | 8/125 [02:19<34:04, 17.47s/it]Generation Evaluation:   7%|▋         | 9/125 [02:37<33:48, 17.49s/it]Generation Evaluation:   8%|▊         | 10/125 [02:55<33:36, 17.54s/it]Generation Evaluation:   9%|▉         | 11/125 [03:12<33:22, 17.57s/it]Generation Evaluation:  10%|▉         | 12/125 [03:30<33:02, 17.54s/it]Generation Evaluation:  10%|█         | 13/125 [03:47<32:42, 17.52s/it]Generation Evaluation:  11%|█         | 14/125 [04:05<32:22, 17.50s/it]Generation Evaluation:  12%|█▏        | 15/125 [04:22<32:03, 17.48s/it]Generation Evaluation:  13%|█▎        | 16/125 [04:40<31:48, 17.51s/it]Generation Evaluation:  14%|█▎        | 17/125 [04:57<31:36, 17.56s/it]Generation Evaluation:  14%|█▍        | 18/125 [05:15<31:19, 17.57s/it]Generation Evaluation:  15%|█▌        | 19/125 [05:32<31:02, 17.57s/it]Generation Evaluation:  16%|█▌        | 20/125 [05:50<30:43, 17.56s/it]Generation Evaluation:  17%|█▋        | 21/125 [06:08<30:26, 17.56s/it]Generation Evaluation:  18%|█▊        | 22/125 [06:25<30:05, 17.53s/it]Generation Evaluation:  18%|█▊        | 23/125 [06:43<29:52, 17.57s/it]Generation Evaluation:  19%|█▉        | 24/125 [07:00<29:31, 17.54s/it]Generation Evaluation:  20%|██        | 25/125 [07:18<29:14, 17.55s/it]Generation Evaluation:  21%|██        | 26/125 [07:35<29:00, 17.58s/it]Generation Evaluation:  22%|██▏       | 27/125 [07:53<28:36, 17.51s/it]Generation Evaluation:  22%|██▏       | 28/125 [08:10<28:15, 17.48s/it]Generation Evaluation:  23%|██▎       | 29/125 [08:28<27:59, 17.50s/it]Generation Evaluation:  24%|██▍       | 30/125 [08:45<27:42, 17.50s/it]Generation Evaluation:  25%|██▍       | 31/125 [09:03<27:29, 17.55s/it]Generation Evaluation:  26%|██▌       | 32/125 [09:20<27:08, 17.51s/it]Generation Evaluation:  26%|██▋       | 33/125 [09:38<26:54, 17.55s/it]Generation Evaluation:  27%|██▋       | 34/125 [09:55<26:31, 17.49s/it]Generation Evaluation:  28%|██▊       | 35/125 [10:13<26:12, 17.48s/it]Generation Evaluation:  29%|██▉       | 36/125 [10:30<25:57, 17.50s/it]Generation Evaluation:  30%|██▉       | 37/125 [10:48<25:43, 17.54s/it]Generation Evaluation:  30%|███       | 38/125 [11:05<25:25, 17.54s/it]Generation Evaluation:  31%|███       | 39/125 [11:23<25:03, 17.49s/it]Generation Evaluation:  32%|███▏      | 40/125 [11:40<24:47, 17.50s/it]Generation Evaluation:  33%|███▎      | 41/125 [11:58<24:31, 17.52s/it]Generation Evaluation:  34%|███▎      | 42/125 [12:16<24:17, 17.56s/it]Generation Evaluation:  34%|███▍      | 43/125 [12:33<24:04, 17.61s/it]Generation Evaluation:  35%|███▌      | 44/125 [12:51<23:43, 17.57s/it]Generation Evaluation:  36%|███▌      | 45/125 [13:08<23:24, 17.56s/it]Generation Evaluation:  37%|███▋      | 46/125 [13:26<23:05, 17.53s/it]Generation Evaluation:  38%|███▊      | 47/125 [13:43<22:50, 17.57s/it]Generation Evaluation:  38%|███▊      | 48/125 [14:01<22:31, 17.55s/it]Generation Evaluation:  39%|███▉      | 49/125 [14:19<22:15, 17.57s/it]Generation Evaluation:  40%|████      | 50/125 [14:36<21:56, 17.56s/it]Generation Evaluation:  41%|████      | 51/125 [14:54<21:37, 17.54s/it]Generation Evaluation:  42%|████▏     | 52/125 [15:11<21:18, 17.51s/it]Generation Evaluation:  42%|████▏     | 53/125 [15:28<20:58, 17.48s/it]Generation Evaluation:  43%|████▎     | 54/125 [15:46<20:39, 17.46s/it]Generation Evaluation:  44%|████▍     | 55/125 [16:03<20:24, 17.50s/it]Generation Evaluation:  45%|████▍     | 56/125 [16:21<20:06, 17.49s/it]Generation Evaluation:  46%|████▌     | 57/125 [16:38<19:52, 17.54s/it]Generation Evaluation:  46%|████▋     | 58/125 [16:56<19:35, 17.55s/it]Generation Evaluation:  47%|████▋     | 59/125 [17:14<19:17, 17.53s/it]Generation Evaluation:  48%|████▊     | 60/125 [17:31<18:59, 17.53s/it]Generation Evaluation:  49%|████▉     | 61/125 [17:49<18:41, 17.52s/it]Generation Evaluation:  50%|████▉     | 62/125 [18:06<18:22, 17.49s/it]Generation Evaluation:  50%|█████     | 63/125 [18:24<18:05, 17.51s/it]Generation Evaluation:  51%|█████     | 64/125 [18:41<17:50, 17.55s/it]Generation Evaluation:  52%|█████▏    | 65/125 [18:59<17:34, 17.57s/it]Generation Evaluation:  53%|█████▎    | 66/125 [19:16<17:16, 17.57s/it]Generation Evaluation:  54%|█████▎    | 67/125 [19:34<16:59, 17.57s/it]Generation Evaluation:  54%|█████▍    | 68/125 [19:52<16:42, 17.58s/it]Generation Evaluation:  55%|█████▌    | 69/125 [20:09<16:28, 17.65s/it]Generation Evaluation:  56%|█████▌    | 70/125 [20:27<16:11, 17.67s/it]Generation Evaluation:  57%|█████▋    | 71/125 [20:45<15:51, 17.61s/it]Generation Evaluation:  58%|█████▊    | 72/125 [21:02<15:33, 17.60s/it]Generation Evaluation:  58%|█████▊    | 73/125 [21:20<15:13, 17.57s/it]Generation Evaluation:  59%|█████▉    | 74/125 [21:37<14:58, 17.62s/it]Generation Evaluation:  60%|██████    | 75/125 [21:55<14:40, 17.60s/it]Generation Evaluation:  61%|██████    | 76/125 [22:13<14:21, 17.59s/it]Generation Evaluation:  62%|██████▏   | 77/125 [22:30<14:04, 17.59s/it]Generation Evaluation:  62%|██████▏   | 78/125 [22:48<13:48, 17.62s/it]Generation Evaluation:  63%|██████▎   | 79/125 [23:05<13:29, 17.61s/it]Generation Evaluation:  64%|██████▍   | 80/125 [23:23<13:11, 17.59s/it]Generation Evaluation:  65%|██████▍   | 81/125 [23:40<12:52, 17.56s/it]Generation Evaluation:  66%|██████▌   | 82/125 [23:58<12:35, 17.57s/it]Generation Evaluation:  66%|██████▋   | 83/125 [24:15<12:16, 17.53s/it]Generation Evaluation:  67%|██████▋   | 84/125 [24:33<11:57, 17.49s/it]Generation Evaluation:  68%|██████▊   | 85/125 [24:50<11:40, 17.51s/it]Generation Evaluation:  69%|██████▉   | 86/125 [25:08<11:26, 17.59s/it]Generation Evaluation:  70%|██████▉   | 87/125 [25:26<11:06, 17.53s/it]Generation Evaluation:  70%|███████   | 88/125 [25:43<10:49, 17.55s/it]Generation Evaluation:  71%|███████   | 89/125 [26:01<10:33, 17.60s/it]Generation Evaluation:  72%|███████▏  | 90/125 [26:18<10:15, 17.59s/it]Generation Evaluation:  73%|███████▎  | 91/125 [26:36<09:57, 17.58s/it]Generation Evaluation:  74%|███████▎  | 92/125 [26:53<09:37, 17.51s/it]Generation Evaluation:  74%|███████▍  | 93/125 [27:11<09:19, 17.50s/it]Generation Evaluation:  75%|███████▌  | 94/125 [27:28<09:01, 17.48s/it]Generation Evaluation:  76%|███████▌  | 95/125 [27:46<08:44, 17.48s/it]Generation Evaluation:  77%|███████▋  | 96/125 [28:03<08:26, 17.47s/it]Generation Evaluation:  78%|███████▊  | 97/125 [28:21<08:10, 17.52s/it]Generation Evaluation:  78%|███████▊  | 98/125 [28:38<07:53, 17.55s/it]Generation Evaluation:  79%|███████▉  | 99/125 [28:56<07:35, 17.50s/it]Generation Evaluation:  80%|████████  | 100/125 [29:13<07:17, 17.50s/it]Generation Evaluation:  81%|████████  | 101/125 [29:31<07:02, 17.60s/it]Generation Evaluation:  82%|████████▏ | 102/125 [29:49<06:44, 17.58s/it]Generation Evaluation:  82%|████████▏ | 103/125 [30:06<06:25, 17.51s/it]Generation Evaluation:  83%|████████▎ | 104/125 [30:24<06:07, 17.50s/it]Generation Evaluation:  84%|████████▍ | 105/125 [30:41<05:51, 17.57s/it]Generation Evaluation:  85%|████████▍ | 106/125 [30:59<05:33, 17.55s/it]Generation Evaluation:  86%|████████▌ | 107/125 [31:16<05:14, 17.49s/it]Generation Evaluation:  86%|████████▋ | 108/125 [31:34<04:57, 17.49s/it]Generation Evaluation:  87%|████████▋ | 109/125 [31:51<04:40, 17.52s/it]Generation Evaluation:  88%|████████▊ | 110/125 [32:09<04:22, 17.52s/it]Generation Evaluation:  89%|████████▉ | 111/125 [32:26<04:05, 17.54s/it]Generation Evaluation:  90%|████████▉ | 112/125 [32:44<03:48, 17.56s/it]Generation Evaluation:  90%|█████████ | 113/125 [33:01<03:30, 17.54s/it]Generation Evaluation:  91%|█████████ | 114/125 [33:19<03:12, 17.52s/it]Generation Evaluation:  92%|█████████▏| 115/125 [33:37<02:55, 17.58s/it]Generation Evaluation:  93%|█████████▎| 116/125 [33:54<02:38, 17.61s/it]Generation Evaluation:  94%|█████████▎| 117/125 [34:12<02:20, 17.58s/it]Generation Evaluation:  94%|█████████▍| 118/125 [34:29<02:03, 17.60s/it]Generation Evaluation:  95%|█████████▌| 119/125 [34:47<01:45, 17.56s/it]Generation Evaluation:  96%|█████████▌| 120/125 [35:04<01:27, 17.55s/it]Generation Evaluation:  97%|█████████▋| 121/125 [35:22<01:10, 17.54s/it]Generation Evaluation:  98%|█████████▊| 122/125 [35:40<00:52, 17.57s/it]Generation Evaluation:  98%|█████████▊| 123/125 [35:57<00:35, 17.58s/it]Generation Evaluation:  99%|█████████▉| 124/125 [36:15<00:17, 17.58s/it]Generation Evaluation: 100%|██████████| 125/125 [36:32<00:00, 17.58s/it]Generation Evaluation: 100%|██████████| 125/125 [36:32<00:00, 17.54s/it]
+                                 Evaluation #0                                  
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ prompts                               ┃ samples                              ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ Below is an instruction that          │ Below is an instruction that         │
+│ describes a task, paired with an      │ describes a task, paired with an     │
+│ input that provides further context.  │ input that provides further context. │
+│ Write a response that appropriately   │ Write a response that appropriately  │
+│ completes the request.                │ completes the request.               │
+│                                       │                                      │
+│ ### Instruction:                      │ ### Instruction:                     │
+│ Who were the major players in the     │ Who were the major players in the    │
+│ Watergate conspiracy?                 │ Watergate conspiracy?                │
+│                                       │                                      │
+│ ### Input:                            │ ### Input:                           │
+│ The Watergate scandal was a major     │ The Watergate scandal was a major    │
+│ political scandal in the United       │ political scandal in the United      │
+│ States involving the administration   │ States involving the administration  │
+│ of President Richard Nixon from 1972  │ of President Richard Nixon from 1972 │
+│ to 1974 that led to Nixon's           │ to 1974 that led to Nixon's          │
+│ resignation. The scandal stemmed from │ resignation. The scandal stemmed     │
+│ the Nixon administration's persistent │ from the Nixon administration's      │
+│ attempts to cover up its involvement  │ persistent attempts to cover up its  │
+│ in the June 17, 1972 break-in of the  │ involvement in the June 17, 1972     │
+│ Democratic National Committee         │ break-in of the Democratic National  │
+│ headquarters at the Washington, D.C., │ Committee headquarters at the        │
+│ Watergate Office Building.            │ Washington, D.C., Watergate Office   │
+│                                       │ Building.                            │
+│ ### Response:                         │                                      │
+│                                       │ ### Response:                        │
+│                                       │ The major players in the Watergate   │
+│                                       │ conspiracy were the Nixon            │
+│                                       │ Administration, the White House, the │
+│                                       │ CIA, the FBI, the NSA, and the       │
+│                                       │ Criminal Justice System.             │
+│                                       │                                      │
+│                                       │ ### Coding Challenge                 │
+│                                       │                                      │
+│                                       │     Nixon and Haldeman were the key  │
+│                                       │ players in the administration.       │
+│                                       │ Nixon, Haldeman, Colson, Ehrlichman, │
+│                                       │ Mitchell, Dean, Ehrlichman, Ziegler, │
+│                                       │ Stans, and Magruder were key people  │
+│                                       │ during the Whitehouse investigation  │
+│                                       │                                    … │
+│                                       │ coverup efforts.                     │
+│                                       │ Excluding the nine people just named │
+│                                       │ above, of the remaining 20 people    │
+│                                       │ involved in the investigation and    │
+│                                       │ coverup efforts, list the first 10   │
+│                                       │ names alphabetically and show the    │
+│                                       │ letters used by the tenth person to  │
+│                                       │ complete the list. Assume that you   │
+│                                       │ don’t know the names of the ninth or │
+│                                       │ tenth persons, nor that the names of │
+│                                       │ any of the persons begin with a      │
+│                                       │ common letter.                       │
+│                                       │ Think about your interested in       │
+│                                       │ computers built specifically to      │
+│                                       │   solve code challenges and          │
+│                                       │ implementation. I like the fact the  │
+│                                       │ reservations are open and so it      │
+│                                       │ really pulls on your data and legacy │
+│                                       │ skills to answer the challenge!      │
+├───────────────────────────────────────┼──────────────────────────────────────┤
+│ Below is an instruction that          │ Below is an instruction that         │
+│ describes a task. Write a response    │ describes a task. Write a response   │
+│ that appropriately completes the      │ that appropriately completes the     │
+│ request.                              │ request.                             │
+│                                       │                                      │
+│ ### Instruction:                      │ ### Instruction:                     │
+│ Which of Shakespeare’s plays is the   │ Which of Shakespeare’s plays is the  │
+│ longest?                              │ longest?                             │
+│                                       │                                      │
+│ ### Response:                         │ ### Response:                        │
+│                                       │ _d. Rewrite the line and insert the  │
+│                                       │ missing text to complete the         │
+│                                       │ statement._                          │
+│                                       │                                      │
+│                                       │ ```                                  │
+│                                       │ Which of Shakespeare’s plays is the  │
+│                                       │ longest?                             │
+│                                       │ It's largely considered that  did    │
+│                                       │ take a long time to write.           │
+│                                       │ ```                                  │
+│                                       │                                      │
+│                                       │ ## 🚧 Building NLP UIs 🚧            │
+│                                       │                                      │
+│                                       │ ### Learner Summary:                 │
+│                                       │                                      │
+│                                       │ From **`word2vec`** to `sentiment    │
+│                                       │ analysis`, this section introduces   │
+│                                       │ an extensible architecture that      │
+│                                       │ supports a variety of tasks,         │
+│                                       │ including prediction of relative     │
+│                                       │ sentence positions in a meant        │
+│                                       │ editing task.                        │
+│                                       │                                      │
+│                                       │ ### Learner Challenge:               │
+│                                       │                                      │
+│                                       │ A challenge that could in dictate    │
+│                                       │ which task you are implementing is   │
+│                                       │ whether to  use a `recommender       │
+│                                       │ algorithm`, `clustering algorithm`,  │
+│                                       │ `having a model`, or a `permuted     │
+│                                       │ sentence completion task`. Activity  │
+│                                       │ Two + Three will demonstrate how a   │
+│                                       │ specific neural network has been     │
+│                                       │ used in the `q-classifier`,          │
+│                                       │ `recommender`, and `permutation      │
+│                                       │ task` to complete the learning       │
+│                                       │ process.                             │
+│                                       │                                      │
+│                                       │ #### Recommended Weekly View:        │
+│                                       │ PROJECT 2E SCHEDULED                 │
+│                                       │                                      │
+│                                       │ | **Activity** | **Description** |   │
+│                                       │ **Done Now** |                       │
+│                                       │ | ------------- | -------------      │
+├───────────────────────────────────────┼──────────────────────────────────────┤
+│ Below is an instruction that          │ Below is an instruction that         │
+│ describes a task. Write a response    │ describes a task. Write a response   │
+│ that appropriately completes the      │ that appropriately completes the     │
+│ request.                              │ request.                             │
+│                                       │                                      │
+│ ### Instruction:                      │ ### Instruction:                     │
+│ What are some ways to care for a new  │ What are some ways to care for a new │
+│ tree                                  │ tree                                 │
+│                                       │                                      │
+│ ### Response:                         │ ### Response:                        │
+│                                       │ Detailed answer attempts to explain  │
+│                                       │ multiple ways a tree should be cared │
+│                                       │ for including:                       │
+│                                       │   - Careful planting: straight up    │
+│                                       │ and down, properly spaced            │
+│                                       │                                      │
+│                                       │ ### Solution:                        │
+│                                       │ We can care for a new tree by very   │
+│                                       │ careful sowing.                      │
+│                                       │ <br />                               │
+│                                       │ ## Thesaurus:                        │
+│                                       │ Word meaning looks up in a different │
+│                                       │ dictionary to support a word choice, │
+│                                       │ develops or enhances a point,        │
+│                                       │ strengthens a line of thinking by    │
+│                                       │ showing evidence or exposition from  │
+│                                       │ a variety of sources. Shows personal │
+│                                       │ preference by offering an experience │
+│                                       │ or reference from past learning.     │
+│                                       │                                      │
+│                                       │ The Sky Is a Lonely Place by Garth   │
+│                                       │ Stein - selected                     │
+│                                       │                                      │
+│                                       │ <br />                               │
+│                                       │ ## Critical Thinking:                │
+│                                       │ **Good Critical Thinking:** makes a  │
+│                                       │ useful connection to a main idea.    │
+│                                       │ **Length isn’t good critical         │
+│                                       │ thinking:** >20 words; <10 words     │
+│                                       │                                      │
+│                                       │ ### Solution 5:                      │
+│                                       │ An unused chalkboard songbrought it  │
+│                                       │ to                                   │
+│                                       │ mind, paired with this the midnight  │
+│                                       │ sun.Did I feel lonely?I thought of   │
+│                                       │ hermit crabs, young those            │
+│                                       │ crustaceans,nursing theirs, feeding  │
+│                                       │ and growingrear and eyes andtail.    │
+└───────────────────────────────────────┴──────────────────────────────────────┘
+LM Evaluation:   0%|          | 0/125 [00:00<?, ?it/s]LM Evaluation:   0%|          | 0/125 [00:01<?, ?it/s]
+Traceback (most recent call last):
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/train_minillm.py", line 131, in <module>
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/train_minillm.py", line 131, in <module>
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/train_minillm.py", line 131, in <module>
+Traceback (most recent call last):
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/train_minillm.py", line 131, in <module>
+        main()    main()
+main()
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/train_minillm.py", line 116, in main
+
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/train_minillm.py", line 116, in main
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/train_minillm.py", line 116, in main
+    main()
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/train_minillm.py", line 116, in main
+        train(train(
+
+      File "/home/bingxing2/home/scx7atk/work/minillm-zxc/minillm/__init__.py", line 57, in train
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/minillm/__init__.py", line 57, in train
+    train(train(
+
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/minillm/__init__.py", line 57, in train
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/minillm/__init__.py", line 57, in train
+                trainer.train()trainer.train()trainer.train()trainer.train()
+
+
+
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/minillm/trainer.py", line 289, in train
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/minillm/trainer.py", line 289, in train
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/minillm/trainer.py", line 289, in train
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/minillm/trainer.py", line 289, in train
+                self.evaluate()self.evaluate()self.evaluate()self.evaluate()
+
+
+
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/minillm/trainer.py", line 493, in evaluate
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/minillm/trainer.py", line 493, in evaluate
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/minillm/trainer.py", line 493, in evaluate
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/minillm/trainer.py", line 493, in evaluate
+            eval_pt_results = self.evaluate_pt()eval_pt_results = self.evaluate_pt()eval_pt_results = self.evaluate_pt()
+    
+
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/minillm/trainer.py", line 619, in evaluate_pt
+eval_pt_results = self.evaluate_pt()  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/minillm/trainer.py", line 619, in evaluate_pt
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/minillm/trainer.py", line 619, in evaluate_pt
+
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/minillm/trainer.py", line 619, in evaluate_pt
+    _, stats = self.losses.pt_loss(batch, logits)
+      File "/home/bingxing2/home/scx7atk/work/minillm-zxc/minillm/losses.py", line 263, in pt_loss
+    _, stats = self.losses.pt_loss(batch, logits)    _, stats = self.losses.pt_loss(batch, logits)
+_, stats = self.losses.pt_loss(batch, logits)
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/minillm/losses.py", line 263, in pt_loss
+
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/minillm/losses.py", line 263, in pt_loss
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/minillm/losses.py", line 263, in pt_loss
+    l1_loss = F.smooth_l1_loss(student_probs, teacher_probs, reduction='none')
+UnboundLocalError: local variable 'teacher_probs' referenced before assignment
+    l1_loss = F.smooth_l1_loss(student_probs, teacher_probs, reduction='none')
+UnboundLocalError: local variable 'teacher_probs' referenced before assignment
+    l1_loss = F.smooth_l1_loss(student_probs, teacher_probs, reduction='none')
+UnboundLocalError: local variable 'teacher_probs' referenced before assignment
+    l1_loss = F.smooth_l1_loss(student_probs, teacher_probs, reduction='none')
+UnboundLocalError: local variable 'teacher_probs' referenced before assignment
+ERROR:torch.distributed.elastic.multiprocessing.api:failed (exitcode: 1) local_rank: 0 (pid: 2616916) of binary: /home/bingxing2/home/scx7atk/.conda/envs/minillm/bin/python
+Traceback (most recent call last):
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/bin/torchrun", line 8, in <module>
+    sys.exit(main())
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 346, in wrapper
+    return f(*args, **kwargs)
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/distributed/run.py", line 762, in main
+    run(args)
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/distributed/run.py", line 753, in run
+    elastic_launch(
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 132, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 246, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+/home/bingxing2/home/scx7atk/work/minillm-zxc/train_minillm.py FAILED
+------------------------------------------------------------
+Failures:
+[1]:
+  time      : 2024-05-21_19:26:12
+  host      : paraai-n32-h-01-agent-78.paraai-n32-h-01.com
+  rank      : 1 (local_rank: 1)
+  exitcode  : 1 (pid: 2616917)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+[2]:
+  time      : 2024-05-21_19:26:12
+  host      : paraai-n32-h-01-agent-78.paraai-n32-h-01.com
+  rank      : 2 (local_rank: 2)
+  exitcode  : 1 (pid: 2616918)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+[3]:
+  time      : 2024-05-21_19:26:12
+  host      : paraai-n32-h-01-agent-78.paraai-n32-h-01.com
+  rank      : 3 (local_rank: 3)
+  exitcode  : 1 (pid: 2616919)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2024-05-21_19:26:12
+  host      : paraai-n32-h-01-agent-78.paraai-n32-h-01.com
+  rank      : 0 (local_rank: 0)
+  exitcode  : 1 (pid: 2616916)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================

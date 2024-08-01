@@ -1,0 +1,515 @@
+torchrun --nproc_per_node 4 --nnodes 1 --node_rank 0 --master_addr localhost --master_port 2012 /home/bingxing2/home/scx7atk/work/minillm-zxc/train_minillm.py --base-path /home/bingxing2/home/scx7atk/work/minillm-zxc --model-path /home/bingxing2/home/scx7atk/work/minillm-zxc/results/gpt2/train/minillm_init/gpt2-base --teacher-model-path /home/bingxing2/home/scx7atk/work/minillm-zxc/results/gpt2/train/sft/gpt2-xlarge/ --ckpt-name base-init --teacher-ckpt-name xlarge-sft --n-gpu 4 --n-nodes 1 --teacher-model-fp16 --prompt-data-dir /home/bingxing2/home/scx7atk/work/minillm-zxc/processed_data/dolly/prompt/gpt2/ --lm-data-dir /home/bingxing2/home/scx7atk/work/minillm-zxc/processed_data/openwebtext/gpt2/512/10M/ --dev-num 1000 --num-workers 0 --epochs 10 --total-iters 5000 --kd-ratio 0.5 --batch-size 16 --lr 5e-6 --lr-min 5e-6 --gradient-accumulation-steps 1 --max-length 512 --max-prompt-length 256 --warmup-iters 100 --save /home/bingxing2/home/scx7atk/work/minillm-zxc/results/gpt2/train/minillm-zxc/ --seed 10 --seed-ppo 42 --seed-lm 7 --save-interval 500 --eval-interval 100 --log-interval 16 --mid-log-num 1 --type minillm --ppo-epochs 4 --num-rollouts 64 --chunk-size 32 --length-norm --single-step-reg --teacher-mixed-alpha 0.2 --reward-scaling 0.5 --cliprange-reward 100 --do-sample --top-k 0 --top-p 1.0 --temperature 1.0 --deepspeed --deepspeed_config /home/bingxing2/home/scx7atk/work/minillm-zxc/configs/deepspeed/ds_config.json > /home/bingxing2/home/scx7atk/work/minillm-zxc/results/gpt2/train/minillm-zxc//gpt2-xl-base-minillm-20240519-train.log 2>&1
+PYTHONPATH=/home/bingxing2/home/scx7atk/work/minillm-zxc
+WARNING:torch.distributed.run:
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+[2024-05-19 20:36:31,231] [INFO] [real_accelerator.py:133:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2024-05-19 20:36:31,231] [INFO] [real_accelerator.py:133:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2024-05-19 20:36:31,231] [INFO] [real_accelerator.py:133:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2024-05-19 20:36:31,231] [INFO] [real_accelerator.py:133:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+using world size: 4
+[2024-05-19 20:36:48,273] [WARNING] [comm.py:152:init_deepspeed_backend] NCCL backend in DeepSpeed not yet implemented
+[2024-05-19 20:36:48,273] [WARNING] [comm.py:152:init_deepspeed_backend] NCCL backend in DeepSpeed not yet implemented
+[2024-05-19 20:36:48,273] [WARNING] [comm.py:152:init_deepspeed_backend] NCCL backend in DeepSpeed not yet implemented
+[2024-05-19 20:36:48,273] [WARNING] [comm.py:152:init_deepspeed_backend] NCCL backend in DeepSpeed not yet implemented
+[2024-05-19 20:36:48,273] [INFO] [comm.py:616:init_distributed] cdb=None
+[2024-05-19 20:36:48,273] [INFO] [comm.py:616:init_distributed] cdb=None
+[2024-05-19 20:36:48,273] [INFO] [comm.py:616:init_distributed] cdb=None
+[2024-05-19 20:36:48,273] [INFO] [comm.py:616:init_distributed] cdb=None
+[2024-05-19 20:36:48,273] [INFO] [comm.py:643:init_distributed] Initializing TorchBackend in DeepSpeed with backend nccl
+arguments:
+  model_path ................... /home/bingxing2/home/scx7atk/work/minillm-zxc/results/gpt2/train/minillm_init/gpt2-base
+  ckpt_name .................... base-init
+  n_gpu ........................ 4
+  n_nodes ...................... 1
+  model_type ................... gpt2
+  teacher_model_type ........... None
+  teacher_model_path ........... ['/home/bingxing2/home/scx7atk/work/minillm-zxc/results/gpt2/train/sft/gpt2-xlarge/']
+  teacher_ckpt_name ............ xlarge-sft
+  teacher_model_fp16 ........... True
+  model_parallel ............... False
+  model_parallel_size .......... None
+  no_value ..................... False
+  dropout_path_rate ............ None
+  fp32 ......................... False
+  type ......................... minillm
+  do_train ..................... False
+  do_valid ..................... False
+  do_eval ...................... False
+  base_path .................... /home/bingxing2/home/scx7atk/work/minillm-zxc
+  load ......................... None
+  save ......................... /home/bingxing2/home/scx7atk/work/minillm-zxc/results/gpt2/train/minillm-zxc/bs16-lr5e-06-G1-N4-NN1-lm1-len512/pe4_rs0.5_nr64_ln_sr_tm0.2
+  log_interval ................. 16
+  mid_log_num .................. 1
+  save_interval ................ 500
+  eval_interval ................ 100
+  local_rank ................... 0
+  save_additional_suffix ....... 
+  save_rollout ................. False
+  eb_sample_times .............. 3
+  data_dir ..................... None
+  processed_data_dir ........... None
+  force_process ................ False
+  force_process_demo ........... False
+  data_process_workers ......... -1
+  train_num .................... -1
+  train_ratio .................. 1
+  dev_num ...................... 1000
+  dev_ratio .................... 1
+  gen_num ...................... -1
+  data_names ................... None
+  prompt_type .................. None
+  num_workers .................. 0
+  max_prompt_length ............ 256
+  min_prompt_length ............ 128
+  json_data .................... False
+  bin_data ..................... False
+  txt_data ..................... False
+  prompt_data_dir .............. /home/bingxing2/home/scx7atk/work/minillm-zxc/processed_data/dolly/prompt/gpt2/
+  lm_data_dir .................. /home/bingxing2/home/scx7atk/work/minillm-zxc/processed_data/openwebtext/gpt2/512/10M/
+  eval_ppl ..................... False
+  eval_rw ...................... False
+  eval_gen ..................... False
+  only_prompt .................. False
+  batch_size ................... 16
+  eval_batch_size .............. 32
+  clip_grad .................... 1.0
+  total_iters .................. 5000
+  train_iters_per_epoch ........ -1
+  max_length ................... 512
+  seed ......................... 10
+  seed_order ................... 42
+  seed_data .................... 42
+  seed_ppo ..................... 42
+  seed_lm ...................... 7
+  epochs ....................... 10
+  training_epochs .............. 10000
+  gradient_accumulation_steps .. 1
+  gradient_checkpointing ....... False
+  attn_dtype ................... None
+  lr ........................... 5e-06
+  lr_min ....................... 5e-06
+  weight_decay ................. 0.01
+  loss_scale ................... 65536
+  kd_ratio ..................... 0.5
+  warmup_iters ................. 100
+  lr_decay_iters ............... None
+  lr_decay_style ............... noam
+  scheduler_name ............... constant_trm
+  reward_scaling ............... 0.5
+  cliprange_reward ............. 100.0
+  ppo_epochs ................... 4
+  num_rollouts ................. 64
+  num_rollouts_per_device ...... 16
+  cliprange .................... 0.2
+  chunk_size ................... 32
+  gamma ........................ 0.95
+  length_norm .................. True
+  single_step_reg .............. True
+  teacher_mixed_alpha .......... 0.2
+  lm_coef ...................... 1
+  top_k ........................ 0
+  top_p ........................ 1.0
+  do_sample .................... True
+  no_repeat_ngram_size ......... 6
+  repetition_penalty ........... None
+  num_beams .................... 1
+  temperature .................. 1.0
+  peft ......................... None
+  peft_lora_r .................. 8
+  peft_lora_alpha .............. 32
+  peft_lora_dropout ............ 0.1
+  peft_name .................... None
+  peft_path .................... None
+  teacher_peft_name ............ None
+  teacher_peft_path ............ None
+  deepspeed .................... True
+  deepspeed_config ............. /home/bingxing2/home/scx7atk/work/minillm-zxc/configs/deepspeed/ds_config.json
+  deepscale .................... False
+  deepscale_config ............. None
+  deepspeed_mpi ................ False
+  rank ......................... 0
+  world_size ................... 4
+ > number of parameters: 1557611200
+ > number of parameters: 124439808
+Model load time: 0.828228235244751s
+ > number of parameters: 124M
+[2024-05-19 20:36:55,176] [INFO] [logging.py:96:log_dist] [Rank 0] DeepSpeed info: version=0.10.0, git-hash=unknown, git-branch=unknown
+[2024-05-19 20:36:55,771] [INFO] [logging.py:96:log_dist] [Rank 0] DeepSpeed Flops Profiler Enabled: False
+[2024-05-19 20:36:55,772] [INFO] [logging.py:96:log_dist] [Rank 0] Removing param_group that has no 'params' in the client Optimizer
+[2024-05-19 20:36:55,772] [INFO] [logging.py:96:log_dist] [Rank 0] Using client Optimizer as basic optimizer
+[2024-05-19 20:36:55,779] [INFO] [logging.py:96:log_dist] [Rank 0] DeepSpeed Basic Optimizer = AdamW
+[2024-05-19 20:36:55,779] [INFO] [utils.py:54:is_zero_supported_optimizer] Checking ZeRO support for optimizer=AdamW type=<class 'torch.optim.adamw.AdamW'>
+[2024-05-19 20:36:55,779] [INFO] [logging.py:96:log_dist] [Rank 0] Creating torch.float16 ZeRO stage 1 optimizer
+[2024-05-19 20:36:55,779] [INFO] [stage_1_and_2.py:133:__init__] Reduce bucket size 500,000,000
+[2024-05-19 20:36:55,779] [INFO] [stage_1_and_2.py:134:__init__] Allgather bucket size 500,000,000
+[2024-05-19 20:36:55,779] [INFO] [stage_1_and_2.py:135:__init__] CPU Offload: False
+[2024-05-19 20:36:55,779] [INFO] [stage_1_and_2.py:136:__init__] Round robin gradient partitioning: False
+Rank: 2 partition count [4] and sizes[(31109952, False)] 
+Rank: 1 partition count [4] and sizes[(31109952, False)] 
+Rank: 3 partition count [4] and sizes[(31109952, False)] 
+Rank: 0 partition count [4] and sizes[(31109952, False)] 
+[2024-05-19 20:36:56,017] [INFO] [utils.py:785:see_memory_usage] Before initializing optimizer states
+[2024-05-19 20:36:56,018] [INFO] [utils.py:786:see_memory_usage] MA 3.37 GB         Max_MA 3.43 GB         CA 3.45 GB         Max_CA 3 GB 
+[2024-05-19 20:36:56,018] [INFO] [utils.py:793:see_memory_usage] CPU Virtual Memory:  used = 82.42 GB, percent = 32.4%
+[2024-05-19 20:36:56,105] [INFO] [utils.py:785:see_memory_usage] After initializing optimizer states
+[2024-05-19 20:36:56,106] [INFO] [utils.py:786:see_memory_usage] MA 3.61 GB         Max_MA 3.95 GB         CA 4.04 GB         Max_CA 4 GB 
+[2024-05-19 20:36:56,107] [INFO] [utils.py:793:see_memory_usage] CPU Virtual Memory:  used = 82.45 GB, percent = 32.5%
+[2024-05-19 20:36:56,107] [INFO] [stage_1_and_2.py:493:__init__] optimizer state initialized
+[2024-05-19 20:36:56,176] [INFO] [utils.py:785:see_memory_usage] After initializing ZeRO optimizer
+[2024-05-19 20:36:56,177] [INFO] [utils.py:786:see_memory_usage] MA 3.61 GB         Max_MA 3.61 GB         CA 4.04 GB         Max_CA 4 GB 
+[2024-05-19 20:36:56,177] [INFO] [utils.py:793:see_memory_usage] CPU Virtual Memory:  used = 82.47 GB, percent = 32.5%
+[2024-05-19 20:36:56,178] [INFO] [logging.py:96:log_dist] [Rank 0] DeepSpeed Final Optimizer = AdamW
+[2024-05-19 20:36:56,178] [INFO] [logging.py:96:log_dist] [Rank 0] DeepSpeed using client LR scheduler
+[2024-05-19 20:36:56,178] [INFO] [logging.py:96:log_dist] [Rank 0] DeepSpeed LR Scheduler = <torch.optim.lr_scheduler.LambdaLR object at 0x4000f3a82c20>
+[2024-05-19 20:36:56,178] [INFO] [logging.py:96:log_dist] [Rank 0] step=0, skipped=0, lr=[0.0], mom=[[0.9, 0.95]]
+[2024-05-19 20:36:56,179] [INFO] [config.py:960:print] DeepSpeedEngine configuration:
+[2024-05-19 20:36:56,179] [INFO] [config.py:964:print]   activation_checkpointing_config  {
+    "partition_activations": false, 
+    "contiguous_memory_optimization": false, 
+    "cpu_checkpointing": false, 
+    "number_checkpoints": null, 
+    "synchronize_checkpoint_boundary": false, 
+    "profile": false
+}
+[2024-05-19 20:36:56,179] [INFO] [config.py:964:print]   aio_config ................... {'block_size': 1048576, 'queue_depth': 8, 'thread_count': 1, 'single_submit': False, 'overlap_events': True}
+[2024-05-19 20:36:56,179] [INFO] [config.py:964:print]   amp_enabled .................. False
+[2024-05-19 20:36:56,179] [INFO] [config.py:964:print]   amp_params ................... False
+[2024-05-19 20:36:56,180] [INFO] [config.py:964:print]   autotuning_config ............ {
+    "enabled": false, 
+    "start_step": null, 
+    "end_step": null, 
+    "metric_path": null, 
+    "arg_mappings": null, 
+    "metric": "throughput", 
+    "model_info": null, 
+    "results_dir": "autotuning_results", 
+    "exps_dir": "autotuning_exps", 
+    "overwrite": true, 
+    "fast": true, 
+    "start_profile_step": 3, 
+    "end_profile_step": 5, 
+    "tuner_type": "gridsearch", 
+    "tuner_early_stopping": 5, 
+    "tuner_num_trials": 50, 
+    "model_info_path": null, 
+    "mp_size": 1, 
+    "max_train_batch_size": null, 
+    "min_train_batch_size": 1, 
+    "max_train_micro_batch_size_per_gpu": 1.024000e+03, 
+    "min_train_micro_batch_size_per_gpu": 1, 
+    "num_tuning_micro_batch_sizes": 3
+}
+[2024-05-19 20:36:56,180] [INFO] [config.py:964:print]   bfloat16_enabled ............. False
+[2024-05-19 20:36:56,180] [INFO] [config.py:964:print]   checkpoint_parallel_write_pipeline  False
+[2024-05-19 20:36:56,180] [INFO] [config.py:964:print]   checkpoint_tag_validation_enabled  True
+[2024-05-19 20:36:56,180] [INFO] [config.py:964:print]   checkpoint_tag_validation_fail  False
+[2024-05-19 20:36:56,180] [INFO] [config.py:964:print]   comms_config ................. <deepspeed.comm.config.DeepSpeedCommsConfig object at 0x4000f3a80190>
+[2024-05-19 20:36:56,180] [INFO] [config.py:964:print]   communication_data_type ...... None
+[2024-05-19 20:36:56,180] [INFO] [config.py:964:print]   compression_config ........... {'weight_quantization': {'shared_parameters': {'enabled': False, 'quantizer_kernel': False, 'schedule_offset': 0, 'quantize_groups': 1, 'quantize_verbose': False, 'quantization_type': 'symmetric', 'quantize_weight_in_forward': False, 'rounding': 'nearest', 'fp16_mixed_quantize': False, 'quantize_change_ratio': 0.001}, 'different_groups': {}}, 'activation_quantization': {'shared_parameters': {'enabled': False, 'quantization_type': 'symmetric', 'range_calibration': 'dynamic', 'schedule_offset': 1000}, 'different_groups': {}}, 'sparse_pruning': {'shared_parameters': {'enabled': False, 'method': 'l1', 'schedule_offset': 1000}, 'different_groups': {}}, 'row_pruning': {'shared_parameters': {'enabled': False, 'method': 'l1', 'schedule_offset': 1000}, 'different_groups': {}}, 'head_pruning': {'shared_parameters': {'enabled': False, 'method': 'topk', 'schedule_offset': 1000}, 'different_groups': {}}, 'channel_pruning': {'shared_parameters': {'enabled': False, 'method': 'l1', 'schedule_offset': 1000}, 'different_groups': {}}, 'layer_reduction': {'enabled': False}}
+[2024-05-19 20:36:56,180] [INFO] [config.py:964:print]   curriculum_enabled_legacy .... False
+[2024-05-19 20:36:56,180] [INFO] [config.py:964:print]   curriculum_params_legacy ..... False
+[2024-05-19 20:36:56,180] [INFO] [config.py:964:print]   data_efficiency_config ....... {'enabled': False, 'seed': 1234, 'data_sampling': {'enabled': False, 'num_epochs': 1000, 'num_workers': 0, 'curriculum_learning': {'enabled': False}}, 'data_routing': {'enabled': False, 'random_ltd': {'enabled': False, 'layer_token_lr_schedule': {'enabled': False}}}}
+[2024-05-19 20:36:56,180] [INFO] [config.py:964:print]   data_efficiency_enabled ...... False
+[2024-05-19 20:36:56,180] [INFO] [config.py:964:print]   dataloader_drop_last ......... False
+[2024-05-19 20:36:56,180] [INFO] [config.py:964:print]   disable_allgather ............ False
+[2024-05-19 20:36:56,180] [INFO] [config.py:964:print]   dump_state ................... False
+[2024-05-19 20:36:56,180] [INFO] [config.py:964:print]   dynamic_loss_scale_args ...... {'init_scale': 2048, 'scale_window': 2000, 'delayed_shift': 4, 'consecutive_hysteresis': False, 'min_scale': 1}
+[2024-05-19 20:36:56,180] [INFO] [config.py:964:print]   eigenvalue_enabled ........... False
+[2024-05-19 20:36:56,181] [INFO] [config.py:964:print]   eigenvalue_gas_boundary_resolution  1
+[2024-05-19 20:36:56,181] [INFO] [config.py:964:print]   eigenvalue_layer_name ........ bert.encoder.layer
+[2024-05-19 20:36:56,181] [INFO] [config.py:964:print]   eigenvalue_layer_num ......... 0
+[2024-05-19 20:36:56,181] [INFO] [config.py:964:print]   eigenvalue_max_iter .......... 100
+[2024-05-19 20:36:56,181] [INFO] [config.py:964:print]   eigenvalue_stability ......... 1e-06
+[2024-05-19 20:36:56,181] [INFO] [config.py:964:print]   eigenvalue_tol ............... 0.01
+[2024-05-19 20:36:56,181] [INFO] [config.py:964:print]   eigenvalue_verbose ........... False
+[2024-05-19 20:36:56,181] [INFO] [config.py:964:print]   elasticity_enabled ........... False
+[2024-05-19 20:36:56,181] [INFO] [config.py:964:print]   flops_profiler_config ........ {
+    "enabled": false, 
+    "recompute_fwd_factor": 0.0, 
+    "profile_step": 1, 
+    "module_depth": -1, 
+    "top_modules": 1, 
+    "detailed": true, 
+    "output_file": null
+}
+[2024-05-19 20:36:56,181] [INFO] [config.py:964:print]   fp16_auto_cast ............... False
+[2024-05-19 20:36:56,181] [INFO] [config.py:964:print]   fp16_enabled ................. True
+[2024-05-19 20:36:56,181] [INFO] [config.py:964:print]   fp16_master_weights_and_gradients  False
+[2024-05-19 20:36:56,181] [INFO] [config.py:964:print]   global_rank .................. 0
+[2024-05-19 20:36:56,181] [INFO] [config.py:964:print]   grad_accum_dtype ............. None
+[2024-05-19 20:36:56,181] [INFO] [config.py:964:print]   gradient_accumulation_steps .. 1
+[2024-05-19 20:36:56,181] [INFO] [config.py:964:print]   gradient_clipping ............ 1.0
+[2024-05-19 20:36:56,181] [INFO] [config.py:964:print]   gradient_predivide_factor .... 1.0
+[2024-05-19 20:36:56,181] [INFO] [config.py:964:print]   hybrid_engine ................ enabled=False max_out_tokens=512 inference_tp_size=1 release_inference_cache=False pin_parameters=True tp_gather_partition_size=8
+[2024-05-19 20:36:56,181] [INFO] [config.py:964:print]   initial_dynamic_scale ........ 2048
+[2024-05-19 20:36:56,182] [INFO] [config.py:964:print]   load_universal_checkpoint .... False
+[2024-05-19 20:36:56,182] [INFO] [config.py:964:print]   loss_scale ................... 0
+[2024-05-19 20:36:56,182] [INFO] [config.py:964:print]   memory_breakdown ............. False
+[2024-05-19 20:36:56,182] [INFO] [config.py:964:print]   mics_hierarchial_params_gather  False
+[2024-05-19 20:36:56,182] [INFO] [config.py:964:print]   mics_shard_size .............. -1
+[2024-05-19 20:36:56,182] [INFO] [config.py:964:print]   monitor_config ............... tensorboard=TensorBoardConfig(enabled=False, output_path='', job_name='DeepSpeedJobName') wandb=WandbConfig(enabled=False, group=None, team=None, project='deepspeed') csv_monitor=CSVConfig(enabled=False, output_path='', job_name='DeepSpeedJobName') enabled=False
+[2024-05-19 20:36:56,182] [INFO] [config.py:964:print]   nebula_config ................ {
+    "enabled": false, 
+    "persistent_storage_path": null, 
+    "persistent_time_interval": 100, 
+    "num_of_version_in_retention": 2, 
+    "enable_nebula_load": true, 
+    "load_path": null
+}
+[2024-05-19 20:36:56,182] [INFO] [config.py:964:print]   optimizer_legacy_fusion ...... False
+[2024-05-19 20:36:56,182] [INFO] [config.py:964:print]   optimizer_name ............... None
+[2024-05-19 20:36:56,182] [INFO] [config.py:964:print]   optimizer_params ............. None
+[2024-05-19 20:36:56,182] [INFO] [config.py:964:print]   pipeline ..................... {'stages': 'auto', 'partition': 'best', 'seed_layers': False, 'activation_checkpoint_interval': 0}
+[2024-05-19 20:36:56,182] [INFO] [config.py:964:print]   pld_enabled .................. False
+[2024-05-19 20:36:56,182] [INFO] [config.py:964:print]   pld_params ................... False
+[2024-05-19 20:36:56,182] [INFO] [config.py:964:print]   prescale_gradients ........... False
+[2024-05-19 20:36:56,182] [INFO] [config.py:964:print]   scheduler_name ............... None
+[2024-05-19 20:36:56,182] [INFO] [config.py:964:print]   scheduler_params ............. None
+[2024-05-19 20:36:56,182] [INFO] [config.py:964:print]   sparse_attention ............. None
+[2024-05-19 20:36:56,182] [INFO] [config.py:964:print]   sparse_gradients_enabled ..... False
+[2024-05-19 20:36:56,182] [INFO] [config.py:964:print]   steps_per_print .............. 10000000
+[2024-05-19 20:36:56,183] [INFO] [config.py:964:print]   train_batch_size ............. 64
+[2024-05-19 20:36:56,183] [INFO] [config.py:964:print]   train_micro_batch_size_per_gpu  16
+[2024-05-19 20:36:56,183] [INFO] [config.py:964:print]   use_node_local_storage ....... False
+[2024-05-19 20:36:56,183] [INFO] [config.py:964:print]   wall_clock_breakdown ......... False
+[2024-05-19 20:36:56,183] [INFO] [config.py:964:print]   world_size ................... 4
+[2024-05-19 20:36:56,183] [INFO] [config.py:964:print]   zero_allow_untested_optimizer  True
+[2024-05-19 20:36:56,183] [INFO] [config.py:964:print]   zero_config .................. stage=1 contiguous_gradients=True reduce_scatter=True reduce_bucket_size=500,000,000 allgather_partitions=True allgather_bucket_size=500,000,000 overlap_comm=False load_from_fp32_weights=True elastic_checkpoint=False offload_param=None offload_optimizer=None sub_group_size=1,000,000,000 cpu_offload_param=None cpu_offload_use_pin_memory=None cpu_offload=None prefetch_bucket_size=50,000,000 param_persistence_threshold=100,000 model_persistence_threshold=sys.maxsize max_live_parameters=1,000,000,000 max_reuse_distance=1,000,000,000 gather_16bit_weights_on_model_save=False stage3_gather_fp16_weights_on_model_save=False ignore_unused_parameters=True legacy_stage1=False round_robin_gradients=False zero_hpz_partition_size=1 zero_quantized_weights=False zero_quantized_gradients=False mics_shard_size=-1 mics_hierarchical_params_gather=False memory_efficient_linear=True
+[2024-05-19 20:36:56,183] [INFO] [config.py:964:print]   zero_enabled ................. True
+[2024-05-19 20:36:56,183] [INFO] [config.py:964:print]   zero_force_ds_cpu_optimizer .. True
+[2024-05-19 20:36:56,183] [INFO] [config.py:964:print]   zero_optimization_stage ...... 1
+[2024-05-19 20:36:56,183] [INFO] [config.py:950:print_user_config]   json = {
+    "train_micro_batch_size_per_gpu": 16, 
+    "gradient_accumulation_steps": 1, 
+    "zero_optimization": {
+        "stage": 1
+    }, 
+    "zero_allow_untested_optimizer": true, 
+    "fp16": {
+        "enabled": true, 
+        "loss_scale": 0, 
+        "initial_scale_power": 11, 
+        "loss_scale_window": 2.000000e+03, 
+        "hysteresis": 4
+    }, 
+    "wall_clock_breakdown": false, 
+    "gradient_clipping": 1.0, 
+    "steps_per_print": 1.000000e+07
+}
+Probing Dataset
+Probing end. Max data state 1, total length 11435
+Num PPO instances: 11435
+Probing Dataset
+Probing end. Max data state 1, total length 1000
+Num PPO instances: 1000
+Probing Dataset
+Probing end. Max data state 1, total length 17346712
+Num LM instances: 17346712
+Probing Dataset
+Probing end. Max data state 1, total length 10000
+Num LM instances: 10000
+Generation Evaluation:   0%|          | 0/16 [00:00<?, ?it/s]Generation Evaluation:   6%|▋         | 1/16 [00:04<01:05,  4.36s/it]Generation Evaluation:  12%|█▎        | 2/16 [00:09<01:06,  4.75s/it]Generation Evaluation:  19%|█▉        | 3/16 [00:11<00:47,  3.64s/it]Generation Evaluation:  25%|██▌       | 4/16 [00:14<00:41,  3.43s/it]Generation Evaluation:  31%|███▏      | 5/16 [00:18<00:37,  3.44s/it]Generation Evaluation:  38%|███▊      | 6/16 [00:22<00:35,  3.54s/it]Generation Evaluation:  44%|████▍     | 7/16 [00:26<00:34,  3.80s/it]Generation Evaluation:  50%|█████     | 8/16 [00:30<00:31,  3.96s/it]Generation Evaluation:  56%|█████▋    | 9/16 [00:34<00:27,  3.89s/it]Generation Evaluation:  62%|██████▎   | 10/16 [00:38<00:24,  4.02s/it]Generation Evaluation:  69%|██████▉   | 11/16 [00:43<00:21,  4.21s/it]Generation Evaluation:  75%|███████▌  | 12/16 [00:47<00:16,  4.11s/it]Generation Evaluation:  81%|████████▏ | 13/16 [00:51<00:12,  4.07s/it]Generation Evaluation:  88%|████████▊ | 14/16 [00:56<00:08,  4.30s/it]Generation Evaluation:  94%|█████████▍| 15/16 [00:58<00:03,  3.84s/it]Generation Evaluation: 100%|██████████| 16/16 [01:04<00:00,  4.28s/it]Generation Evaluation: 100%|██████████| 16/16 [01:04<00:00,  4.01s/it]
+                                 Evaluation #0                                  
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ prompts                               ┃ samples                              ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ Below is an instruction that          │ Below is an instruction that         │
+│ describes a task, paired with an      │ describes a task, paired with an     │
+│ input that provides further context.  │ input that provides further context. │
+│ Write a response that appropriately   │ Write a response that appropriately  │
+│ completes the request.                │ completes the request.               │
+│                                       │                                      │
+│ ### Instruction:                      │ ### Instruction:                     │
+│ Give me a chronological bulleted list │ Give me a chronological bulleted     │
+│ based on a timeline of events         │ list based on a timeline of events   │
+│                                       │                                      │
+│ ### Input:                            │ ### Input:                           │
+│ Olson served as a law clerk for Judge │ Olson served as a law clerk for      │
+│ Barbara Jacobs Rothstein on the       │ Judge Barbara Jacobs Rothstein on    │
+│ United States District Court for the  │ the United States District Court for │
+│ Western District of Washington for    │ the Western District of Washington   │
+│ two years immediately after finishing │ for two years immediately after      │
+│ law school. She served as a trial     │ finishing law school. She served as  │
+│ attorney and later Deputy Director of │ a trial attorney and later Deputy    │
+│ the National Church Arson Task Force  │ Director of the National Church      │
+│ in the United States Department of    │ Arson Task Force in the United       │
+│ Justice Civil Rights Division from    │ States Department of Justice Civil   │
+│ 1992 to 1997. From 1994 to 1997, she  │ Rights Division from 1992 to 1997.   │
+│ also worked part-time as an adjunct   │ From 1994 to 1997, she also worked   │
+│ professor at George Washington        │ part-time as an adjunct professor at │
+│ University Law School.                │ George Washington University Law     │
+│                                       │ School.                              │
+│ In 1997, Olson joined the Office of   │                                      │
+│ the United States Attorney for the    │ In 1997, Olson joined the Office of  │
+│ District of Idaho, rising to the rank │ the United States Attorney for the   │
+│ of Senior Litigation Counsel at the   │ District of Idaho, rising to the     │
+│ time of her appointment in 2010.[4]   │ rank of Senior Litigation Counsel at │
+│                                       │ the time of her appointment in       │
+│ After Olson resigned in 2017, she     │ 2010.[4]                             │
+│ joined the Boise office of Stoel      │                                      │
+│ Rives, a law firm that operates in    │ After Olson resigned in 2017, she    │
+│ the Pacific Northwest.[5][6] In 2021, │ joined the Boise office of Stoel     │
+│ Olson was included on a shortlist of  │ Rives, a law firm that operates in   │
+│ possible nominees to succeed Judge B. │ the Pacific Northwest.[5][6] In      │
+│ Lynn Winmill.[7][8]                   │ 2021, Olson was included on a        │
+│                                       │ shortlist of possible nominees to    │
+│ ### Response:                         │ succeed Judge B. Lynn Winmill.[7][8] │
+│                                       │                                      │
+│                                       │ ### Response:                        │
+│                                       │ Olson served as a judge and later    │
+│                                       │ deputy director of the National      │
+│                                       │ Church Arson Task Force              │
+│                                       │                                      │
+│                                       │ In 1993, Olson joined the Office of  │
+│                                       │ the United States Attorney for the   │
+│                                       │ District of Idaho                    │
+│                                       │                                      │
+│                                       │ In 1997, Olson joined the Office of  │
+│                                       │ the United States Attorney for the   │
+│                                       │ District of Idaho                    │
+│                                       │                                      │
+│                                       │ In 1997, Olson joined the Office of  │
+│                                       │ the United States Attorney for the   │
+│                                       │ District of Idaho                    │
+│                                       │                                      │
+│                                       │ In 1997, Olson joined the Office of  │
+│                                       │ the United States Attorney for the   │
+│                                       │ District of Idaho                    │
+│                                       │                                      │
+│                                       │ In 2020, Olson was added to the      │
+│                                       │ shortlist for vice president of the  │
+│                                       │ United States Supreme Court and was  │
+│                                       │ confirmed                            │
+├───────────────────────────────────────┼──────────────────────────────────────┤
+│ Below is an instruction that          │ Below is an instruction that         │
+│ describes a task. Write a response    │ describes a task. Write a response   │
+│ that appropriately completes the      │ that appropriately completes the     │
+│ request.                              │ request.                             │
+│                                       │                                      │
+│ ### Instruction:                      │ ### Instruction:                     │
+│ Did Sir Winston Churchill win the     │ Did Sir Winston Churchill win the    │
+│ Nobel Peace Prize?                    │ Nobel Peace Prize?                   │
+│                                       │                                      │
+│ ### Response:                         │ ### Response:                        │
+│                                       │ No. Churchill won the Nobel Peace    │
+│                                       │ Prize in July 1997 evening.          │
+├───────────────────────────────────────┼──────────────────────────────────────┤
+│ Below is an instruction that          │ Below is an instruction that         │
+│ describes a task. Write a response    │ describes a task. Write a response   │
+│ that appropriately completes the      │ that appropriately completes the     │
+│ request.                              │ request.                             │
+│                                       │                                      │
+│ ### Instruction:                      │ ### Instruction:                     │
+│ Are the Golden State Warriors a good  │ Are the Golden State Warriors a good │
+│ basketball team?                      │ basketball team?                     │
+│                                       │                                      │
+│ ### Response:                         │ ### Response:                        │
+│                                       │ The Golden State Warriors have a lot │
+│                                       │ of potential but have not been       │
+│                                       │ widely recognized. For many, the     │
+│                                       │ name of the team doesn't matter at   │
+│                                       │ all but upon closer inspection, the  │
+│                                       │ look and feel are all of this is     │
+│                                       │ exceptional.  Additionally, most     │
+│                                       │ fans gravitate toward their favorite │
+│                                       │ team.  It's been said that even      │
+│                                       │ small moments of success can make    │
+│                                       │ one noticed by success or failure.   │
+│                                       │                                      │
+│                                       │ However, the addition of a newly     │
+│                                       │ crowned leader like James Curry who  │
+│                                       │ has led the team to four             │
+│                                       │ championships next to Steve Nash and │
+│                                       │ Stephen Curry haven't been           │
+│                                       │ celebrated in any other way. These   │
+│                                       │ traits have become too evident for   │
+│                                       │ the fans to deny and it has just     │
+│                                       │ become obvious that the Warriors are │
+│                                       │ a very powerful group of basketball  │
+│                                       │ giants.                              │
+└───────────────────────────────────────┴──────────────────────────────────────┘
+LM Evaluation:   0%|          | 0/16 [00:00<?, ?it/s]LM Evaluation:   6%|▋         | 1/16 [00:00<00:07,  2.06it/s]LM Evaluation:  12%|█▎        | 2/16 [00:00<00:06,  2.11it/s]LM Evaluation:  19%|█▉        | 3/16 [00:01<00:06,  2.12it/s]LM Evaluation:  25%|██▌       | 4/16 [00:01<00:05,  2.13it/s]LM Evaluation:  31%|███▏      | 5/16 [00:02<00:05,  2.13it/s]LM Evaluation:  38%|███▊      | 6/16 [00:02<00:04,  2.14it/s]LM Evaluation:  44%|████▍     | 7/16 [00:03<00:04,  2.14it/s]LM Evaluation:  50%|█████     | 8/16 [00:03<00:03,  2.14it/s]LM Evaluation:  56%|█████▋    | 9/16 [00:04<00:03,  2.14it/s]LM Evaluation:  62%|██████▎   | 10/16 [00:04<00:02,  2.14it/s]LM Evaluation:  69%|██████▉   | 11/16 [00:05<00:02,  2.14it/s]LM Evaluation:  75%|███████▌  | 12/16 [00:05<00:01,  2.14it/s]LM Evaluation:  81%|████████▏ | 13/16 [00:06<00:01,  2.14it/s]LM Evaluation:  88%|████████▊ | 14/16 [00:06<00:00,  2.14it/s]LM Evaluation:  94%|█████████▍| 15/16 [00:07<00:00,  2.14it/s]LM Evaluation: 100%|██████████| 16/16 [00:07<00:00,  2.40it/s]LM Evaluation: 100%|██████████| 16/16 [00:07<00:00,  2.19it/s]
+eval | rougeL: 21.360 | exact_match: 2.600 | rev_kl: 2.508 | lens: 60.935 | pt_loss: 3.166 | lm_loss: 3.433 | kd_loss: 2.600 
+Total Steps: 5000 Data Epochs: 10
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  0/ 4 | global iter:      1/  5000| tot_loss: 3.1256 | rl_loss: 3.0402 | pt_loss: 3.1256 | pg_loss: -0.0105 | reg_loss: 3.0507 | reward: -0.4333 | rev_kl: 2.8011 | stu_lens: 52.1250 | mixed_lens: 256.0000 | lr: 5.0000e-08 | scale: 2048.00 | time: 1.721 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  1/ 4 | global iter:      2/  5000| tot_loss: 3.2791 | rl_loss: 3.0402 | pt_loss: 3.2791 | pg_loss: -0.0105 | reg_loss: 3.0507 | reward: -0.4333 | rev_kl: 2.8011 | stu_lens: 52.1250 | mixed_lens: 256.0000 | lr: 1.0000e-07 | scale: 2048.00 | time: 1.308 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  2/ 4 | global iter:      3/  5000| tot_loss: 3.2857 | rl_loss: 3.0402 | pt_loss: 3.2857 | pg_loss: -0.0105 | reg_loss: 3.0507 | reward: -0.4333 | rev_kl: 2.8011 | stu_lens: 52.1250 | mixed_lens: 256.0000 | lr: 1.5000e-07 | scale: 2048.00 | time: 1.399 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  3/ 4 | global iter:      4/  5000| tot_loss: 3.3131 | rl_loss: 3.0405 | pt_loss: 3.3131 | pg_loss: -0.0104 | reg_loss: 3.0509 | reward: -0.4333 | rev_kl: 2.8011 | stu_lens: 52.1250 | mixed_lens: 256.0000 | lr: 2.0000e-07 | scale: 2048.00 | time: 1.356 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  0/ 4 | global iter:      5/  5000| tot_loss: 3.2303 | rl_loss: 3.2975 | pt_loss: 3.2303 | pg_loss: 0.0345 | reg_loss: 3.2629 | reward: -0.3853 | rev_kl: 2.5642 | stu_lens: 61.6719 | mixed_lens: 256.0000 | lr: 2.5000e-07 | scale: 2048.00 | time: 1.615 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  1/ 4 | global iter:      6/  5000| tot_loss: 3.2340 | rl_loss: 3.2975 | pt_loss: 3.2340 | pg_loss: 0.0345 | reg_loss: 3.2629 | reward: -0.3853 | rev_kl: 2.5642 | stu_lens: 61.6719 | mixed_lens: 256.0000 | lr: 3.0000e-07 | scale: 2048.00 | time: 1.398 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  2/ 4 | global iter:      7/  5000| tot_loss: 3.3696 | rl_loss: 3.2976 | pt_loss: 3.3696 | pg_loss: 0.0346 | reg_loss: 3.2630 | reward: -0.3853 | rev_kl: 2.5642 | stu_lens: 61.6719 | mixed_lens: 256.0000 | lr: 3.5000e-07 | scale: 2048.00 | time: 1.328 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  3/ 4 | global iter:      8/  5000| tot_loss: 3.2982 | rl_loss: 3.2974 | pt_loss: 3.2982 | pg_loss: 0.0345 | reg_loss: 3.2629 | reward: -0.3853 | rev_kl: 2.5642 | stu_lens: 61.6719 | mixed_lens: 256.0000 | lr: 4.0000e-07 | scale: 2048.00 | time: 1.332 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  0/ 4 | global iter:      9/  5000| tot_loss: 3.2560 | rl_loss: 3.1044 | pt_loss: 3.2560 | pg_loss: -0.0081 | reg_loss: 3.1125 | reward: -0.4146 | rev_kl: 2.7171 | stu_lens: 53.7344 | mixed_lens: 256.0000 | lr: 4.5000e-07 | scale: 2048.00 | time: 8.662 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  1/ 4 | global iter:     10/  5000| tot_loss: 3.1664 | rl_loss: 3.1044 | pt_loss: 3.1664 | pg_loss: -0.0081 | reg_loss: 3.1125 | reward: -0.4146 | rev_kl: 2.7171 | stu_lens: 53.7344 | mixed_lens: 256.0000 | lr: 5.0000e-07 | scale: 2048.00 | time: 1.388 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  2/ 4 | global iter:     11/  5000| tot_loss: 3.1314 | rl_loss: 3.1043 | pt_loss: 3.1314 | pg_loss: -0.0081 | reg_loss: 3.1124 | reward: -0.4146 | rev_kl: 2.7171 | stu_lens: 53.7344 | mixed_lens: 256.0000 | lr: 5.5000e-07 | scale: 2048.00 | time: 1.329 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  3/ 4 | global iter:     12/  5000| tot_loss: 3.3241 | rl_loss: 3.1047 | pt_loss: 3.3241 | pg_loss: -0.0081 | reg_loss: 3.1128 | reward: -0.4146 | rev_kl: 2.7171 | stu_lens: 53.7344 | mixed_lens: 256.0000 | lr: 6.0000e-07 | scale: 2048.00 | time: 1.334 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  0/ 4 | global iter:     13/  5000| tot_loss: 3.1834 | rl_loss: 3.0288 | pt_loss: 3.1834 | pg_loss: -0.0329 | reg_loss: 3.0617 | reward: -0.3992 | rev_kl: 2.5557 | stu_lens: 47.0781 | mixed_lens: 256.0000 | lr: 6.5000e-07 | scale: 2048.00 | time: 1.470 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  1/ 4 | global iter:     14/  5000| tot_loss: 3.2523 | rl_loss: 3.0290 | pt_loss: 3.2523 | pg_loss: -0.0328 | reg_loss: 3.0618 | reward: -0.3992 | rev_kl: 2.5557 | stu_lens: 47.0781 | mixed_lens: 256.0000 | lr: 7.0000e-07 | scale: 2048.00 | time: 1.326 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  2/ 4 | global iter:     15/  5000| tot_loss: 3.2446 | rl_loss: 3.0289 | pt_loss: 3.2446 | pg_loss: -0.0331 | reg_loss: 3.0620 | reward: -0.3992 | rev_kl: 2.5557 | stu_lens: 47.0781 | mixed_lens: 256.0000 | lr: 7.5000e-07 | scale: 2048.00 | time: 1.334 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  3/ 4 | global iter:     16/  5000| tot_loss: 3.3366 | rl_loss: 3.0291 | pt_loss: 3.3366 | pg_loss: -0.0332 | reg_loss: 3.0623 | reward: -0.3992 | rev_kl: 2.5557 | stu_lens: 47.0781 | mixed_lens: 256.0000 | lr: 8.0000e-07 | scale: 2048.00 | time: 1.482 | step time: 0.000
+****************************************************************************************************
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  3/ 4 | global iter:     16/  5000| tot_loss: 3.2519 | rl_loss: 3.1178 | pt_loss: 3.2519 | pg_loss: -0.0043 | reg_loss: 3.1221 | reward: -0.4081 | rev_kl: 2.6595 | stu_lens: 53.6523 | mixed_lens: 256.0000 | lr: 8.0000e-07 | scale: 2048.00 | time: 1.482 | step time: 1.861
+/home/bingxing2/home/scx7atk/work/minillm-zxc/results/gpt2/train/minillm-zxc/bs16-lr5e-06-G1-N4-NN1-lm1-len512/pe4_rs0.5_nr64_ln_sr_tm0.2
+****************************************************************************************************
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  0/ 4 | global iter:     17/  5000| tot_loss: 3.4284 | rl_loss: 3.5071 | pt_loss: 3.4284 | pg_loss: 0.1187 | reg_loss: 3.3884 | reward: -0.4084 | rev_kl: 2.7315 | stu_lens: 59.4375 | mixed_lens: 256.0000 | lr: 8.5000e-07 | scale: 2048.00 | time: 12.792 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  1/ 4 | global iter:     18/  5000| tot_loss: 3.1450 | rl_loss: 3.5073 | pt_loss: 3.1450 | pg_loss: 0.1186 | reg_loss: 3.3886 | reward: -0.4084 | rev_kl: 2.7315 | stu_lens: 59.4375 | mixed_lens: 256.0000 | lr: 9.0000e-07 | scale: 2048.00 | time: 1.364 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  2/ 4 | global iter:     19/  5000| tot_loss: 3.1550 | rl_loss: 3.5074 | pt_loss: 3.1550 | pg_loss: 0.1187 | reg_loss: 3.3887 | reward: -0.4084 | rev_kl: 2.7315 | stu_lens: 59.4375 | mixed_lens: 256.0000 | lr: 9.5000e-07 | scale: 2048.00 | time: 1.327 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  3/ 4 | global iter:     20/  5000| tot_loss: 3.1831 | rl_loss: 3.5080 | pt_loss: 3.1831 | pg_loss: 0.1182 | reg_loss: 3.3898 | reward: -0.4084 | rev_kl: 2.7315 | stu_lens: 59.4375 | mixed_lens: 256.0000 | lr: 1.0000e-06 | scale: 2048.00 | time: 1.346 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  0/ 4 | global iter:     21/  5000| tot_loss: 3.2804 | rl_loss: 3.5906 | pt_loss: 3.2804 | pg_loss: 0.2243 | reg_loss: 3.3663 | reward: -0.4387 | rev_kl: 2.4704 | stu_lens: 56.0938 | mixed_lens: 256.0000 | lr: 1.0500e-06 | scale: 2048.00 | time: 8.627 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  1/ 4 | global iter:     22/  5000| tot_loss: 3.2582 | rl_loss: 3.5908 | pt_loss: 3.2582 | pg_loss: 0.2242 | reg_loss: 3.3666 | reward: -0.4387 | rev_kl: 2.4704 | stu_lens: 56.0938 | mixed_lens: 256.0000 | lr: 1.1000e-06 | scale: 2048.00 | time: 1.475 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  2/ 4 | global iter:     23/  5000| tot_loss: 3.3753 | rl_loss: 3.5911 | pt_loss: 3.3753 | pg_loss: 0.2242 | reg_loss: 3.3669 | reward: -0.4387 | rev_kl: 2.4704 | stu_lens: 56.0938 | mixed_lens: 256.0000 | lr: 1.1500e-06 | scale: 2048.00 | time: 1.328 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  3/ 4 | global iter:     24/  5000| tot_loss: 3.2785 | rl_loss: 3.5911 | pt_loss: 3.2785 | pg_loss: 0.2241 | reg_loss: 3.3670 | reward: -0.4387 | rev_kl: 2.4704 | stu_lens: 56.0938 | mixed_lens: 256.0000 | lr: 1.2000e-06 | scale: 2048.00 | time: 1.397 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  0/ 4 | global iter:     25/  5000| tot_loss: 3.3439 | rl_loss: 3.0533 | pt_loss: 3.3439 | pg_loss: -0.0806 | reg_loss: 3.1339 | reward: -0.4297 | rev_kl: 2.7839 | stu_lens: 51.7656 | mixed_lens: 256.0000 | lr: 1.2500e-06 | scale: 2048.00 | time: 1.471 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  1/ 4 | global iter:     26/  5000| tot_loss: 3.1912 | rl_loss: 3.0536 | pt_loss: 3.1912 | pg_loss: -0.0807 | reg_loss: 3.1343 | reward: -0.4297 | rev_kl: 2.7839 | stu_lens: 51.7656 | mixed_lens: 256.0000 | lr: 1.3000e-06 | scale: 2048.00 | time: 1.455 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  2/ 4 | global iter:     27/  5000| tot_loss: 3.1786 | rl_loss: 3.0549 | pt_loss: 3.1786 | pg_loss: -0.0812 | reg_loss: 3.1361 | reward: -0.4297 | rev_kl: 2.7839 | stu_lens: 51.7656 | mixed_lens: 256.0000 | lr: 1.3500e-06 | scale: 2048.00 | time: 1.478 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  3/ 4 | global iter:     28/  5000| tot_loss: 3.2337 | rl_loss: 3.0568 | pt_loss: 3.2337 | pg_loss: -0.0815 | reg_loss: 3.1382 | reward: -0.4297 | rev_kl: 2.7839 | stu_lens: 51.7656 | mixed_lens: 256.0000 | lr: 1.4000e-06 | scale: 2048.00 | time: 1.384 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  0/ 4 | global iter:     29/  5000| tot_loss: 3.2446 | rl_loss: 2.9954 | pt_loss: 3.2446 | pg_loss: -0.0631 | reg_loss: 3.0585 | reward: -0.4241 | rev_kl: 2.6911 | stu_lens: 63.1562 | mixed_lens: 256.0000 | lr: 1.4500e-06 | scale: 2048.00 | time: 1.630 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  1/ 4 | global iter:     30/  5000| tot_loss: 3.2032 | rl_loss: 2.9956 | pt_loss: 3.2032 | pg_loss: -0.0635 | reg_loss: 3.0591 | reward: -0.4241 | rev_kl: 2.6911 | stu_lens: 63.1562 | mixed_lens: 256.0000 | lr: 1.5000e-06 | scale: 2048.00 | time: 1.473 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  2/ 4 | global iter:     31/  5000| tot_loss: 3.3600 | rl_loss: 2.9958 | pt_loss: 3.3600 | pg_loss: -0.0637 | reg_loss: 3.0595 | reward: -0.4241 | rev_kl: 2.6911 | stu_lens: 63.1562 | mixed_lens: 256.0000 | lr: 1.5500e-06 | scale: 2048.00 | time: 1.343 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  3/ 4 | global iter:     32/  5000| tot_loss: 3.3716 | rl_loss: 2.9956 | pt_loss: 3.3716 | pg_loss: -0.0640 | reg_loss: 3.0596 | reward: -0.4241 | rev_kl: 2.6911 | stu_lens: 63.1562 | mixed_lens: 256.0000 | lr: 1.6000e-06 | scale: 2048.00 | time: 1.470 | step time: 0.000
+****************************************************************************************************
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  3/ 4 | global iter:     32/  5000| tot_loss: 3.2644 | rl_loss: 3.2872 | pt_loss: 3.2644 | pg_loss: 0.0496 | reg_loss: 3.2376 | reward: -0.4252 | rev_kl: 2.6692 | stu_lens: 57.6133 | mixed_lens: 256.0000 | lr: 1.6000e-06 | scale: 2048.00 | time: 1.470 | step time: 2.585
+/home/bingxing2/home/scx7atk/work/minillm-zxc/results/gpt2/train/minillm-zxc/bs16-lr5e-06-G1-N4-NN1-lm1-len512/pe4_rs0.5_nr64_ln_sr_tm0.2
+****************************************************************************************************
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  0/ 4 | global iter:     33/  5000| tot_loss: 3.1400 | rl_loss: 3.6237 | pt_loss: 3.1400 | pg_loss: 0.1960 | reg_loss: 3.4277 | reward: -0.4424 | rev_kl: 2.8405 | stu_lens: 52.9375 | mixed_lens: 256.0000 | lr: 1.6500e-06 | scale: 2048.00 | time: 1.342 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  1/ 4 | global iter:     34/  5000| tot_loss: 3.3683 | rl_loss: 3.6242 | pt_loss: 3.3683 | pg_loss: 0.1958 | reg_loss: 3.4284 | reward: -0.4424 | rev_kl: 2.8405 | stu_lens: 52.9375 | mixed_lens: 256.0000 | lr: 1.7000e-06 | scale: 2048.00 | time: 1.327 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  2/ 4 | global iter:     35/  5000| tot_loss: 3.1486 | rl_loss: 3.6245 | pt_loss: 3.1486 | pg_loss: 0.1956 | reg_loss: 3.4289 | reward: -0.4424 | rev_kl: 2.8405 | stu_lens: 52.9375 | mixed_lens: 256.0000 | lr: 1.7500e-06 | scale: 2048.00 | time: 1.330 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  3/ 4 | global iter:     36/  5000| tot_loss: 3.2181 | rl_loss: 3.6248 | pt_loss: 3.2181 | pg_loss: 0.1955 | reg_loss: 3.4293 | reward: -0.4424 | rev_kl: 2.8405 | stu_lens: 52.9375 | mixed_lens: 256.0000 | lr: 1.8000e-06 | scale: 2048.00 | time: 1.333 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  0/ 4 | global iter:     37/  5000| tot_loss: 3.2846 | rl_loss: 3.4422 | pt_loss: 3.2846 | pg_loss: 0.1563 | reg_loss: 3.2859 | reward: -0.4106 | rev_kl: 2.5405 | stu_lens: 59.6562 | mixed_lens: 256.0000 | lr: 1.8500e-06 | scale: 2048.00 | time: 1.503 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  1/ 4 | global iter:     38/  5000| tot_loss: 3.2332 | rl_loss: 3.4458 | pt_loss: 3.2332 | pg_loss: 0.1556 | reg_loss: 3.2902 | reward: -0.4106 | rev_kl: 2.5405 | stu_lens: 59.6562 | mixed_lens: 256.0000 | lr: 1.9000e-06 | scale: 2048.00 | time: 1.351 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  2/ 4 | global iter:     39/  5000| tot_loss: 3.2486 | rl_loss: 3.4489 | pt_loss: 3.2486 | pg_loss: 0.1556 | reg_loss: 3.2934 | reward: -0.4106 | rev_kl: 2.5405 | stu_lens: 59.6562 | mixed_lens: 256.0000 | lr: 1.9500e-06 | scale: 2048.00 | time: 1.467 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  3/ 4 | global iter:     40/  5000| tot_loss: 3.2940 | rl_loss: 3.4519 | pt_loss: 3.2940 | pg_loss: 0.1557 | reg_loss: 3.2961 | reward: -0.4106 | rev_kl: 2.5405 | stu_lens: 59.6562 | mixed_lens: 256.0000 | lr: 2.0000e-06 | scale: 2048.00 | time: 1.347 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  0/ 4 | global iter:     41/  5000| tot_loss: 3.3165 | rl_loss: 3.4224 | pt_loss: 3.3165 | pg_loss: 0.0522 | reg_loss: 3.3702 | reward: -0.4680 | rev_kl: 3.0954 | stu_lens: 55.5625 | mixed_lens: 256.0000 | lr: 2.0500e-06 | scale: 2048.00 | time: 1.892 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  1/ 4 | global iter:     42/  5000| tot_loss: 3.2207 | rl_loss: 3.4233 | pt_loss: 3.2207 | pg_loss: 0.0522 | reg_loss: 3.3711 | reward: -0.4680 | rev_kl: 3.0954 | stu_lens: 55.5625 | mixed_lens: 256.0000 | lr: 2.1000e-06 | scale: 2048.00 | time: 1.329 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  2/ 4 | global iter:     43/  5000| tot_loss: 3.2653 | rl_loss: 3.4243 | pt_loss: 3.2653 | pg_loss: 0.0521 | reg_loss: 3.3722 | reward: -0.4680 | rev_kl: 3.0954 | stu_lens: 55.5625 | mixed_lens: 256.0000 | lr: 2.1500e-06 | scale: 2048.00 | time: 1.371 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  3/ 4 | global iter:     44/  5000| tot_loss: 3.1623 | rl_loss: 3.4252 | pt_loss: 3.1623 | pg_loss: 0.0522 | reg_loss: 3.3730 | reward: -0.4680 | rev_kl: 3.0954 | stu_lens: 55.5625 | mixed_lens: 256.0000 | lr: 2.2000e-06 | scale: 2048.00 | time: 1.458 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  0/ 4 | global iter:     45/  5000| tot_loss: 3.2644 | rl_loss: 3.3048 | pt_loss: 3.2644 | pg_loss: -0.0182 | reg_loss: 3.3229 | reward: -0.4187 | rev_kl: 2.9809 | stu_lens: 69.2656 | mixed_lens: 256.0000 | lr: 2.2500e-06 | scale: 2048.00 | time: 1.327 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  1/ 4 | global iter:     46/  5000| tot_loss: 3.2179 | rl_loss: 3.3048 | pt_loss: 3.2179 | pg_loss: -0.0187 | reg_loss: 3.3236 | reward: -0.4187 | rev_kl: 2.9809 | stu_lens: 69.2656 | mixed_lens: 256.0000 | lr: 2.3000e-06 | scale: 2048.00 | time: 1.469 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  2/ 4 | global iter:     47/  5000| tot_loss: 2.9758 | rl_loss: 3.3056 | pt_loss: 2.9758 | pg_loss: -0.0191 | reg_loss: 3.3248 | reward: -0.4187 | rev_kl: 2.9809 | stu_lens: 69.2656 | mixed_lens: 256.0000 | lr: 2.3500e-06 | scale: 2048.00 | time: 1.346 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  3/ 4 | global iter:     48/  5000| tot_loss: 3.1444 | rl_loss: 3.3059 | pt_loss: 3.1444 | pg_loss: -0.0194 | reg_loss: 3.3253 | reward: -0.4187 | rev_kl: 2.9809 | stu_lens: 69.2656 | mixed_lens: 256.0000 | lr: 2.4000e-06 | scale: 2048.00 | time: 1.339 | step time: 0.000
+****************************************************************************************************
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  3/ 4 | global iter:     48/  5000| tot_loss: 3.2189 | rl_loss: 3.4502 | pt_loss: 3.2189 | pg_loss: 0.0962 | reg_loss: 3.3539 | reward: -0.4349 | rev_kl: 2.8643 | stu_lens: 59.3555 | mixed_lens: 256.0000 | lr: 2.4000e-06 | scale: 2048.00 | time: 1.339 | step time: 1.408
+/home/bingxing2/home/scx7atk/work/minillm-zxc/results/gpt2/train/minillm-zxc/bs16-lr5e-06-G1-N4-NN1-lm1-len512/pe4_rs0.5_nr64_ln_sr_tm0.2
+****************************************************************************************************
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  0/ 4 | global iter:     49/  5000| tot_loss: 3.2799 | rl_loss: 3.3094 | pt_loss: 3.2799 | pg_loss: 0.1024 | reg_loss: 3.2070 | reward: -0.4514 | rev_kl: 2.6041 | stu_lens: 70.8281 | mixed_lens: 256.0000 | lr: 2.4500e-06 | scale: 2048.00 | time: 1.352 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  1/ 4 | global iter:     50/  5000| tot_loss: 3.2085 | rl_loss: 3.3100 | pt_loss: 3.2085 | pg_loss: 0.1023 | reg_loss: 3.2077 | reward: -0.4514 | rev_kl: 2.6041 | stu_lens: 70.8281 | mixed_lens: 256.0000 | lr: 2.5000e-06 | scale: 2048.00 | time: 1.480 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  2/ 4 | global iter:     51/  5000| tot_loss: 3.3626 | rl_loss: 3.3104 | pt_loss: 3.3626 | pg_loss: 0.1021 | reg_loss: 3.2082 | reward: -0.4514 | rev_kl: 2.6041 | stu_lens: 70.8281 | mixed_lens: 256.0000 | lr: 2.5500e-06 | scale: 2048.00 | time: 1.349 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  3/ 4 | global iter:     52/  5000| tot_loss: 3.1038 | rl_loss: 3.3092 | pt_loss: 3.1038 | pg_loss: 0.1020 | reg_loss: 3.2072 | reward: -0.4514 | rev_kl: 2.6041 | stu_lens: 70.8281 | mixed_lens: 256.0000 | lr: 2.6000e-06 | scale: 2048.00 | time: 1.334 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  0/ 4 | global iter:     53/  5000| tot_loss: 3.0903 | rl_loss: 3.7395 | pt_loss: 3.0903 | pg_loss: 0.2467 | reg_loss: 3.4928 | reward: -0.4346 | rev_kl: 2.8868 | stu_lens: 89.3906 | mixed_lens: 256.0000 | lr: 2.6500e-06 | scale: 2048.00 | time: 7.772 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  1/ 4 | global iter:     54/  5000| tot_loss: 3.2720 | rl_loss: 3.7395 | pt_loss: 3.2720 | pg_loss: 0.2461 | reg_loss: 3.4934 | reward: -0.4346 | rev_kl: 2.8868 | stu_lens: 89.3906 | mixed_lens: 256.0000 | lr: 2.7000e-06 | scale: 2048.00 | time: 1.328 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  2/ 4 | global iter:     55/  5000| tot_loss: 3.2932 | rl_loss: 3.7399 | pt_loss: 3.2932 | pg_loss: 0.2458 | reg_loss: 3.4941 | reward: -0.4346 | rev_kl: 2.8868 | stu_lens: 89.3906 | mixed_lens: 256.0000 | lr: 2.7500e-06 | scale: 2048.00 | time: 1.327 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  3/ 4 | global iter:     56/  5000| tot_loss: 3.2209 | rl_loss: 3.7402 | pt_loss: 3.2209 | pg_loss: 0.2456 | reg_loss: 3.4947 | reward: -0.4346 | rev_kl: 2.8868 | stu_lens: 89.3906 | mixed_lens: 256.0000 | lr: 2.8000e-06 | scale: 2048.00 | time: 1.328 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  0/ 4 | global iter:     57/  5000| tot_loss: 3.1490 | rl_loss: 3.1657 | pt_loss: 3.1490 | pg_loss: 0.0239 | reg_loss: 3.1419 | reward: -0.4661 | rev_kl: 2.5728 | stu_lens: 89.6719 | mixed_lens: 256.0000 | lr: 2.8500e-06 | scale: 2048.00 | time: 1.668 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  1/ 4 | global iter:     58/  5000| tot_loss: 3.2980 | rl_loss: 3.1652 | pt_loss: 3.2980 | pg_loss: 0.0237 | reg_loss: 3.1415 | reward: -0.4661 | rev_kl: 2.5728 | stu_lens: 89.6719 | mixed_lens: 256.0000 | lr: 2.9000e-06 | scale: 2048.00 | time: 1.478 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  2/ 4 | global iter:     59/  5000| tot_loss: 3.0994 | rl_loss: 3.1651 | pt_loss: 3.0994 | pg_loss: 0.0237 | reg_loss: 3.1414 | reward: -0.4661 | rev_kl: 2.5728 | stu_lens: 89.6719 | mixed_lens: 256.0000 | lr: 2.9500e-06 | scale: 2048.00 | time: 1.326 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  3/ 4 | global iter:     60/  5000| tot_loss: 3.2177 | rl_loss: 3.1647 | pt_loss: 3.2177 | pg_loss: 0.0235 | reg_loss: 3.1412 | reward: -0.4661 | rev_kl: 2.5728 | stu_lens: 89.6719 | mixed_lens: 256.0000 | lr: 3.0000e-06 | scale: 2048.00 | time: 1.359 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  0/ 4 | global iter:     61/  5000| tot_loss: 3.2038 | rl_loss: 3.5863 | pt_loss: 3.2038 | pg_loss: 0.2220 | reg_loss: 3.3643 | reward: -0.4553 | rev_kl: 3.0499 | stu_lens: 81.7031 | mixed_lens: 256.0000 | lr: 3.0500e-06 | scale: 2048.00 | time: 4.328 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  1/ 4 | global iter:     62/  5000| tot_loss: 3.2344 | rl_loss: 3.5875 | pt_loss: 3.2344 | pg_loss: 0.2222 | reg_loss: 3.3653 | reward: -0.4553 | rev_kl: 3.0499 | stu_lens: 81.7031 | mixed_lens: 256.0000 | lr: 3.1000e-06 | scale: 2048.00 | time: 1.386 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  2/ 4 | global iter:     63/  5000| tot_loss: 3.0101 | rl_loss: 3.5884 | pt_loss: 3.0101 | pg_loss: 0.2222 | reg_loss: 3.3662 | reward: -0.4553 | rev_kl: 3.0499 | stu_lens: 81.7031 | mixed_lens: 256.0000 | lr: 3.1500e-06 | scale: 2048.00 | time: 1.336 | step time: 0.000
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  3/ 4 | global iter:     64/  5000| tot_loss: 3.0931 | rl_loss: 3.5888 | pt_loss: 3.0931 | pg_loss: 0.2223 | reg_loss: 3.3665 | reward: -0.4553 | rev_kl: 3.0499 | stu_lens: 81.7031 | mixed_lens: 256.0000 | lr: 3.2000e-06 | scale: 2048.00 | time: 1.346 | step time: 0.000
+****************************************************************************************************
+train | data_epochs  0/10 | inner iter:   0/  1 | ppo epoch:  3/ 4 | global iter:     64/  5000| tot_loss: 3.1960 | rl_loss: 3.4506 | pt_loss: 3.1960 | pg_loss: 0.1485 | reg_loss: 3.3021 | reward: -0.4518 | rev_kl: 2.7784 | stu_lens: 82.8984 | mixed_lens: 256.0000 | lr: 3.2000e-06 | scale: 2048.00 | time: 1.346 | step time: 1.969
+/home/bingxing2/home/scx7atk/work/minillm-zxc/results/gpt2/train/minillm-zxc/bs16-lr5e-06-G1-N4-NN1-lm1-len512/pe4_rs0.5_nr64_ln_sr_tm0.2
+****************************************************************************************************

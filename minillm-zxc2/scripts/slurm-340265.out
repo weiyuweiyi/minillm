@@ -1,0 +1,4 @@
+paraai-n32-h-01-agent-79
+paraai-n32-h-01-agent-80
+PYTHONPATH=/home/bingxing2/home/scx7atk/work/minillm-zxc2
+slurmstepd: error: *** JOB 340265 ON paraai-n32-h-01-agent-79 CANCELLED AT 2024-05-26T22:12:34 ***

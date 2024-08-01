@@ -1,0 +1,241 @@
+torchrun --nproc_per_node 4 --nnodes 1 --node_rank 0 --master_addr localhost --master_port 2012 /home/bingxing2/home/scx7atk/work/minillm-zxc/train_minillm.py --base-path /home/bingxing2/home/scx7atk/work/minillm-zxc --model-path /home/bingxing2/home/scx7atk/pt_models/llama2/Llama-2-7b-hf/ --teacher-model-path /home/bingxing2/home/scx7atk/pt_models/llama2/Llama-2-13b-hf/ --ckpt-name llama2-7b --teacher-ckpt-name llama2-13b --n-gpu 4 --n-nodes 1 --teacher-model-fp16 --model-parallel --model-parallel-size 4 --prompt-data-dir /home/bingxing2/home/scx7atk/work/minillm-zxc/processed_data/dolly/prompt/llama/ --lm-data-dir /home/bingxing2/home/scx7atk/work/minillm-zxc/processed_data/roberta/llama/512/20M/ --dev-num 1000 --num-workers 0 --epochs 10 --total-iters 5000 --kd-ratio 0.5 --batch-size 16 --lr 5e-6 --lr-min 5e-6 --gradient-accumulation-steps 1 --max-length 512 --max-prompt-length 256 --warmup-iters 100 --save /home/bingxing2/home/scx7atk/work/minillm-zxc/results/llama2/train/minillm-zxc/ --seed 10 --seed-ppo 42 --seed-lm 7 --save-interval 500 --eval-interval 100 --log-interval 16 --mid-log-num 1 --type minillm --ppo-epochs 4 --num-rollouts 64 --chunk-size 32 --length-norm --single-step-reg --teacher-mixed-alpha 0.2 --reward-scaling 0.5 --cliprange-reward 100 --do-sample --top-k 0 --top-p 1.0 --temperature 1.0 --deepspeed --deepspeed_config /home/bingxing2/home/scx7atk/work/minillm-zxc/configs/deepspeed/ds_config_zero2_offload.json > /home/bingxing2/home/scx7atk/work/minillm-zxc/results/llama2/train/minillm-zxc//gpt2-xl-base-minillm-20240521-train.log 2>&1
+PYTHONPATH=/home/bingxing2/home/scx7atk/work/minillm-zxc
+WARNING:torch.distributed.run:
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+[2024-05-21 18:42:47,459] [INFO] [real_accelerator.py:133:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2024-05-21 18:42:47,459] [INFO] [real_accelerator.py:133:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2024-05-21 18:42:47,459] [INFO] [real_accelerator.py:133:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2024-05-21 18:42:47,460] [INFO] [real_accelerator.py:133:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+using world size: 4
+[2024-05-21 18:42:53,752] [WARNING] [comm.py:152:init_deepspeed_backend] NCCL backend in DeepSpeed not yet implemented
+[2024-05-21 18:42:53,752] [WARNING] [comm.py:152:init_deepspeed_backend] NCCL backend in DeepSpeed not yet implemented
+[2024-05-21 18:42:53,752] [WARNING] [comm.py:152:init_deepspeed_backend] NCCL backend in DeepSpeed not yet implemented
+[2024-05-21 18:42:53,753] [INFO] [comm.py:616:init_distributed] cdb=None
+[2024-05-21 18:42:53,754] [INFO] [comm.py:616:init_distributed] cdb=None
+[2024-05-21 18:42:53,754] [INFO] [comm.py:616:init_distributed] cdb=None
+[2024-05-21 18:42:53,754] [WARNING] [comm.py:152:init_deepspeed_backend] NCCL backend in DeepSpeed not yet implemented
+[2024-05-21 18:42:53,754] [INFO] [comm.py:616:init_distributed] cdb=None
+[2024-05-21 18:42:53,754] [INFO] [comm.py:643:init_distributed] Initializing TorchBackend in DeepSpeed with backend nccl
+> initializing model parallel with size 4
+> initializing model parallel cuda seeds on global rank 0, model parallel rank 0, and data parallel rank 0 with model parallel seed: 2728 and data parallel seed: 10
+arguments:
+  model_path ................... /home/bingxing2/home/scx7atk/pt_models/llama2/Llama-2-7b-hf/
+  ckpt_name .................... llama2-7b
+  n_gpu ........................ 4
+  n_nodes ...................... 1
+  model_type ................... gpt2
+  teacher_model_type ........... None
+  teacher_model_path ........... ['/home/bingxing2/home/scx7atk/pt_models/llama2/Llama-2-13b-hf/']
+  teacher_ckpt_name ............ llama2-13b
+  teacher_model_fp16 ........... True
+  model_parallel ............... True
+  model_parallel_size .......... 4
+  no_value ..................... False
+  dropout_path_rate ............ None
+  fp32 ......................... False
+  type ......................... minillm
+  do_train ..................... False
+  do_valid ..................... False
+  do_eval ...................... False
+  base_path .................... /home/bingxing2/home/scx7atk/work/minillm-zxc
+  load ......................... None
+  save ......................... /home/bingxing2/home/scx7atk/work/minillm-zxc/results/llama2/train/minillm-zxc/bs16-lr5e-06-G1-N4-NN1-lm1-len512-mp4/pe4_rs0.5_nr64_ln_sr_tm0.2
+  log_interval ................. 16
+  mid_log_num .................. 1
+  save_interval ................ 500
+  eval_interval ................ 100
+  local_rank ................... 0
+  save_additional_suffix ....... 
+  save_rollout ................. False
+  eb_sample_times .............. 3
+  data_dir ..................... None
+  processed_data_dir ........... None
+  force_process ................ False
+  force_process_demo ........... False
+  data_process_workers ......... -1
+  train_num .................... -1
+  train_ratio .................. 1
+  dev_num ...................... 1000
+  dev_ratio .................... 1
+  gen_num ...................... -1
+  data_names ................... None
+  prompt_type .................. None
+  num_workers .................. 0
+  max_prompt_length ............ 256
+  min_prompt_length ............ 128
+  json_data .................... False
+  bin_data ..................... False
+  txt_data ..................... False
+  prompt_data_dir .............. /home/bingxing2/home/scx7atk/work/minillm-zxc/processed_data/dolly/prompt/llama/
+  lm_data_dir .................. /home/bingxing2/home/scx7atk/work/minillm-zxc/processed_data/roberta/llama/512/20M/
+  eval_ppl ..................... False
+  eval_rw ...................... False
+  eval_gen ..................... False
+  only_prompt .................. False
+  batch_size ................... 16
+  eval_batch_size .............. 32
+  clip_grad .................... 1.0
+  total_iters .................. 5000
+  train_iters_per_epoch ........ -1
+  max_length ................... 512
+  seed ......................... 10
+  seed_order ................... 42
+  seed_data .................... 42
+  seed_ppo ..................... 42
+  seed_lm ...................... 7
+  epochs ....................... 10
+  training_epochs .............. 10000
+  gradient_accumulation_steps .. 1
+  gradient_checkpointing ....... False
+  attn_dtype ................... None
+  lr ........................... 5e-06
+  lr_min ....................... 5e-06
+  weight_decay ................. 0.01
+  loss_scale ................... 65536
+  kd_ratio ..................... 0.5
+  warmup_iters ................. 100
+  lr_decay_iters ............... None
+  lr_decay_style ............... noam
+  scheduler_name ............... constant_trm
+  reward_scaling ............... 0.5
+  cliprange_reward ............. 100.0
+  ppo_epochs ................... 4
+  num_rollouts ................. 64
+  num_rollouts_per_device ...... 16
+  cliprange .................... 0.2
+  chunk_size ................... 32
+  gamma ........................ 0.95
+  length_norm .................. True
+  single_step_reg .............. True
+  teacher_mixed_alpha .......... 0.2
+  lm_coef ...................... 1
+  top_k ........................ 0
+  top_p ........................ 1.0
+  do_sample .................... True
+  no_repeat_ngram_size ......... 6
+  repetition_penalty ........... None
+  num_beams .................... 1
+  temperature .................. 1.0
+  peft ......................... None
+  peft_lora_r .................. 8
+  peft_lora_alpha .............. 32
+  peft_lora_dropout ............ 0.1
+  peft_name .................... None
+  peft_path .................... None
+  teacher_peft_name ............ None
+  teacher_peft_path ............ None
+  deepspeed .................... True
+  deepspeed_config ............. /home/bingxing2/home/scx7atk/work/minillm-zxc/configs/deepspeed/ds_config_zero2_offload.json
+  deepscale .................... False
+  deepscale_config ............. None
+  deepspeed_mpi ................ False
+  rank ......................... 0
+  world_size ................... 4
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/train_minillm.py", line 131, in <module>
+Traceback (most recent call last):
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/train_minillm.py", line 131, in <module>
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/train_minillm.py", line 131, in <module>
+    main()
+      File "/home/bingxing2/home/scx7atk/work/minillm-zxc/train_minillm.py", line 108, in main
+    main()main()
+
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/train_minillm.py", line 108, in main
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/train_minillm.py", line 108, in main
+    teacher_model_list = get_teacher_model(args, device)
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/train_minillm.py", line 40, in get_teacher_model
+        teacher_model_list = get_teacher_model(args, device)teacher_model_list = get_teacher_model(args, device)
+
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/train_minillm.py", line 40, in get_teacher_model
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/train_minillm.py", line 40, in get_teacher_model
+    Traceback (most recent call last):
+model = parallel_model_map[args.model_type](config).half()  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/train_minillm.py", line 131, in <module>
+
+  File "/home/bingxing2/home/scx7atk/work/minillm/transformers/src/transformers/models/gpt2_parallel/modeling_gpt2_parallel.py", line 1018, in __init__
+        model = parallel_model_map[args.model_type](config).half()model = parallel_model_map[args.model_type](config).half()
+
+  File "/home/bingxing2/home/scx7atk/work/minillm/transformers/src/transformers/models/gpt2_parallel/modeling_gpt2_parallel.py", line 1018, in __init__
+  File "/home/bingxing2/home/scx7atk/work/minillm/transformers/src/transformers/models/gpt2_parallel/modeling_gpt2_parallel.py", line 1018, in __init__
+    main()
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/train_minillm.py", line 108, in main
+    teacher_model_list = get_teacher_model(args, device)
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/train_minillm.py", line 40, in get_teacher_model
+    model = parallel_model_map[args.model_type](config).half()
+  File "/home/bingxing2/home/scx7atk/work/minillm/transformers/src/transformers/models/gpt2_parallel/modeling_gpt2_parallel.py", line 1018, in __init__
+            self.transformer = ParallelGPT2Model(config)    self.transformer = ParallelGPT2Model(config)self.transformer = ParallelGPT2Model(config)
+self.transformer = ParallelGPT2Model(config)
+
+  File "/home/bingxing2/home/scx7atk/work/minillm/transformers/src/transformers/models/gpt2_parallel/modeling_gpt2_parallel.py", line 737, in __init__
+
+  File "/home/bingxing2/home/scx7atk/work/minillm/transformers/src/transformers/models/gpt2_parallel/modeling_gpt2_parallel.py", line 737, in __init__
+  File "/home/bingxing2/home/scx7atk/work/minillm/transformers/src/transformers/models/gpt2_parallel/modeling_gpt2_parallel.py", line 737, in __init__
+  File "/home/bingxing2/home/scx7atk/work/minillm/transformers/src/transformers/models/gpt2_parallel/modeling_gpt2_parallel.py", line 737, in __init__
+    self.drop = nn.Dropout(config.embd_pdrop)    
+self.drop = nn.Dropout(config.embd_pdrop)  File "/home/bingxing2/home/scx7atk/work/minillm/transformers/src/transformers/configuration_utils.py", line 262, in __getattribute__
+    
+    self.drop = nn.Dropout(config.embd_pdrop)  File "/home/bingxing2/home/scx7atk/work/minillm/transformers/src/transformers/configuration_utils.py", line 262, in __getattribute__
+self.drop = nn.Dropout(config.embd_pdrop)
+
+  File "/home/bingxing2/home/scx7atk/work/minillm/transformers/src/transformers/configuration_utils.py", line 262, in __getattribute__
+  File "/home/bingxing2/home/scx7atk/work/minillm/transformers/src/transformers/configuration_utils.py", line 262, in __getattribute__
+                return super().__getattribute__(key)return super().__getattribute__(key)return super().__getattribute__(key)return super().__getattribute__(key)
+
+
+
+AttributeErrorAttributeErrorAttributeErrorAttributeError: : : : 'LlamaConfig' object has no attribute 'embd_pdrop''LlamaConfig' object has no attribute 'embd_pdrop''LlamaConfig' object has no attribute 'embd_pdrop''LlamaConfig' object has no attribute 'embd_pdrop'
+
+
+
+ERROR:torch.distributed.elastic.multiprocessing.api:failed (exitcode: 1) local_rank: 0 (pid: 2620663) of binary: /home/bingxing2/home/scx7atk/.conda/envs/minillm/bin/python
+Traceback (most recent call last):
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/bin/torchrun", line 8, in <module>
+    sys.exit(main())
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 346, in wrapper
+    return f(*args, **kwargs)
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/distributed/run.py", line 762, in main
+    run(args)
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/distributed/run.py", line 753, in run
+    elastic_launch(
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 132, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 246, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+/home/bingxing2/home/scx7atk/work/minillm-zxc/train_minillm.py FAILED
+------------------------------------------------------------
+Failures:
+[1]:
+  time      : 2024-05-21_18:42:59
+  host      : paraai-n32-h-01-agent-46.paraai-n32-h-01.com
+  rank      : 1 (local_rank: 1)
+  exitcode  : 1 (pid: 2620664)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+[2]:
+  time      : 2024-05-21_18:42:59
+  host      : paraai-n32-h-01-agent-46.paraai-n32-h-01.com
+  rank      : 2 (local_rank: 2)
+  exitcode  : 1 (pid: 2620665)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+[3]:
+  time      : 2024-05-21_18:42:59
+  host      : paraai-n32-h-01-agent-46.paraai-n32-h-01.com
+  rank      : 3 (local_rank: 3)
+  exitcode  : 1 (pid: 2620666)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2024-05-21_18:42:59
+  host      : paraai-n32-h-01-agent-46.paraai-n32-h-01.com
+  rank      : 0 (local_rank: 0)
+  exitcode  : 1 (pid: 2620663)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================

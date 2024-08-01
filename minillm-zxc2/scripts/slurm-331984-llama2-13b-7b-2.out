@@ -1,0 +1,547 @@
+torchrun --nproc_per_node 4 --nnodes 1 --node_rank 0 --master_addr localhost --master_port 2012 /home/bingxing2/home/scx7atk/work/minillm-zxc/train_minillm.py --base-path /home/bingxing2/home/scx7atk/work/minillm-zxc --model-path /home/bingxing2/public/models/llama2/Llama-2-7b-hf/ --teacher-model-path /home/bingxing2/public/models/llama2/Llama-2-13b-hf/ --ckpt-name llama2-7b --teacher-ckpt-name llama2-13b --n-gpu 4 --n-nodes 1 --teacher-model-fp16 --prompt-data-dir /home/bingxing2/home/scx7atk/work/minillm-zxc/processed_data/dolly/prompt/llama/ --lm-data-dir /home/bingxing2/home/scx7atk/work/minillm-zxc/processed_data/roberta/llama/512/20M/ --dev-num 1000 --num-workers 0 --epochs 10 --total-iters 5000 --kd-ratio 0.5 --batch-size 16 --lr 5e-6 --lr-min 5e-6 --gradient-accumulation-steps 1 --max-length 512 --max-prompt-length 256 --warmup-iters 100 --save /home/bingxing2/home/scx7atk/work/minillm-zxc/results/llama2/train/minillm-zxc/ --seed 10 --seed-ppo 42 --seed-lm 7 --save-interval 500 --eval-interval 100 --log-interval 16 --mid-log-num 1 --type minillm --ppo-epochs 4 --num-rollouts 64 --chunk-size 32 --length-norm --single-step-reg --teacher-mixed-alpha 0.2 --reward-scaling 0.5 --cliprange-reward 100 --do-sample --top-k 0 --top-p 1.0 --temperature 1.0 --deepspeed --deepspeed_config /home/bingxing2/home/scx7atk/work/minillm-zxc/configs/deepspeed/ds_config_zero2_offload.json > /home/bingxing2/home/scx7atk/work/minillm-zxc/results/llama2/train/minillm-zxc//gpt2-xl-base-minillm-20240519-train.log 2>&1
+PYTHONPATH=/home/bingxing2/home/scx7atk/work/minillm-zxc
+WARNING:torch.distributed.run:
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+[2024-05-19 22:10:17,937] [INFO] [real_accelerator.py:133:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2024-05-19 22:10:17,937] [INFO] [real_accelerator.py:133:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2024-05-19 22:10:17,997] [INFO] [real_accelerator.py:133:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2024-05-19 22:10:17,997] [INFO] [real_accelerator.py:133:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2024-05-19 22:10:29,913] [WARNING] [comm.py:152:init_deepspeed_backend] NCCL backend in DeepSpeed not yet implemented
+using world size: 4[2024-05-19 22:10:29,914] [INFO] [comm.py:616:init_distributed] cdb=None
+
+[2024-05-19 22:10:29,914] [WARNING] [comm.py:152:init_deepspeed_backend] NCCL backend in DeepSpeed not yet implemented
+[2024-05-19 22:10:29,914] [WARNING] [comm.py:152:init_deepspeed_backend] NCCL backend in DeepSpeed not yet implemented
+[2024-05-19 22:10:29,914] [INFO] [comm.py:616:init_distributed] cdb=None
+[2024-05-19 22:10:29,914] [WARNING] [comm.py:152:init_deepspeed_backend] NCCL backend in DeepSpeed not yet implemented
+[2024-05-19 22:10:29,914] [INFO] [comm.py:616:init_distributed] cdb=None
+[2024-05-19 22:10:29,914] [INFO] [comm.py:616:init_distributed] cdb=None
+[2024-05-19 22:10:29,914] [INFO] [comm.py:643:init_distributed] Initializing TorchBackend in DeepSpeed with backend nccl
+arguments:
+  model_path ................... /home/bingxing2/public/models/llama2/Llama-2-7b-hf/
+  ckpt_name .................... llama2-7b
+  n_gpu ........................ 4
+  n_nodes ...................... 1
+  model_type ................... gpt2
+  teacher_model_type ........... None
+  teacher_model_path ........... ['/home/bingxing2/public/models/llama2/Llama-2-13b-hf/']
+  teacher_ckpt_name ............ llama2-13b
+  teacher_model_fp16 ........... True
+  model_parallel ............... False
+  model_parallel_size .......... None
+  no_value ..................... False
+  dropout_path_rate ............ None
+  fp32 ......................... False
+  type ......................... minillm
+  do_train ..................... False
+  do_valid ..................... False
+  do_eval ...................... False
+  base_path .................... /home/bingxing2/home/scx7atk/work/minillm-zxc
+  load ......................... None
+  save ......................... /home/bingxing2/home/scx7atk/work/minillm-zxc/results/llama2/train/minillm-zxc/bs16-lr5e-06-G1-N4-NN1-lm1-len512/pe4_rs0.5_nr64_ln_sr_tm0.2
+  log_interval ................. 16
+  mid_log_num .................. 1
+  save_interval ................ 500
+  eval_interval ................ 100
+  local_rank ................... 0
+  save_additional_suffix ....... 
+  save_rollout ................. False
+  eb_sample_times .............. 3
+  data_dir ..................... None
+  processed_data_dir ........... None
+  force_process ................ False
+  force_process_demo ........... False
+  data_process_workers ......... -1
+  train_num .................... -1
+  train_ratio .................. 1
+  dev_num ...................... 1000
+  dev_ratio .................... 1
+  gen_num ...................... -1
+  data_names ................... None
+  prompt_type .................. None
+  num_workers .................. 0
+  max_prompt_length ............ 256
+  min_prompt_length ............ 128
+  json_data .................... False
+  bin_data ..................... False
+  txt_data ..................... False
+  prompt_data_dir .............. /home/bingxing2/home/scx7atk/work/minillm-zxc/processed_data/dolly/prompt/llama/
+  lm_data_dir .................. /home/bingxing2/home/scx7atk/work/minillm-zxc/processed_data/roberta/llama/512/20M/
+  eval_ppl ..................... False
+  eval_rw ...................... False
+  eval_gen ..................... False
+  only_prompt .................. False
+  batch_size ................... 16
+  eval_batch_size .............. 32
+  clip_grad .................... 1.0
+  total_iters .................. 5000
+  train_iters_per_epoch ........ -1
+  max_length ................... 512
+  seed ......................... 10
+  seed_order ................... 42
+  seed_data .................... 42
+  seed_ppo ..................... 42
+  seed_lm ...................... 7
+  epochs ....................... 10
+  training_epochs .............. 10000
+  gradient_accumulation_steps .. 1
+  gradient_checkpointing ....... False
+  attn_dtype ................... None
+  lr ........................... 5e-06
+  lr_min ....................... 5e-06
+  weight_decay ................. 0.01
+  loss_scale ................... 65536
+  kd_ratio ..................... 0.5
+  warmup_iters ................. 100
+  lr_decay_iters ............... None
+  lr_decay_style ............... noam
+  scheduler_name ............... constant_trm
+  reward_scaling ............... 0.5
+  cliprange_reward ............. 100.0
+  ppo_epochs ................... 4
+  num_rollouts ................. 64
+  num_rollouts_per_device ...... 16
+  cliprange .................... 0.2
+  chunk_size ................... 32
+  gamma ........................ 0.95
+  length_norm .................. True
+  single_step_reg .............. True
+  teacher_mixed_alpha .......... 0.2
+  lm_coef ...................... 1
+  top_k ........................ 0
+  top_p ........................ 1.0
+  do_sample .................... True
+  no_repeat_ngram_size ......... 6
+  repetition_penalty ........... None
+  num_beams .................... 1
+  temperature .................. 1.0
+  peft ......................... None
+  peft_lora_r .................. 8
+  peft_lora_alpha .............. 32
+  peft_lora_dropout ............ 0.1
+  peft_name .................... None
+  peft_path .................... None
+  teacher_peft_name ............ None
+  teacher_peft_path ............ None
+  deepspeed .................... True
+  deepspeed_config ............. /home/bingxing2/home/scx7atk/work/minillm-zxc/configs/deepspeed/ds_config_zero2_offload.json
+  deepscale .................... False
+  deepscale_config ............. None
+  deepspeed_mpi ................ False
+  rank ......................... 0
+  world_size ................... 4
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:06<00:12,  6.32s/it]Loading checkpoint shards:  33%|███▎      | 1/3 [00:06<00:12,  6.29s/it]Loading checkpoint shards:  33%|███▎      | 1/3 [00:06<00:12,  6.26s/it]Loading checkpoint shards:  33%|███▎      | 1/3 [00:06<00:12,  6.40s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:11<00:05,  5.87s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:11<00:05,  5.80s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:11<00:05,  5.86s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:11<00:05,  5.83s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:15<00:00,  4.73s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:15<00:00,  5.08s/it]
+/home/bingxing2/home/scx7atk/work/minillm/transformers/src/transformers/generation/configuration_utils.py:381: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.9` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/home/bingxing2/home/scx7atk/work/minillm/transformers/src/transformers/generation/configuration_utils.py:386: UserWarning: `do_sample` is set to `False`. However, `top_p` is set to `0.6` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `top_p`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+Loading checkpoint shards: 100%|██████████| 3/3 [00:15<00:00,  4.78s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:15<00:00,  5.12s/it]
+/home/bingxing2/home/scx7atk/work/minillm/transformers/src/transformers/generation/configuration_utils.py:381: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.9` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/home/bingxing2/home/scx7atk/work/minillm/transformers/src/transformers/generation/configuration_utils.py:386: UserWarning: `do_sample` is set to `False`. However, `top_p` is set to `0.6` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `top_p`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+Loading checkpoint shards: 100%|██████████| 3/3 [00:15<00:00,  4.77s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:15<00:00,  5.09s/it]
+/home/bingxing2/home/scx7atk/work/minillm/transformers/src/transformers/generation/configuration_utils.py:381: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.9` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/home/bingxing2/home/scx7atk/work/minillm/transformers/src/transformers/generation/configuration_utils.py:386: UserWarning: `do_sample` is set to `False`. However, `top_p` is set to `0.6` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `top_p`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+Loading checkpoint shards: 100%|██████████| 3/3 [00:15<00:00,  4.80s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:15<00:00,  5.14s/it]
+/home/bingxing2/home/scx7atk/work/minillm/transformers/src/transformers/generation/configuration_utils.py:381: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.9` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/home/bingxing2/home/scx7atk/work/minillm/transformers/src/transformers/generation/configuration_utils.py:386: UserWarning: `do_sample` is set to `False`. However, `top_p` is set to `0.6` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `top_p`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+ > number of parameters: 13015864320
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:14<00:14, 14.56s/it]Loading checkpoint shards:  50%|█████     | 1/2 [00:14<00:14, 14.57s/it]Loading checkpoint shards:  50%|█████     | 1/2 [00:15<00:15, 15.27s/it]Loading checkpoint shards:  50%|█████     | 1/2 [00:15<00:15, 15.86s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:19<00:00,  8.86s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:19<00:00,  9.72s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:19<00:00,  8.86s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:19<00:00,  9.72s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:20<00:00,  9.26s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:20<00:00, 10.16s/it]
+ > number of parameters: 6738415616
+Model load time: 20.761561155319214s
+ > number of parameters: 6738M
+[2024-05-19 22:11:08,333] [INFO] [logging.py:96:log_dist] [Rank 0] DeepSpeed info: version=0.10.0, git-hash=unknown, git-branch=unknown
+Loading checkpoint shards: 100%|██████████| 2/2 [00:21<00:00,  9.63s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:21<00:00, 10.56s/it]
+[2024-05-19 22:11:09,689] [INFO] [logging.py:96:log_dist] [Rank 0] DeepSpeed Flops Profiler Enabled: False
+[2024-05-19 22:11:09,692] [INFO] [logging.py:96:log_dist] [Rank 0] Removing param_group that has no 'params' in the client Optimizer
+[2024-05-19 22:11:09,692] [INFO] [logging.py:96:log_dist] [Rank 0] Using client Optimizer as basic optimizer
+[2024-05-19 22:11:09,715] [INFO] [logging.py:96:log_dist] [Rank 0] DeepSpeed Basic Optimizer = AdamW
+[2024-05-19 22:11:09,715] [INFO] [utils.py:54:is_zero_supported_optimizer] Checking ZeRO support for optimizer=AdamW type=<class 'torch.optim.adamw.AdamW'>
+[2024-05-19 22:11:09,715] [INFO] [logging.py:96:log_dist] [Rank 0] Creating torch.float16 ZeRO stage 2 optimizer
+[2024-05-19 22:11:09,716] [INFO] [stage_1_and_2.py:133:__init__] Reduce bucket size 200000000
+[2024-05-19 22:11:09,716] [INFO] [stage_1_and_2.py:134:__init__] Allgather bucket size 200000000
+[2024-05-19 22:11:09,716] [INFO] [stage_1_and_2.py:135:__init__] CPU Offload: True
+[2024-05-19 22:11:09,716] [INFO] [stage_1_and_2.py:136:__init__] Round robin gradient partitioning: False
+Rank: 2 partition count [4] and sizes[(1684603904, False)] 
+Rank: 1 partition count [4] and sizes[(1684603904, False)] 
+Rank: 0 partition count [4] and sizes[(1684603904, False)] 
+Rank: 3 partition count [4] and sizes[(1684603904, False)] 
+[2024-05-19 22:11:25,653] [INFO] [utils.py:785:see_memory_usage] Before initializing optimizer states
+[2024-05-19 22:11:25,655] [INFO] [utils.py:786:see_memory_usage] MA 37.23 GB         Max_MA 37.23 GB         CA 37.23 GB         Max_CA 37 GB 
+[2024-05-19 22:11:25,655] [INFO] [utils.py:793:see_memory_usage] CPU Virtual Memory:  used = 116.73 GB, percent = 45.9%
+[2024-05-19 22:11:43,981] [INFO] [utils.py:785:see_memory_usage] After initializing optimizer states
+[2024-05-19 22:11:43,982] [INFO] [utils.py:786:see_memory_usage] MA 37.23 GB         Max_MA 37.23 GB         CA 37.23 GB         Max_CA 37 GB 
+[2024-05-19 22:11:43,983] [INFO] [utils.py:793:see_memory_usage] CPU Virtual Memory:  used = 194.13 GB, percent = 76.4%
+[2024-05-19 22:11:43,983] [INFO] [stage_1_and_2.py:493:__init__] optimizer state initialized
+[2024-05-19 22:11:44,105] [INFO] [utils.py:785:see_memory_usage] After initializing ZeRO optimizer
+[2024-05-19 22:11:44,105] [INFO] [utils.py:786:see_memory_usage] MA 37.23 GB         Max_MA 37.23 GB         CA 37.23 GB         Max_CA 37 GB 
+[2024-05-19 22:11:44,106] [INFO] [utils.py:793:see_memory_usage] CPU Virtual Memory:  used = 194.38 GB, percent = 76.5%
+[2024-05-19 22:11:44,110] [INFO] [logging.py:96:log_dist] [Rank 0] DeepSpeed Final Optimizer = AdamW
+[2024-05-19 22:11:44,110] [INFO] [logging.py:96:log_dist] [Rank 0] DeepSpeed using client LR scheduler
+[2024-05-19 22:11:44,110] [INFO] [logging.py:96:log_dist] [Rank 0] DeepSpeed LR Scheduler = <torch.optim.lr_scheduler.LambdaLR object at 0x4002a4f2e260>
+[2024-05-19 22:11:44,110] [INFO] [logging.py:96:log_dist] [Rank 0] step=0, skipped=0, lr=[0.0], mom=[[0.9, 0.95]]
+[2024-05-19 22:11:44,112] [INFO] [config.py:960:print] DeepSpeedEngine configuration:
+[2024-05-19 22:11:44,112] [INFO] [config.py:964:print]   activation_checkpointing_config  {
+    "partition_activations": false, 
+    "contiguous_memory_optimization": false, 
+    "cpu_checkpointing": false, 
+    "number_checkpoints": null, 
+    "synchronize_checkpoint_boundary": false, 
+    "profile": false
+}
+[2024-05-19 22:11:44,112] [INFO] [config.py:964:print]   aio_config ................... {'block_size': 1048576, 'queue_depth': 8, 'thread_count': 1, 'single_submit': False, 'overlap_events': True}
+[2024-05-19 22:11:44,112] [INFO] [config.py:964:print]   amp_enabled .................. False
+[2024-05-19 22:11:44,112] [INFO] [config.py:964:print]   amp_params ................... False
+[2024-05-19 22:11:44,113] [INFO] [config.py:964:print]   autotuning_config ............ {
+    "enabled": false, 
+    "start_step": null, 
+    "end_step": null, 
+    "metric_path": null, 
+    "arg_mappings": null, 
+    "metric": "throughput", 
+    "model_info": null, 
+    "results_dir": "autotuning_results", 
+    "exps_dir": "autotuning_exps", 
+    "overwrite": true, 
+    "fast": true, 
+    "start_profile_step": 3, 
+    "end_profile_step": 5, 
+    "tuner_type": "gridsearch", 
+    "tuner_early_stopping": 5, 
+    "tuner_num_trials": 50, 
+    "model_info_path": null, 
+    "mp_size": 1, 
+    "max_train_batch_size": null, 
+    "min_train_batch_size": 1, 
+    "max_train_micro_batch_size_per_gpu": 1.024000e+03, 
+    "min_train_micro_batch_size_per_gpu": 1, 
+    "num_tuning_micro_batch_sizes": 3
+}
+[2024-05-19 22:11:44,113] [INFO] [config.py:964:print]   bfloat16_enabled ............. False
+[2024-05-19 22:11:44,113] [INFO] [config.py:964:print]   checkpoint_parallel_write_pipeline  False
+[2024-05-19 22:11:44,113] [INFO] [config.py:964:print]   checkpoint_tag_validation_enabled  True
+[2024-05-19 22:11:44,113] [INFO] [config.py:964:print]   checkpoint_tag_validation_fail  False
+[2024-05-19 22:11:44,113] [INFO] [config.py:964:print]   comms_config ................. <deepspeed.comm.config.DeepSpeedCommsConfig object at 0x4002a4dff160>
+[2024-05-19 22:11:44,113] [INFO] [config.py:964:print]   communication_data_type ...... None
+[2024-05-19 22:11:44,113] [INFO] [config.py:964:print]   compression_config ........... {'weight_quantization': {'shared_parameters': {'enabled': False, 'quantizer_kernel': False, 'schedule_offset': 0, 'quantize_groups': 1, 'quantize_verbose': False, 'quantization_type': 'symmetric', 'quantize_weight_in_forward': False, 'rounding': 'nearest', 'fp16_mixed_quantize': False, 'quantize_change_ratio': 0.001}, 'different_groups': {}}, 'activation_quantization': {'shared_parameters': {'enabled': False, 'quantization_type': 'symmetric', 'range_calibration': 'dynamic', 'schedule_offset': 1000}, 'different_groups': {}}, 'sparse_pruning': {'shared_parameters': {'enabled': False, 'method': 'l1', 'schedule_offset': 1000}, 'different_groups': {}}, 'row_pruning': {'shared_parameters': {'enabled': False, 'method': 'l1', 'schedule_offset': 1000}, 'different_groups': {}}, 'head_pruning': {'shared_parameters': {'enabled': False, 'method': 'topk', 'schedule_offset': 1000}, 'different_groups': {}}, 'channel_pruning': {'shared_parameters': {'enabled': False, 'method': 'l1', 'schedule_offset': 1000}, 'different_groups': {}}, 'layer_reduction': {'enabled': False}}
+[2024-05-19 22:11:44,113] [INFO] [config.py:964:print]   curriculum_enabled_legacy .... False
+[2024-05-19 22:11:44,113] [INFO] [config.py:964:print]   curriculum_params_legacy ..... False
+[2024-05-19 22:11:44,113] [INFO] [config.py:964:print]   data_efficiency_config ....... {'enabled': False, 'seed': 1234, 'data_sampling': {'enabled': False, 'num_epochs': 1000, 'num_workers': 0, 'curriculum_learning': {'enabled': False}}, 'data_routing': {'enabled': False, 'random_ltd': {'enabled': False, 'layer_token_lr_schedule': {'enabled': False}}}}
+[2024-05-19 22:11:44,113] [INFO] [config.py:964:print]   data_efficiency_enabled ...... False
+[2024-05-19 22:11:44,113] [INFO] [config.py:964:print]   dataloader_drop_last ......... False
+[2024-05-19 22:11:44,113] [INFO] [config.py:964:print]   disable_allgather ............ False
+[2024-05-19 22:11:44,113] [INFO] [config.py:964:print]   dump_state ................... False
+[2024-05-19 22:11:44,113] [INFO] [config.py:964:print]   dynamic_loss_scale_args ...... {'init_scale': 2048, 'scale_window': 5000, 'delayed_shift': 4, 'consecutive_hysteresis': False, 'min_scale': 1}
+[2024-05-19 22:11:44,113] [INFO] [config.py:964:print]   eigenvalue_enabled ........... False
+[2024-05-19 22:11:44,113] [INFO] [config.py:964:print]   eigenvalue_gas_boundary_resolution  1
+[2024-05-19 22:11:44,114] [INFO] [config.py:964:print]   eigenvalue_layer_name ........ bert.encoder.layer
+[2024-05-19 22:11:44,114] [INFO] [config.py:964:print]   eigenvalue_layer_num ......... 0
+[2024-05-19 22:11:44,114] [INFO] [config.py:964:print]   eigenvalue_max_iter .......... 100
+[2024-05-19 22:11:44,114] [INFO] [config.py:964:print]   eigenvalue_stability ......... 1e-06
+[2024-05-19 22:11:44,114] [INFO] [config.py:964:print]   eigenvalue_tol ............... 0.01
+[2024-05-19 22:11:44,114] [INFO] [config.py:964:print]   eigenvalue_verbose ........... False
+[2024-05-19 22:11:44,114] [INFO] [config.py:964:print]   elasticity_enabled ........... False
+[2024-05-19 22:11:44,114] [INFO] [config.py:964:print]   flops_profiler_config ........ {
+    "enabled": false, 
+    "recompute_fwd_factor": 0.0, 
+    "profile_step": 1, 
+    "module_depth": -1, 
+    "top_modules": 1, 
+    "detailed": true, 
+    "output_file": null
+}
+[2024-05-19 22:11:44,114] [INFO] [config.py:964:print]   fp16_auto_cast ............... False
+[2024-05-19 22:11:44,114] [INFO] [config.py:964:print]   fp16_enabled ................. True
+[2024-05-19 22:11:44,114] [INFO] [config.py:964:print]   fp16_master_weights_and_gradients  False
+[2024-05-19 22:11:44,114] [INFO] [config.py:964:print]   global_rank .................. 0
+[2024-05-19 22:11:44,114] [INFO] [config.py:964:print]   grad_accum_dtype ............. None
+[2024-05-19 22:11:44,114] [INFO] [config.py:964:print]   gradient_accumulation_steps .. 1
+[2024-05-19 22:11:44,114] [INFO] [config.py:964:print]   gradient_clipping ............ 1.0
+[2024-05-19 22:11:44,114] [INFO] [config.py:964:print]   gradient_predivide_factor .... 1.0
+[2024-05-19 22:11:44,114] [INFO] [config.py:964:print]   hybrid_engine ................ enabled=False max_out_tokens=512 inference_tp_size=1 release_inference_cache=False pin_parameters=True tp_gather_partition_size=8
+[2024-05-19 22:11:44,114] [INFO] [config.py:964:print]   initial_dynamic_scale ........ 2048
+[2024-05-19 22:11:44,115] [INFO] [config.py:964:print]   load_universal_checkpoint .... False
+[2024-05-19 22:11:44,115] [INFO] [config.py:964:print]   loss_scale ................... 0
+[2024-05-19 22:11:44,115] [INFO] [config.py:964:print]   memory_breakdown ............. False
+[2024-05-19 22:11:44,115] [INFO] [config.py:964:print]   mics_hierarchial_params_gather  False
+[2024-05-19 22:11:44,115] [INFO] [config.py:964:print]   mics_shard_size .............. -1
+[2024-05-19 22:11:44,115] [INFO] [config.py:964:print]   monitor_config ............... tensorboard=TensorBoardConfig(enabled=False, output_path='', job_name='DeepSpeedJobName') wandb=WandbConfig(enabled=False, group=None, team=None, project='deepspeed') csv_monitor=CSVConfig(enabled=False, output_path='', job_name='DeepSpeedJobName') enabled=False
+[2024-05-19 22:11:44,115] [INFO] [config.py:964:print]   nebula_config ................ {
+    "enabled": false, 
+    "persistent_storage_path": null, 
+    "persistent_time_interval": 100, 
+    "num_of_version_in_retention": 2, 
+    "enable_nebula_load": true, 
+    "load_path": null
+}
+[2024-05-19 22:11:44,115] [INFO] [config.py:964:print]   optimizer_legacy_fusion ...... False
+[2024-05-19 22:11:44,115] [INFO] [config.py:964:print]   optimizer_name ............... None
+[2024-05-19 22:11:44,115] [INFO] [config.py:964:print]   optimizer_params ............. None
+[2024-05-19 22:11:44,115] [INFO] [config.py:964:print]   pipeline ..................... {'stages': 'auto', 'partition': 'best', 'seed_layers': False, 'activation_checkpoint_interval': 0}
+[2024-05-19 22:11:44,115] [INFO] [config.py:964:print]   pld_enabled .................. False
+[2024-05-19 22:11:44,115] [INFO] [config.py:964:print]   pld_params ................... False
+[2024-05-19 22:11:44,115] [INFO] [config.py:964:print]   prescale_gradients ........... False
+[2024-05-19 22:11:44,115] [INFO] [config.py:964:print]   scheduler_name ............... None
+[2024-05-19 22:11:44,115] [INFO] [config.py:964:print]   scheduler_params ............. None
+[2024-05-19 22:11:44,115] [INFO] [config.py:964:print]   sparse_attention ............. None
+[2024-05-19 22:11:44,115] [INFO] [config.py:964:print]   sparse_gradients_enabled ..... False
+[2024-05-19 22:11:44,116] [INFO] [config.py:964:print]   steps_per_print .............. 10000000
+[2024-05-19 22:11:44,116] [INFO] [config.py:964:print]   train_batch_size ............. 64
+[2024-05-19 22:11:44,116] [INFO] [config.py:964:print]   train_micro_batch_size_per_gpu  16
+[2024-05-19 22:11:44,116] [INFO] [config.py:964:print]   use_node_local_storage ....... False
+[2024-05-19 22:11:44,116] [INFO] [config.py:964:print]   wall_clock_breakdown ......... False
+[2024-05-19 22:11:44,116] [INFO] [config.py:964:print]   world_size ................... 4
+[2024-05-19 22:11:44,116] [INFO] [config.py:964:print]   zero_allow_untested_optimizer  True
+[2024-05-19 22:11:44,116] [INFO] [config.py:964:print]   zero_config .................. stage=2 contiguous_gradients=True reduce_scatter=True reduce_bucket_size=200000000 allgather_partitions=True allgather_bucket_size=200000000 overlap_comm=True load_from_fp32_weights=True elastic_checkpoint=False offload_param=None offload_optimizer=DeepSpeedZeroOffloadOptimizerConfig(device='cpu', nvme_path=None, buffer_count=4, pin_memory=False, pipeline=False, pipeline_read=False, pipeline_write=False, fast_init=False) sub_group_size=1,000,000,000 cpu_offload_param=None cpu_offload_use_pin_memory=None cpu_offload=None prefetch_bucket_size=50,000,000 param_persistence_threshold=100,000 model_persistence_threshold=sys.maxsize max_live_parameters=1,000,000,000 max_reuse_distance=1,000,000,000 gather_16bit_weights_on_model_save=False stage3_gather_fp16_weights_on_model_save=False ignore_unused_parameters=True legacy_stage1=False round_robin_gradients=False zero_hpz_partition_size=1 zero_quantized_weights=False zero_quantized_gradients=False mics_shard_size=-1 mics_hierarchical_params_gather=False memory_efficient_linear=True
+[2024-05-19 22:11:44,116] [INFO] [config.py:964:print]   zero_enabled ................. True
+[2024-05-19 22:11:44,116] [INFO] [config.py:964:print]   zero_force_ds_cpu_optimizer .. False
+[2024-05-19 22:11:44,116] [INFO] [config.py:964:print]   zero_optimization_stage ...... 2
+[2024-05-19 22:11:44,116] [INFO] [config.py:950:print_user_config]   json = {
+    "train_micro_batch_size_per_gpu": 16, 
+    "gradient_accumulation_steps": 1, 
+    "zero_optimization": {
+        "stage": 2, 
+        "offload_optimizer": {
+            "device": "cpu"
+        }, 
+        "allgather_partitions": true, 
+        "allgather_bucket_size": 2.000000e+08, 
+        "overlap_comm": true, 
+        "reduce_scatter": true, 
+        "reduce_bucket_size": 2.000000e+08, 
+        "contiguous_gradients": true
+    }, 
+    "zero_force_ds_cpu_optimizer": false, 
+    "zero_allow_untested_optimizer": true, 
+    "fp16": {
+        "enabled": true, 
+        "loss_scale": 0, 
+        "initial_scale_power": 11, 
+        "loss_scale_window": 5.000000e+03, 
+        "hysteresis": 4
+    }, 
+    "wall_clock_breakdown": false, 
+    "gradient_clipping": 1.0, 
+    "steps_per_print": 1.000000e+07
+}
+Probing Dataset
+Probing end. Max data state 1, total length 10902
+Num PPO instances: 10902
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/train_minillm.py", line 131, in <module>
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/train_minillm.py", line 131, in <module>
+    main()    
+main()  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/train_minillm.py", line 116, in main
+
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/train_minillm.py", line 116, in main
+        train(train(
+
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/minillm/__init__.py", line 40, in train
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/minillm/__init__.py", line 40, in train
+        sampler.run_sample(args.num_rollouts_per_device)sampler.run_sample(args.num_rollouts_per_device)
+
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/minillm/sampler.py", line 77, in run_sample
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/minillm/sampler.py", line 77, in run_sample
+        gen_out = self.trainer.generate(**batch, return_dict_in_generate=True, mode=mode, teacher_mixed_sample=(self.args.teacher_mixed_alpha is not None), output_scores=True)gen_out = self.trainer.generate(**batch, return_dict_in_generate=True, mode=mode, teacher_mixed_sample=(self.args.teacher_mixed_alpha is not None), output_scores=True)
+
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/minillm/trainer.py", line 691, in generate
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/minillm/trainer.py", line 691, in generate
+        gen = sub_generate(self, model, mix_in_model, mix_in_alpha, input_ids, attention_mask, **kwargs)gen = sub_generate(self, model, mix_in_model, mix_in_alpha, input_ids, attention_mask, **kwargs)
+
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/minillm/trainer.py", line 759, in sub_generate
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/minillm/trainer.py", line 759, in sub_generate
+        gen = model.generate(gen = model.generate(
+
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/minillm/model.py", line 24, in generate
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/minillm/model.py", line 24, in generate
+        return self.base_model.generate(**x)return self.base_model.generate(**x)
+
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/autograd/grad_mode.py", line 27, in decorate_context
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/autograd/grad_mode.py", line 27, in decorate_context
+        return func(*args, **kwargs)return func(*args, **kwargs)
+
+  File "/home/bingxing2/home/scx7atk/work/minillm/transformers/src/transformers/generation/utils.py", line 1805, in generate
+  File "/home/bingxing2/home/scx7atk/work/minillm/transformers/src/transformers/generation/utils.py", line 1805, in generate
+    return self.sample(    
+return self.sample(  File "/home/bingxing2/home/scx7atk/work/minillm/transformers/src/transformers/generation/utils.py", line 2916, in sample
+
+  File "/home/bingxing2/home/scx7atk/work/minillm/transformers/src/transformers/generation/utils.py", line 2916, in sample
+    outputs = self(
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1194, in _call_impl
+    outputs = self(
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1194, in _call_impl
+        return forward_call(*input, **kwargs)return forward_call(*input, **kwargs)
+
+  File "/home/bingxing2/home/scx7atk/work/minillm/transformers/src/transformers/models/llama/modeling_llama.py", line 1096, in forward
+  File "/home/bingxing2/home/scx7atk/work/minillm/transformers/src/transformers/models/llama/modeling_llama.py", line 1096, in forward
+        outputs = self.model(outputs = self.model(
+
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1194, in _call_impl
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1194, in _call_impl
+        return forward_call(*input, **kwargs)return forward_call(*input, **kwargs)
+
+  File "/home/bingxing2/home/scx7atk/work/minillm/transformers/src/transformers/models/llama/modeling_llama.py", line 952, in forward
+  File "/home/bingxing2/home/scx7atk/work/minillm/transformers/src/transformers/models/llama/modeling_llama.py", line 952, in forward
+        layer_outputs = decoder_layer(layer_outputs = decoder_layer(
+
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1194, in _call_impl
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1194, in _call_impl
+        return forward_call(*input, **kwargs)return forward_call(*input, **kwargs)
+
+  File "/home/bingxing2/home/scx7atk/work/minillm/transformers/src/transformers/models/llama/modeling_llama.py", line 698, in forward
+  File "/home/bingxing2/home/scx7atk/work/minillm/transformers/src/transformers/models/llama/modeling_llama.py", line 698, in forward
+        hidden_states, self_attn_weights, present_key_value = self.self_attn(hidden_states, self_attn_weights, present_key_value = self.self_attn(
+
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1194, in _call_impl
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1194, in _call_impl
+    return forward_call(*input, **kwargs)    
+return forward_call(*input, **kwargs)  File "/home/bingxing2/home/scx7atk/work/minillm/transformers/src/transformers/models/llama/modeling_llama.py", line 432, in forward
+
+  File "/home/bingxing2/home/scx7atk/work/minillm/transformers/src/transformers/models/llama/modeling_llama.py", line 432, in forward
+    attn_weights = nn.functional.softmax(attn_weights, dim=-1, dtype=torch.float32).to(query_states.dtype)    
+attn_weights = nn.functional.softmax(attn_weights, dim=-1, dtype=torch.float32).to(query_states.dtype)  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/nn/functional.py", line 1843, in softmax
+
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/nn/functional.py", line 1843, in softmax
+        ret = input.softmax(dim, dtype=dtype)ret = input.softmax(dim, dtype=dtype)
+
+torch.cudatorch.cuda..OutOfMemoryErrorOutOfMemoryError: : CUDA out of memory. Tried to allocate 256.00 MiB (GPU 1; 39.39 GiB total capacity; 38.23 GiB already allocated; 83.94 MiB free; 38.71 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONFCUDA out of memory. Tried to allocate 256.00 MiB (GPU 2; 39.39 GiB total capacity; 38.23 GiB already allocated; 83.94 MiB free; 38.71 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+
+Traceback (most recent call last):
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/train_minillm.py", line 131, in <module>
+    main()
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/train_minillm.py", line 116, in main
+    train(
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/minillm/__init__.py", line 40, in train
+    sampler.run_sample(args.num_rollouts_per_device)
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/minillm/sampler.py", line 77, in run_sample
+    gen_out = self.trainer.generate(**batch, return_dict_in_generate=True, mode=mode, teacher_mixed_sample=(self.args.teacher_mixed_alpha is not None), output_scores=True)
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/minillm/trainer.py", line 691, in generate
+    gen = sub_generate(self, model, mix_in_model, mix_in_alpha, input_ids, attention_mask, **kwargs)
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/minillm/trainer.py", line 759, in sub_generate
+    gen = model.generate(
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/minillm/model.py", line 24, in generate
+    return self.base_model.generate(**x)
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/autograd/grad_mode.py", line 27, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/bingxing2/home/scx7atk/work/minillm/transformers/src/transformers/generation/utils.py", line 1805, in generate
+    return self.sample(
+  File "/home/bingxing2/home/scx7atk/work/minillm/transformers/src/transformers/generation/utils.py", line 2916, in sample
+    outputs = self(
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1194, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/bingxing2/home/scx7atk/work/minillm/transformers/src/transformers/models/llama/modeling_llama.py", line 1096, in forward
+    outputs = self.model(
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1194, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/bingxing2/home/scx7atk/work/minillm/transformers/src/transformers/models/llama/modeling_llama.py", line 952, in forward
+    layer_outputs = decoder_layer(
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1194, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/bingxing2/home/scx7atk/work/minillm/transformers/src/transformers/models/llama/modeling_llama.py", line 698, in forward
+    hidden_states, self_attn_weights, present_key_value = self.self_attn(
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1194, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/bingxing2/home/scx7atk/work/minillm/transformers/src/transformers/models/llama/modeling_llama.py", line 432, in forward
+    attn_weights = nn.functional.softmax(attn_weights, dim=-1, dtype=torch.float32).to(query_states.dtype)
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/nn/functional.py", line 1843, in softmax
+    ret = input.softmax(dim, dtype=dtype)
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 256.00 MiB (GPU 0; 39.39 GiB total capacity; 38.23 GiB already allocated; 83.94 MiB free; 38.71 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+Traceback (most recent call last):
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/train_minillm.py", line 131, in <module>
+    main()
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/train_minillm.py", line 116, in main
+    train(
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/minillm/__init__.py", line 40, in train
+    sampler.run_sample(args.num_rollouts_per_device)
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/minillm/sampler.py", line 77, in run_sample
+    gen_out = self.trainer.generate(**batch, return_dict_in_generate=True, mode=mode, teacher_mixed_sample=(self.args.teacher_mixed_alpha is not None), output_scores=True)
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/minillm/trainer.py", line 691, in generate
+    gen = sub_generate(self, model, mix_in_model, mix_in_alpha, input_ids, attention_mask, **kwargs)
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/minillm/trainer.py", line 759, in sub_generate
+    gen = model.generate(
+  File "/home/bingxing2/home/scx7atk/work/minillm-zxc/minillm/model.py", line 24, in generate
+    return self.base_model.generate(**x)
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/autograd/grad_mode.py", line 27, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/bingxing2/home/scx7atk/work/minillm/transformers/src/transformers/generation/utils.py", line 1805, in generate
+    return self.sample(
+  File "/home/bingxing2/home/scx7atk/work/minillm/transformers/src/transformers/generation/utils.py", line 2916, in sample
+    outputs = self(
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1194, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/bingxing2/home/scx7atk/work/minillm/transformers/src/transformers/models/llama/modeling_llama.py", line 1096, in forward
+    outputs = self.model(
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1194, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/bingxing2/home/scx7atk/work/minillm/transformers/src/transformers/models/llama/modeling_llama.py", line 952, in forward
+    layer_outputs = decoder_layer(
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1194, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/bingxing2/home/scx7atk/work/minillm/transformers/src/transformers/models/llama/modeling_llama.py", line 698, in forward
+    hidden_states, self_attn_weights, present_key_value = self.self_attn(
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1194, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/bingxing2/home/scx7atk/work/minillm/transformers/src/transformers/models/llama/modeling_llama.py", line 432, in forward
+    attn_weights = nn.functional.softmax(attn_weights, dim=-1, dtype=torch.float32).to(query_states.dtype)
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/nn/functional.py", line 1843, in softmax
+    ret = input.softmax(dim, dtype=dtype)
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 256.00 MiB (GPU 3; 39.39 GiB total capacity; 38.23 GiB already allocated; 83.94 MiB free; 38.71 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+ERROR:torch.distributed.elastic.multiprocessing.api:failed (exitcode: 1) local_rank: 0 (pid: 3064172) of binary: /home/bingxing2/home/scx7atk/.conda/envs/minillm/bin/python
+Traceback (most recent call last):
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/bin/torchrun", line 8, in <module>
+    sys.exit(main())
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 346, in wrapper
+    return f(*args, **kwargs)
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/distributed/run.py", line 762, in main
+    run(args)
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/distributed/run.py", line 753, in run
+    elastic_launch(
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 132, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/home/bingxing2/home/scx7atk/.conda/envs/minillm/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 246, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+/home/bingxing2/home/scx7atk/work/minillm-zxc/train_minillm.py FAILED
+------------------------------------------------------------
+Failures:
+[1]:
+  time      : 2024-05-19_22:11:48
+  host      : paraai-n32-h-01-agent-63.paraai-n32-h-01.com
+  rank      : 1 (local_rank: 1)
+  exitcode  : 1 (pid: 3064176)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+[2]:
+  time      : 2024-05-19_22:11:48
+  host      : paraai-n32-h-01-agent-63.paraai-n32-h-01.com
+  rank      : 2 (local_rank: 2)
+  exitcode  : 1 (pid: 3064180)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+[3]:
+  time      : 2024-05-19_22:11:48
+  host      : paraai-n32-h-01-agent-63.paraai-n32-h-01.com
+  rank      : 3 (local_rank: 3)
+  exitcode  : 1 (pid: 3064182)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2024-05-19_22:11:48
+  host      : paraai-n32-h-01-agent-63.paraai-n32-h-01.com
+  rank      : 0 (local_rank: 0)
+  exitcode  : 1 (pid: 3064172)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================

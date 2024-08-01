@@ -1,0 +1,262 @@
+[2024-05-20 06:47:44,314] [INFO] [real_accelerator.py:133:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+
+Authorized users only. All activities may be monitored and reported.
+cuda-11.8 loaded successful
+gcc-11.3.0 loaded successful
+[2024-05-20 06:47:55,483] [INFO] [runner.py:452:main] Using IP address of 172.16.4.22 for node paraai-n32-h-01-agent-54
+[2024-05-20 06:47:55,488] [INFO] [multinode_runner.py:70:get_cmd] Running on the following workers: paraai-n32-h-01-agent-54,paraai-n32-h-01-agent-65
+[2024-05-20 06:47:55,488] [INFO] [runner.py:555:main] cmd = pdsh -S -f 1024 -w paraai-n32-h-01-agent-54,paraai-n32-h-01-agent-65 export PYTHONUNBUFFERED=1; export NCCL_ALGO=Ring; export NCCL_MIN_NCHANNELS=16; export NCCL_DEBUG=INFO; export NCCL_IB_HCA=mlx5_0,mlx5_2; export NCCL_IB_GID_INDEX=3; export NCCL_MAX_NCHANNELS=16; export PYTHONPATH=/home/bingxing2/home/scx7atk/work/minillm-zxc2/scripts:/home/bingxing2/home/scx7atk/work/minillm-zxc; export NCCL_IB_TIMEOUT=23; export NCCL_IB_RETRY_CNT=7; export NCCL_TOPO_FILE=/home/bingxing2/apps/nccl/conf/dump.xml;  cd /home/bingxing2/home/scx7atk/work/minillm-zxc2/scripts; /home/bingxing2/home/scx7atk/.conda/envs/minillm/bin/python -u -m deepspeed.launcher.launch --world_info=eyJwYXJhYWktbjMyLWgtMDEtYWdlbnQtNTQiOiBbMCwgMSwgMiwgM10sICJwYXJhYWktbjMyLWgtMDEtYWdlbnQtNjUiOiBbMCwgMSwgMiwgM119 --node_rank=%n --master_addr=172.16.4.22 --master_port=29501 /home/bingxing2/home/scx7atk/work/minillm-zxc/finetune.py --base-path '/home/bingxing2/home/scx7atk/work/minillm-zxc' --model-path '/home/bingxing2/public/models/llama2/Llama-2-7b-hf/' --teacher-model-path '/home/bingxing2/public/models/llama2/Llama-2-13b-hf/' --ckpt-name 'llama2-7b' --teacher-ckpt-name 'llama2-13b' --n-gpu '4' --n-nodes '2' --teacher-model-fp16 --gradient-checkpointing --prompt-data-dir '/home/bingxing2/home/scx7atk/work/minillm-zxc/processed_data/dolly/prompt/llama/' --lm-data-dir '/home/bingxing2/home/scx7atk/work/minillm-zxc/processed_data/roberta/llama/512/20M/' --dev-num '1000' --num-workers '0' --epochs '10' --total-iters '5000' --kd-ratio '0.5' --batch-size '16' --lr '5e-6' --lr-min '5e-6' --gradient-accumulation-steps '1' --max-length '512' --max-prompt-length '256' --warmup-iters '100' --save '/home/bingxing2/home/scx7atk/work/minillm-zxc/results/llama2/train/minillm-zxc/' --seed '10' --seed-ppo '42' --seed-lm '7' --save-interval '500' --eval-interval '100' --log-interval '16' --mid-log-num '1' --type 'minillm' --ppo-epochs '4' --num-rollouts '256' --chunk-size '16' --length-norm --single-step-reg --teacher-mixed-alpha '0.2' --reward-scaling '0.5' --cliprange-reward '100' --do-sample --top-k '0' --top-p '1.0' --temperature '1.0' --deepspeed --deepspeed_config '/home/bingxing2/home/scx7atk/work/minillm-zxc/configs/deepspeed/ds_config_zero2_offload.json'
+paraai-n32-h-01-agent-65: Warning: Permanently added 'paraai-n32-h-01-agent-65,172.16.4.201' (ECDSA) to the list of known hosts.
+paraai-n32-h-01-agent-65: 
+paraai-n32-h-01-agent-65: Authorized users only. All activities may be monitored and reported.
+paraai-n32-h-01-agent-54: 
+paraai-n32-h-01-agent-54: Authorized users only. All activities may be monitored and reported.
+paraai-n32-h-01-agent-54: cuda-11.8 loaded successful
+paraai-n32-h-01-agent-54: gcc-11.3.0 loaded successful
+paraai-n32-h-01-agent-65: cuda-11.8 loaded successful
+paraai-n32-h-01-agent-65: gcc-11.3.0 loaded successful
+paraai-n32-h-01-agent-54: [2024-05-20 06:47:57,908] [INFO] [real_accelerator.py:133:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+paraai-n32-h-01-agent-54: [2024-05-20 06:48:00,150] [INFO] [launch.py:138:main] 0 NCCL_ALGO=Ring
+paraai-n32-h-01-agent-54: [2024-05-20 06:48:00,150] [INFO] [launch.py:138:main] 0 NCCL_MIN_NCHANNELS=16
+paraai-n32-h-01-agent-54: [2024-05-20 06:48:00,150] [INFO] [launch.py:138:main] 0 NCCL_DEBUG=INFO
+paraai-n32-h-01-agent-54: [2024-05-20 06:48:00,150] [INFO] [launch.py:138:main] 0 NCCL_IB_HCA=mlx5_0,mlx5_2
+paraai-n32-h-01-agent-54: [2024-05-20 06:48:00,150] [INFO] [launch.py:138:main] 0 NCCL_IB_GID_INDEX=3
+paraai-n32-h-01-agent-54: [2024-05-20 06:48:00,150] [INFO] [launch.py:138:main] 0 NCCL_MAX_NCHANNELS=16
+paraai-n32-h-01-agent-54: [2024-05-20 06:48:00,150] [INFO] [launch.py:138:main] 0 NCCL_IB_TIMEOUT=23
+paraai-n32-h-01-agent-54: [2024-05-20 06:48:00,150] [INFO] [launch.py:138:main] 0 NCCL_IB_RETRY_CNT=7
+paraai-n32-h-01-agent-54: [2024-05-20 06:48:00,150] [INFO] [launch.py:138:main] 0 NCCL_TOPO_FILE=/home/bingxing2/apps/nccl/conf/dump.xml
+paraai-n32-h-01-agent-54: [2024-05-20 06:48:00,150] [INFO] [launch.py:145:main] WORLD INFO DICT: {'paraai-n32-h-01-agent-54': [0, 1, 2, 3], 'paraai-n32-h-01-agent-65': [0, 1, 2, 3]}
+paraai-n32-h-01-agent-54: [2024-05-20 06:48:00,150] [INFO] [launch.py:151:main] nnodes=2, num_local_procs=4, node_rank=0
+paraai-n32-h-01-agent-54: [2024-05-20 06:48:00,150] [INFO] [launch.py:162:main] global_rank_mapping=defaultdict(<class 'list'>, {'paraai-n32-h-01-agent-54': [0, 1, 2, 3], 'paraai-n32-h-01-agent-65': [4, 5, 6, 7]})
+paraai-n32-h-01-agent-54: [2024-05-20 06:48:00,150] [INFO] [launch.py:163:main] dist_world_size=8
+paraai-n32-h-01-agent-54: [2024-05-20 06:48:00,150] [INFO] [launch.py:165:main] Setting CUDA_VISIBLE_DEVICES=0,1,2,3
+paraai-n32-h-01-agent-65: [2024-05-20 06:48:01,315] [INFO] [real_accelerator.py:133:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+paraai-n32-h-01-agent-54: [2024-05-20 06:48:02,243] [INFO] [real_accelerator.py:133:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+paraai-n32-h-01-agent-54: [2024-05-20 06:48:02,250] [INFO] [real_accelerator.py:133:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+paraai-n32-h-01-agent-54: [2024-05-20 06:48:02,291] [INFO] [real_accelerator.py:133:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+paraai-n32-h-01-agent-54: [2024-05-20 06:48:02,304] [INFO] [real_accelerator.py:133:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+paraai-n32-h-01-agent-54: [2024-05-20 06:48:10,202] [WARNING] [comm.py:152:init_deepspeed_backend] NCCL backend in DeepSpeed not yet implemented
+paraai-n32-h-01-agent-54: [2024-05-20 06:48:10,202] [INFO] [comm.py:616:init_distributed] cdb=None
+paraai-n32-h-01-agent-54: [2024-05-20 06:48:10,205] [WARNING] [comm.py:152:init_deepspeed_backend] NCCL backend in DeepSpeed not yet implemented
+paraai-n32-h-01-agent-54: [2024-05-20 06:48:10,205] [INFO] [comm.py:616:init_distributed] cdb=None
+paraai-n32-h-01-agent-54: using world size: 8
+paraai-n32-h-01-agent-54: [2024-05-20 06:48:10,206] [WARNING] [comm.py:152:init_deepspeed_backend] NCCL backend in DeepSpeed not yet implemented
+paraai-n32-h-01-agent-54: [2024-05-20 06:48:10,206] [INFO] [comm.py:616:init_distributed] cdb=None
+paraai-n32-h-01-agent-54: [2024-05-20 06:48:10,206] [INFO] [comm.py:643:init_distributed] Initializing TorchBackend in DeepSpeed with backend nccl
+paraai-n32-h-01-agent-54: [2024-05-20 06:48:10,206] [WARNING] [comm.py:152:init_deepspeed_backend] NCCL backend in DeepSpeed not yet implemented
+paraai-n32-h-01-agent-54: [2024-05-20 06:48:10,206] [INFO] [comm.py:616:init_distributed] cdb=None
+paraai-n32-h-01-agent-65: [2024-05-20 06:48:11,640] [INFO] [launch.py:138:main] 1 NCCL_ALGO=Ring
+paraai-n32-h-01-agent-65: [2024-05-20 06:48:11,640] [INFO] [launch.py:138:main] 1 NCCL_MIN_NCHANNELS=16
+paraai-n32-h-01-agent-65: [2024-05-20 06:48:11,640] [INFO] [launch.py:138:main] 1 NCCL_DEBUG=INFO
+paraai-n32-h-01-agent-65: [2024-05-20 06:48:11,640] [INFO] [launch.py:138:main] 1 NCCL_IB_HCA=mlx5_0,mlx5_2
+paraai-n32-h-01-agent-65: [2024-05-20 06:48:11,640] [INFO] [launch.py:138:main] 1 NCCL_IB_GID_INDEX=3
+paraai-n32-h-01-agent-65: [2024-05-20 06:48:11,640] [INFO] [launch.py:138:main] 1 NCCL_MAX_NCHANNELS=16
+paraai-n32-h-01-agent-65: [2024-05-20 06:48:11,640] [INFO] [launch.py:138:main] 1 NCCL_IB_TIMEOUT=23
+paraai-n32-h-01-agent-65: [2024-05-20 06:48:11,640] [INFO] [launch.py:138:main] 1 NCCL_IB_RETRY_CNT=7
+paraai-n32-h-01-agent-65: [2024-05-20 06:48:11,640] [INFO] [launch.py:138:main] 1 NCCL_TOPO_FILE=/home/bingxing2/apps/nccl/conf/dump.xml
+paraai-n32-h-01-agent-65: [2024-05-20 06:48:11,640] [INFO] [launch.py:145:main] WORLD INFO DICT: {'paraai-n32-h-01-agent-54': [0, 1, 2, 3], 'paraai-n32-h-01-agent-65': [0, 1, 2, 3]}
+paraai-n32-h-01-agent-65: [2024-05-20 06:48:11,640] [INFO] [launch.py:151:main] nnodes=2, num_local_procs=4, node_rank=1
+paraai-n32-h-01-agent-65: [2024-05-20 06:48:11,640] [INFO] [launch.py:162:main] global_rank_mapping=defaultdict(<class 'list'>, {'paraai-n32-h-01-agent-54': [0, 1, 2, 3], 'paraai-n32-h-01-agent-65': [4, 5, 6, 7]})
+paraai-n32-h-01-agent-65: [2024-05-20 06:48:11,640] [INFO] [launch.py:163:main] dist_world_size=8
+paraai-n32-h-01-agent-65: [2024-05-20 06:48:11,640] [INFO] [launch.py:165:main] Setting CUDA_VISIBLE_DEVICES=0,1,2,3
+paraai-n32-h-01-agent-65: [2024-05-20 06:48:13,812] [INFO] [real_accelerator.py:133:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+paraai-n32-h-01-agent-65: [2024-05-20 06:48:13,870] [INFO] [real_accelerator.py:133:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+paraai-n32-h-01-agent-65: [2024-05-20 06:48:13,874] [INFO] [real_accelerator.py:133:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+paraai-n32-h-01-agent-65: [2024-05-20 06:48:13,905] [INFO] [real_accelerator.py:133:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+paraai-n32-h-01-agent-65: [2024-05-20 06:48:21,287] [WARNING] [comm.py:152:init_deepspeed_backend] NCCL backend in DeepSpeed not yet implemented
+paraai-n32-h-01-agent-65: [2024-05-20 06:48:21,287] [INFO] [comm.py:616:init_distributed] cdb=None
+paraai-n32-h-01-agent-65: [2024-05-20 06:48:21,291] [WARNING] [comm.py:152:init_deepspeed_backend] NCCL backend in DeepSpeed not yet implemented
+paraai-n32-h-01-agent-65: [2024-05-20 06:48:21,292] [WARNING] [comm.py:152:init_deepspeed_backend] NCCL backend in DeepSpeed not yet implemented
+paraai-n32-h-01-agent-65: [2024-05-20 06:48:21,292] [INFO] [comm.py:616:init_distributed] cdb=None
+paraai-n32-h-01-agent-65: [2024-05-20 06:48:21,292] [INFO] [comm.py:616:init_distributed] cdb=None
+paraai-n32-h-01-agent-65: [2024-05-20 06:48:21,292] [WARNING] [comm.py:152:init_deepspeed_backend] NCCL backend in DeepSpeed not yet implemented
+paraai-n32-h-01-agent-65: [2024-05-20 06:48:21,292] [INFO] [comm.py:616:init_distributed] cdb=None
+paraai-n32-h-01-agent-54: arguments:
+paraai-n32-h-01-agent-54:   model_path ................... /home/bingxing2/public/models/llama2/Llama-2-7b-hf/
+paraai-n32-h-01-agent-54:   ckpt_name .................... llama2-7b
+paraai-n32-h-01-agent-54:   n_gpu ........................ 8
+paraai-n32-h-01-agent-54:   n_nodes ...................... 2
+paraai-n32-h-01-agent-54:   model_type ................... gpt2
+paraai-n32-h-01-agent-54:   teacher_model_type ........... None
+paraai-n32-h-01-agent-54:   teacher_model_path ........... ['/home/bingxing2/public/models/llama2/Llama-2-13b-hf/']
+paraai-n32-h-01-agent-54:   teacher_ckpt_name ............ llama2-13b
+paraai-n32-h-01-agent-54:   teacher_model_fp16 ........... True
+paraai-n32-h-01-agent-54:   model_parallel ............... False
+paraai-n32-h-01-agent-54:   model_parallel_size .......... None
+paraai-n32-h-01-agent-54:   no_value ..................... False
+paraai-n32-h-01-agent-54:   dropout_path_rate ............ None
+paraai-n32-h-01-agent-54:   fp32 ......................... False
+paraai-n32-h-01-agent-54:   type ......................... minillm
+paraai-n32-h-01-agent-54:   do_train ..................... False
+paraai-n32-h-01-agent-54:   do_valid ..................... False
+paraai-n32-h-01-agent-54:   do_eval ...................... False
+paraai-n32-h-01-agent-54:   base_path .................... /home/bingxing2/home/scx7atk/work/minillm-zxc
+paraai-n32-h-01-agent-54:   load ......................... None
+paraai-n32-h-01-agent-54:   save ......................... /home/bingxing2/home/scx7atk/work/minillm-zxc/results/llama2/train/minillm-zxc/bs16-lr5e-06-G1-N8-NN2-lm1-len512/pe4_rs0.5_nr256_ln_sr_tm0.2
+paraai-n32-h-01-agent-54:   log_interval ................. 16
+paraai-n32-h-01-agent-54:   mid_log_num .................. 1
+paraai-n32-h-01-agent-54:   save_interval ................ 500
+paraai-n32-h-01-agent-54:   eval_interval ................ 100
+paraai-n32-h-01-agent-54:   local_rank ................... 0
+paraai-n32-h-01-agent-54:   save_additional_suffix ....... 
+paraai-n32-h-01-agent-54:   save_rollout ................. False
+paraai-n32-h-01-agent-54:   eb_sample_times .............. 3
+paraai-n32-h-01-agent-54:   data_dir ..................... None
+paraai-n32-h-01-agent-54:   processed_data_dir ........... None
+paraai-n32-h-01-agent-54:   force_process ................ False
+paraai-n32-h-01-agent-54:   force_process_demo ........... False
+paraai-n32-h-01-agent-54:   data_process_workers ......... -1
+paraai-n32-h-01-agent-54:   train_num .................... -1
+paraai-n32-h-01-agent-54:   train_ratio .................. 1
+paraai-n32-h-01-agent-54:   dev_num ...................... 1000
+paraai-n32-h-01-agent-54:   dev_ratio .................... 1
+paraai-n32-h-01-agent-54:   gen_num ...................... -1
+paraai-n32-h-01-agent-54:   data_names ................... None
+paraai-n32-h-01-agent-54:   prompt_type .................. None
+paraai-n32-h-01-agent-54:   num_workers .................. 0
+paraai-n32-h-01-agent-54:   max_prompt_length ............ 256
+paraai-n32-h-01-agent-54:   min_prompt_length ............ 128
+paraai-n32-h-01-agent-54:   json_data .................... False
+paraai-n32-h-01-agent-54:   bin_data ..................... False
+paraai-n32-h-01-agent-54:   txt_data ..................... False
+paraai-n32-h-01-agent-54:   prompt_data_dir .............. /home/bingxing2/home/scx7atk/work/minillm-zxc/processed_data/dolly/prompt/llama/
+paraai-n32-h-01-agent-54:   lm_data_dir .................. /home/bingxing2/home/scx7atk/work/minillm-zxc/processed_data/roberta/llama/512/20M/
+paraai-n32-h-01-agent-54:   eval_ppl ..................... False
+paraai-n32-h-01-agent-54:   eval_rw ...................... False
+paraai-n32-h-01-agent-54:   eval_gen ..................... False
+paraai-n32-h-01-agent-54:   only_prompt .................. False
+paraai-n32-h-01-agent-54:   batch_size ................... 16
+paraai-n32-h-01-agent-54:   eval_batch_size .............. 32
+paraai-n32-h-01-agent-54:   clip_grad .................... 1.0
+paraai-n32-h-01-agent-54:   total_iters .................. 5000
+paraai-n32-h-01-agent-54:   train_iters_per_epoch ........ -1
+paraai-n32-h-01-agent-54:   max_length ................... 512
+paraai-n32-h-01-agent-54:   seed ......................... 10
+paraai-n32-h-01-agent-54:   seed_order ................... 42
+paraai-n32-h-01-agent-54:   seed_data .................... 42
+paraai-n32-h-01-agent-54:   seed_ppo ..................... 42
+paraai-n32-h-01-agent-54:   seed_lm ...................... 7
+paraai-n32-h-01-agent-54:   epochs ....................... 10
+paraai-n32-h-01-agent-54:   training_epochs .............. 10000
+paraai-n32-h-01-agent-54:   gradient_accumulation_steps .. 1
+paraai-n32-h-01-agent-54:   gradient_checkpointing ....... True
+paraai-n32-h-01-agent-54:   attn_dtype ................... None
+paraai-n32-h-01-agent-54:   lr ........................... 5e-06
+paraai-n32-h-01-agent-54:   lr_min ....................... 5e-06
+paraai-n32-h-01-agent-54:   weight_decay ................. 0.01
+paraai-n32-h-01-agent-54:   loss_scale ................... 65536
+paraai-n32-h-01-agent-54:   kd_ratio ..................... 0.5
+paraai-n32-h-01-agent-54:   warmup_iters ................. 100
+paraai-n32-h-01-agent-54:   lr_decay_iters ............... None
+paraai-n32-h-01-agent-54:   lr_decay_style ............... noam
+paraai-n32-h-01-agent-54:   scheduler_name ............... constant_trm
+paraai-n32-h-01-agent-54:   reward_scaling ............... 0.5
+paraai-n32-h-01-agent-54:   cliprange_reward ............. 100.0
+paraai-n32-h-01-agent-54:   ppo_epochs ................... 4
+paraai-n32-h-01-agent-54:   num_rollouts ................. 256
+paraai-n32-h-01-agent-54:   num_rollouts_per_device ...... 32
+paraai-n32-h-01-agent-54:   cliprange .................... 0.2
+paraai-n32-h-01-agent-54:   chunk_size ................... 16
+paraai-n32-h-01-agent-54:   gamma ........................ 0.95
+paraai-n32-h-01-agent-54:   length_norm .................. True
+paraai-n32-h-01-agent-54:   single_step_reg .............. True
+paraai-n32-h-01-agent-54:   teacher_mixed_alpha .......... 0.2
+paraai-n32-h-01-agent-54:   lm_coef ...................... 1
+paraai-n32-h-01-agent-54:   top_k ........................ 0
+paraai-n32-h-01-agent-54:   top_p ........................ 1.0
+paraai-n32-h-01-agent-54:   do_sample .................... True
+paraai-n32-h-01-agent-54:   no_repeat_ngram_size ......... 6
+paraai-n32-h-01-agent-54:   repetition_penalty ........... None
+paraai-n32-h-01-agent-54:   num_beams .................... 1
+paraai-n32-h-01-agent-54:   temperature .................. 1.0
+paraai-n32-h-01-agent-54:   peft ......................... None
+paraai-n32-h-01-agent-54:   peft_lora_r .................. 8
+paraai-n32-h-01-agent-54:   peft_lora_alpha .............. 32
+paraai-n32-h-01-agent-54:   peft_lora_dropout ............ 0.1
+paraai-n32-h-01-agent-54:   peft_name .................... None
+paraai-n32-h-01-agent-54:   peft_path .................... None
+paraai-n32-h-01-agent-54:   teacher_peft_name ............ None
+paraai-n32-h-01-agent-54:   teacher_peft_path ............ None
+paraai-n32-h-01-agent-54:   deepspeed .................... True
+paraai-n32-h-01-agent-54:   deepspeed_config ............. /home/bingxing2/home/scx7atk/work/minillm-zxc/configs/deepspeed/ds_config_zero2_offload.json
+paraai-n32-h-01-agent-54:   deepscale .................... False
+paraai-n32-h-01-agent-54:   deepscale_config ............. None
+paraai-n32-h-01-agent-54:   deepspeed_mpi ................ False
+paraai-n32-h-01-agent-54:   rank ......................... 0
+paraai-n32-h-01-agent-54:   world_size ................... 8
+paraai-n32-h-01-agent-65: Traceback (most recent call last):
+paraai-n32-h-01-agent-65:   File "/home/bingxing2/home/scx7atk/work/minillm-zxc/finetune.py", line 552, in <module>
+paraai-n32-h-01-agent-54: Traceback (most recent call last):
+paraai-n32-h-01-agent-54:   File "/home/bingxing2/home/scx7atk/work/minillm-zxc/finetune.py", line 552, in <module>
+paraai-n32-h-01-agent-54:     main()
+paraai-n32-h-01-agent-54:   File "/home/bingxing2/home/scx7atk/work/minillm-zxc/finetune.py", line 512, in main
+paraai-n32-h-01-agent-54:     dataset = prepare_dataset(
+paraai-n32-h-01-agent-54:   File "/home/bingxing2/home/scx7atk/work/minillm-zxc/finetune.py", line 162, in prepare_dataset
+paraai-n32-h-01-agent-54:     raise ValueError("Do train and do eval must set one")
+paraai-n32-h-01-agent-54: ValueError: Do train and do eval must set one
+paraai-n32-h-01-agent-65: Traceback (most recent call last):
+paraai-n32-h-01-agent-65:   File "/home/bingxing2/home/scx7atk/work/minillm-zxc/finetune.py", line 552, in <module>
+paraai-n32-h-01-agent-54: Traceback (most recent call last):
+paraai-n32-h-01-agent-54:   File "/home/bingxing2/home/scx7atk/work/minillm-zxc/finetune.py", line 552, in <module>
+paraai-n32-h-01-agent-54: Traceback (most recent call last):
+paraai-n32-h-01-agent-54:   File "/home/bingxing2/home/scx7atk/work/minillm-zxc/finetune.py", line 552, in <module>
+paraai-n32-h-01-agent-65:     main()
+paraai-n32-h-01-agent-65:   File "/home/bingxing2/home/scx7atk/work/minillm-zxc/finetune.py", line 512, in main
+paraai-n32-h-01-agent-54:     main()
+paraai-n32-h-01-agent-54:   File "/home/bingxing2/home/scx7atk/work/minillm-zxc/finetune.py", line 512, in main
+paraai-n32-h-01-agent-65:     dataset = prepare_dataset(
+paraai-n32-h-01-agent-54:     main()
+paraai-n32-h-01-agent-65:   File "/home/bingxing2/home/scx7atk/work/minillm-zxc/finetune.py", line 162, in prepare_dataset
+paraai-n32-h-01-agent-54:   File "/home/bingxing2/home/scx7atk/work/minillm-zxc/finetune.py", line 512, in main
+paraai-n32-h-01-agent-65:     raise ValueError("Do train and do eval must set one")
+paraai-n32-h-01-agent-65: ValueError: Do train and do eval must set one
+paraai-n32-h-01-agent-54:     dataset = prepare_dataset(
+paraai-n32-h-01-agent-54:   File "/home/bingxing2/home/scx7atk/work/minillm-zxc/finetune.py", line 162, in prepare_dataset
+paraai-n32-h-01-agent-54:     dataset = prepare_dataset(
+paraai-n32-h-01-agent-54:   File "/home/bingxing2/home/scx7atk/work/minillm-zxc/finetune.py", line 162, in prepare_dataset
+paraai-n32-h-01-agent-54:     raise ValueError("Do train and do eval must set one")
+paraai-n32-h-01-agent-54: ValueError: Do train and do eval must set one
+paraai-n32-h-01-agent-65: Traceback (most recent call last):
+paraai-n32-h-01-agent-65:   File "/home/bingxing2/home/scx7atk/work/minillm-zxc/finetune.py", line 552, in <module>
+paraai-n32-h-01-agent-54:     raise ValueError("Do train and do eval must set one")
+paraai-n32-h-01-agent-54: ValueError: Do train and do eval must set one
+paraai-n32-h-01-agent-65:     main()
+paraai-n32-h-01-agent-65:   File "/home/bingxing2/home/scx7atk/work/minillm-zxc/finetune.py", line 512, in main
+paraai-n32-h-01-agent-65:     dataset = prepare_dataset(
+paraai-n32-h-01-agent-65:   File "/home/bingxing2/home/scx7atk/work/minillm-zxc/finetune.py", line 162, in prepare_dataset
+paraai-n32-h-01-agent-65:     raise ValueError("Do train and do eval must set one")
+paraai-n32-h-01-agent-65: ValueError: Do train and do eval must set one
+paraai-n32-h-01-agent-65:     main()
+paraai-n32-h-01-agent-65:   File "/home/bingxing2/home/scx7atk/work/minillm-zxc/finetune.py", line 512, in main
+paraai-n32-h-01-agent-65:     dataset = prepare_dataset(
+paraai-n32-h-01-agent-65:   File "/home/bingxing2/home/scx7atk/work/minillm-zxc/finetune.py", line 162, in prepare_dataset
+paraai-n32-h-01-agent-65:     raise ValueError("Do train and do eval must set one")
+paraai-n32-h-01-agent-65: ValueError: Do train and do eval must set one
+paraai-n32-h-01-agent-54: Traceback (most recent call last):
+paraai-n32-h-01-agent-54:   File "/home/bingxing2/home/scx7atk/work/minillm-zxc/finetune.py", line 552, in <module>
+paraai-n32-h-01-agent-54:     main()
+paraai-n32-h-01-agent-54:   File "/home/bingxing2/home/scx7atk/work/minillm-zxc/finetune.py", line 512, in main
+paraai-n32-h-01-agent-54:     dataset = prepare_dataset(
+paraai-n32-h-01-agent-54:   File "/home/bingxing2/home/scx7atk/work/minillm-zxc/finetune.py", line 162, in prepare_dataset
+paraai-n32-h-01-agent-54:     raise ValueError("Do train and do eval must set one")
+paraai-n32-h-01-agent-54: ValueError: Do train and do eval must set one
+paraai-n32-h-01-agent-65: Traceback (most recent call last):
+paraai-n32-h-01-agent-65:   File "/home/bingxing2/home/scx7atk/work/minillm-zxc/finetune.py", line 552, in <module>
+paraai-n32-h-01-agent-65:     main()
+paraai-n32-h-01-agent-65:   File "/home/bingxing2/home/scx7atk/work/minillm-zxc/finetune.py", line 512, in main
+paraai-n32-h-01-agent-65:     dataset = prepare_dataset(
+paraai-n32-h-01-agent-65:   File "/home/bingxing2/home/scx7atk/work/minillm-zxc/finetune.py", line 162, in prepare_dataset
+paraai-n32-h-01-agent-65:     raise ValueError("Do train and do eval must set one")
+paraai-n32-h-01-agent-65: ValueError: Do train and do eval must set one
+paraai-n32-h-01-agent-54: [2024-05-20 06:48:22,176] [INFO] [launch.py:315:sigkill_handler] Killing subprocess 1916541
+paraai-n32-h-01-agent-54: [2024-05-20 06:48:22,176] [INFO] [launch.py:315:sigkill_handler] Killing subprocess 1916542
+paraai-n32-h-01-agent-54: [2024-05-20 06:48:22,655] [INFO] [launch.py:315:sigkill_handler] Killing subprocess 1916543
+paraai-n32-h-01-agent-65: [2024-05-20 06:48:22,658] [INFO] [launch.py:315:sigkill_handler] Killing subprocess 1442514
+paraai-n32-h-01-agent-54: [2024-05-20 06:48:22,679] [INFO] [launch.py:315:sigkill_handler] Killing subprocess 1916544
+paraai-n32-h-01-agent-65: [2024-05-20 06:48:22,684] [INFO] [launch.py:315:sigkill_handler] Killing subprocess 1442515
+paraai-n32-h-01-agent-54: [2024-05-20 06:48:22,702] [ERROR] [launch.py:321:sigkill_handler] ['/home/bingxing2/home/scx7atk/.conda/envs/minillm/bin/python', '-u', '/home/bingxing2/home/scx7atk/work/minillm-zxc/finetune.py', '--local_rank=3', '--base-path', '/home/bingxing2/home/scx7atk/work/minillm-zxc', '--model-path', '/home/bingxing2/public/models/llama2/Llama-2-7b-hf/', '--teacher-model-path', '/home/bingxing2/public/models/llama2/Llama-2-13b-hf/', '--ckpt-name', 'llama2-7b', '--teacher-ckpt-name', 'llama2-13b', '--n-gpu', '4', '--n-nodes', '2', '--teacher-model-fp16', '--gradient-checkpointing', '--prompt-data-dir', '/home/bingxing2/home/scx7atk/work/minillm-zxc/processed_data/dolly/prompt/llama/', '--lm-data-dir', '/home/bingxing2/home/scx7atk/work/minillm-zxc/processed_data/roberta/llama/512/20M/', '--dev-num', '1000', '--num-workers', '0', '--epochs', '10', '--total-iters', '5000', '--kd-ratio', '0.5', '--batch-size', '16', '--lr', '5e-6', '--lr-min', '5e-6', '--gradient-accumulation-steps', '1', '--max-length', '512', '--max-prompt-length', '256', '--warmup-iters', '100', '--save', '/home/bingxing2/home/scx7atk/work/minillm-zxc/results/llama2/train/minillm-zxc/', '--seed', '10', '--seed-ppo', '42', '--seed-lm', '7', '--save-interval', '500', '--eval-interval', '100', '--log-interval', '16', '--mid-log-num', '1', '--type', 'minillm', '--ppo-epochs', '4', '--num-rollouts', '256', '--chunk-size', '16', '--length-norm', '--single-step-reg', '--teacher-mixed-alpha', '0.2', '--reward-scaling', '0.5', '--cliprange-reward', '100', '--do-sample', '--top-k', '0', '--top-p', '1.0', '--temperature', '1.0', '--deepspeed', '--deepspeed_config', '/home/bingxing2/home/scx7atk/work/minillm-zxc/configs/deepspeed/ds_config_zero2_offload.json'] exits with return code = 1
+paraai-n32-h-01-agent-65: [2024-05-20 06:48:22,707] [INFO] [launch.py:315:sigkill_handler] Killing subprocess 1442516
+paraai-n32-h-01-agent-65: [2024-05-20 06:48:22,707] [INFO] [launch.py:315:sigkill_handler] Killing subprocess 1442517
+paraai-n32-h-01-agent-65: [2024-05-20 06:48:22,729] [ERROR] [launch.py:321:sigkill_handler] ['/home/bingxing2/home/scx7atk/.conda/envs/minillm/bin/python', '-u', '/home/bingxing2/home/scx7atk/work/minillm-zxc/finetune.py', '--local_rank=3', '--base-path', '/home/bingxing2/home/scx7atk/work/minillm-zxc', '--model-path', '/home/bingxing2/public/models/llama2/Llama-2-7b-hf/', '--teacher-model-path', '/home/bingxing2/public/models/llama2/Llama-2-13b-hf/', '--ckpt-name', 'llama2-7b', '--teacher-ckpt-name', 'llama2-13b', '--n-gpu', '4', '--n-nodes', '2', '--teacher-model-fp16', '--gradient-checkpointing', '--prompt-data-dir', '/home/bingxing2/home/scx7atk/work/minillm-zxc/processed_data/dolly/prompt/llama/', '--lm-data-dir', '/home/bingxing2/home/scx7atk/work/minillm-zxc/processed_data/roberta/llama/512/20M/', '--dev-num', '1000', '--num-workers', '0', '--epochs', '10', '--total-iters', '5000', '--kd-ratio', '0.5', '--batch-size', '16', '--lr', '5e-6', '--lr-min', '5e-6', '--gradient-accumulation-steps', '1', '--max-length', '512', '--max-prompt-length', '256', '--warmup-iters', '100', '--save', '/home/bingxing2/home/scx7atk/work/minillm-zxc/results/llama2/train/minillm-zxc/', '--seed', '10', '--seed-ppo', '42', '--seed-lm', '7', '--save-interval', '500', '--eval-interval', '100', '--log-interval', '16', '--mid-log-num', '1', '--type', 'minillm', '--ppo-epochs', '4', '--num-rollouts', '256', '--chunk-size', '16', '--length-norm', '--single-step-reg', '--teacher-mixed-alpha', '0.2', '--reward-scaling', '0.5', '--cliprange-reward', '100', '--do-sample', '--top-k', '0', '--top-p', '1.0', '--temperature', '1.0', '--deepspeed', '--deepspeed_config', '/home/bingxing2/home/scx7atk/work/minillm-zxc/configs/deepspeed/ds_config_zero2_offload.json'] exits with return code = 1
+pdsh@paraai-n32-h-01-agent-54: paraai-n32-h-01-agent-54: ssh exited with exit code 1
+pdsh@paraai-n32-h-01-agent-54: paraai-n32-h-01-agent-65: ssh exited with exit code 1
